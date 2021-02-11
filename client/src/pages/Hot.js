@@ -2,40 +2,42 @@ import React from "react";
 import { Col, Row, Container } from "../components/Grid";
 
 
-function Pantry() 
+function Hot() 
 {
+
+
     return (
       <div>
-
-      <Container fluid className = "tab-container">
+      <Container fluid>
         <Row>
-          <Col className = "tab-container"size="lg-12">
+          <Col size="lg-12">
           
-          <div>
+
+              <div>
               <div className="navbar-item has-dropdown is-hoverable is-right">
         <a className="navbar-link" style = {{fontWeight:"bold"}}>
-          Current Pantry Items
+          Hot Inventory
         </a>
 
         <div className="navbar-dropdown">
           <a className="navbar-item">
-            Eggs
+            Bacon
+          </a>
+          <a className="navbar-item">
+            Pineapples
           </a>
           <a className="navbar-item">
             Bread
           </a>
-          <a className="navbar-item">
-            Cheese
-          </a>
           <hr className="navbar-divider"/>
           <a className="navbar-item">
-            Recommended: A Krabby Patty 🙂
+            Recommended: Bacon Pineapple Pizza 🙂 <br/>
           </a>
         </div>
       </div>
-    </div>
+    </div>    
 
-    {/* Team Footer - Zo on each for now */}
+    {/* Team Footer - Zo on each page for now */}
     <footer className="footer">
                 <div className="content has-text-centered">
                     <p>
@@ -45,14 +47,13 @@ function Pantry()
     </p>
                 </div>
             </footer>
-
+    
           </Col>
         </Row>
       </Container>
-
-      </div>
+    </div>
     );
-}
+  }
 
 
-export default Pantry;
+export default Hot;
