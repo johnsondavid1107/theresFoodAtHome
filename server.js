@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require("./models")
 
 const mongoose = require("mongoose");
 const routes = require("./routes");
@@ -13,6 +14,24 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+app.get("/find", function (req, res) {
+  db.User.find({ fireBaseId: 1 })
+    // .populate("foodItem")
+    .then(response => res.json(response))
+})
+
+app.post("/addFood", function (req, res) {
+  // db.User.create({
+  //   name: "Stew",
+  //   dateOfPurchase: null,
+  //   daysFresh: 5,
+  //   spoiled: false,
+  //   location: "fridge"
+  // }).then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { notes: _id } }
+
+
+})
 
 // Add routes, both API and view
 app.use(routes);
@@ -30,6 +49,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
