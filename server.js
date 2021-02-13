@@ -15,27 +15,9 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get("/find", function (req, res) {
-  db.User.find({ fireBaseId: 1 })
-    // .populate("foodItem")
-    .then(response => res.json(response))
-})
-
-app.post("/addFood", function (req, res) {
-  // db.User.create({
-  //   name: "Stew",
-  //   dateOfPurchase: null,
-  //   daysFresh: 5,
-  //   spoiled: false,
-  //   location: "fridge"
-  // }).then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { notes: _id } }
-
-
-})
 
 // Add routes, both API and view
 app.use(routes);
-
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theresfoodathome", {
   useNewUrlParser: true,
