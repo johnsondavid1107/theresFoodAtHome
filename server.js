@@ -44,6 +44,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theresfoodathom
   useFindAndModify: false
 });
 
+mongoose.connection.on('connected', ()=>{console.log("SUCCESSFULLY CONNECTED TO DB")})
+mongoose.connection.on('error', ()=>{console.log("Error connecting to mongo database")})
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
