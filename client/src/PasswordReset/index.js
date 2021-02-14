@@ -13,7 +13,17 @@ const PasswordReset = () => {
   };
   const sendResetEmail = event => {
     event.preventDefault();
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        setEmailHasBeenSent(true);
+        setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
+      })
+      .catch(() => {
+        setError("Error resetting password");
+      });
   };
+  
   return (
     <div className="">
       <h1 className="">
