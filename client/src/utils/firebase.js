@@ -22,7 +22,7 @@ export const firestore = firebase.firestore();
 
 const provider = firebase.auth.GoogleAuthProvider()
 const userRef = firestore.doc(`users/${user.uid}`);
-const snapshot = await userRef.get();
+
 
 
 
