@@ -21,7 +21,7 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: 2,
+        fireBaseId: 1,
         foodItem: [
             {
                 name: "Cola",
@@ -33,7 +33,7 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: 3,
+        fireBaseId: 1,
         foodItem: [
             {
                 name: "BigMac",
@@ -45,7 +45,7 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: 4,
+        fireBaseId: 1,
         foodItem: [
             {
                 name: "milk",
