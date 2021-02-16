@@ -1,24 +1,31 @@
-import React, {useEffect, useState} from "react"
+import React, {Component, useEffect, useState} from "react"
 import { auth, generateUserDocument } from "../utils/firebase";
 
 import UserContext from "../utils/UserContext";
 
-function UserProvider(){
+class UserProvider extends Component{
 
-    const [user, setUser] = useState('');
+    state = {
+        user: null
+      };
+    
+      componentDidMount = async () => {
+        auth.onAuthStateChanged(async userAuth => {
+          const user = await generateUserDocument(userAuth);
+          this.setState({ user });
+        });
+      };
 
-    useEffect(()=>{
-        auth.onAuthStateChanged(async userAuth=>{
-            const user = await generateUserDocument(userAuth)
-            setUser(user)
-        })
-    },[])
+      render(){
+        const { user } = this.state;
 
     return(
+
         <UserContext.Provider value={user}>
             {this.props.children}
         </UserContext.Provider>
     )
+      }
 }
 
 export default UserProvider;
