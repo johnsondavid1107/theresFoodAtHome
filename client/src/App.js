@@ -11,6 +11,7 @@ import UserProvider from "./Providers/UserProvider";
 // (https://reacttraining.com/react-router/web/example/basic)
 function App() {
   return (
+
     <UserProvider>   
       <Router>
         <div>
@@ -29,6 +30,7 @@ function App() {
         </div>
       </Router>
     </UserProvider>
+    
   );
 }
 
