@@ -52,7 +52,7 @@ router.route("/recipes/allspec/:ingredient/:allergy/:diet")
     .get(FoodsController.findBySearchAllergySpecialDiet)
 
 
-router.route("/PantryItems:id").get(FoodsController.findById)
+router.route("/PantryItems/:id").get(FoodsController.findById)
 module.exports = router;
 
 

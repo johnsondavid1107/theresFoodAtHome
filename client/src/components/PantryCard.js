@@ -25,9 +25,45 @@ class PantryCard extends React.Component {
 
                         <div className="col-md-8">
                             <div className="card-body">
-                                <h5 className="card-title">Zo's Cinnamin Raisin Bagels</h5>
-                                <p className="card-text" style={{ color: "white" }}>Fresh bagels, raisin  and cinnamon infused great when toasted.</p> <button type="button" className="btn btn-danger">Delete</button>
-                                <p className="card-text"><small className="text-muted">Added 3 mins ago, on 2/14/2021 @ 5: 47 pm</small></p>
+                                <ul>
+                                    <li>Milk</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card mb-3" style={{ maxWidth: "500px" }}>
+                    <div className="row no-gutters">
+
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <ul>
+                                    <li>Egg</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card mb-3" style={{ maxWidth: "500px" }}>
+                    <div className="row no-gutters">
+
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <ul>
+                                    <li>Tomato</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card mb-3" style={{ maxWidth: "500px" }}>
+                    <div className="row no-gutters">
+
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <ul>
+                                    <li>1</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
