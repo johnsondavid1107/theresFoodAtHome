@@ -1,6 +1,9 @@
 import axios from "axios";
  
 export default {
+    getPantryItems: function (id) {
+        return axios.get("/api/foods/PantryItems/" + id)
+    },
     //Gets all food from the user's pantry
     getFoods: function(id) {
         return axios.get("/api/foods/user/" + id);

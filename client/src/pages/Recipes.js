@@ -4,7 +4,6 @@ import API from "../utils/API";
  
 
 function Recipes() {
-
   //This will be replaced by variables once firebase is up
   const userId = 1;
   const specialDiet = "";
@@ -99,8 +98,12 @@ function Recipes() {
             if (foods[i].daysRemaining >= 0) {
               ingredients += foods[i].name + ",";
             }
+            if(ingredients === ""){
+              ingredients = "eggs,onion,flour";
+            }
           }
  
+          ingredients = ingredients.replace(/,\s*$/, "");
           setSearchTerm(ingredients);
           
         }
