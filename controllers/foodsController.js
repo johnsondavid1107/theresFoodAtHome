@@ -10,9 +10,11 @@ module.exports = {
 
     //Gets all items from the pantry of a specific user - finding by fireBaseId
     findById: function (req, res) {
+        console.log(req.params.id, "line 13 controller")
         let index = parseInt(req.params.id);
         db.User.find({ fireBaseId: index })
             .then(dbModel => {
+                console.log(dbModel, "line17 controller")
                 res.json(dbModel)
             })
             .catch(err => {

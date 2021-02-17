@@ -4,15 +4,15 @@ const FoodsController = require("../../controllers/foodsController");
 const db = require("../../models")
 
 
- 
+
 // Matches with "/api/foods"
 router.route("/")
-    // .get(FoodsController.findAll);
- 
+// .get(FoodsController.findAll);
+
 //Matches with "/api/foods/user/:id"
 router.route("/user/:id")
     .get(FoodsController.findById);
- 
+
 // Matches with "/api/foods/recipes/:ingredient"
 router.route("/recipes/:ingredient")
     .get(FoodsController.findBySearch);
@@ -43,19 +43,20 @@ router.post("/addFood", function (req, res) {
 // Matches with "/api/foods/recipes/:ingredient/:diet"
 router.route("/recipes/:ingredient/:diet")
     .get(FoodsController.findBySearchSpecialDiet);
- 
+
 // Matches with "/api/foods/recipes/:ingredient/:diet"
 router.route("/recipes/allergy/:ingredient/:allergy")
     .get(FoodsController.findBySearchAllergy)
- 
+
 router.route("/recipes/allspec/:ingredient/:allergy/:diet")
     .get(FoodsController.findBySearchAllergySpecialDiet)
- 
 
+
+router.route("/PantryItems/:id").get(FoodsController.findById)
 module.exports = router;
- 
- 
- 
- 
- 
+
+
+
+
+
 
