@@ -5,6 +5,7 @@ import Logout from "./pages/Logout";
 import NoMatch from "./pages/NoMatch";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer/Footer";
+import UserProvider from "./Providers/UserProvider";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -14,7 +15,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() 
 {
   return (
-
+    <UserProvider>   
     <Router>
     <div>
     <NavBar />
@@ -35,6 +36,7 @@ function App()
       <Footer />
     </div>
     </Router>
+    </UserProvider>
   );
 }
 
