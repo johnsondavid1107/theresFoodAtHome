@@ -3,16 +3,17 @@ import React from "react";
 import "./style.css";
 // Importing food-promo video - Zo
 import Video from "../../images/food-demo.mp4";
-
+// Importing cool background video loop - Zo
+import Video2 from "../../images/Cool-background-Zo.mp4";
 
 function NavBar() 
 {
   return (
     <div>
 
-      {/* There's Food video pro - Zo*/}
+      {/* There's Food video demo - Zo*/}
       <video width="100%" height="240" muted autostart loop autoPlay src={Video} type="video/mp4" className = "video-Zo" />
-
+    
       <br/>
 
       {/* Title of Team App */}
@@ -40,6 +41,9 @@ function NavBar()
              <span role="img" aria-label="Logout" style = {{backgroundColor:"#EB6864"}}>➡️ Logout</span>
              </a>
   </nav>
+
+    {/* Cool background loop video */}
+  <video id="myVideo" loop muted autostart autoPlay src={Video2} type="video/mp4" />
 
 {/* Ending div for component - Zo */}
 </div>
