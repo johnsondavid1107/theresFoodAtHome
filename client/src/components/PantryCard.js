@@ -1,5 +1,6 @@
 import React from "react"
 import API from "../utils/API"
+// Didn't use or touch this, as it was confusing for me to style/ update the page
 
 class PantryCard extends React.Component {
 
@@ -26,7 +27,15 @@ class PantryCard extends React.Component {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <ul>
-                                    <li>Milk</li>
+                                    <li>Milk</li> 
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="col-md-2">
+                            <div className="card-body">
+                                <ul>
+                                    <li>Milk</li> 
                                 </ul>
                             </div>
                         </div>

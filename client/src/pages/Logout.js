@@ -4,8 +4,6 @@ import { Col, Row, Container } from "../components/Grid";
 
 function Logout() 
 {
-
-
     return (
       <Container fluid>
         <Row>
