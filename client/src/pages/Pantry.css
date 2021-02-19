@@ -30,6 +30,7 @@ button
     text-align: left;
     color: white;
     padding-bottom: 20px;
+    background-color: gray;
 }
 
 .align-text
@@ -56,6 +57,8 @@ button
     margin:20px;
     padding:10px;
     overflow: scroll;
+    /* Change background color within container */
+    background-color: gray;
 }
 
 .Box-2
@@ -66,6 +69,14 @@ button
     margin:20px;
     padding:10px;
     overflow: scroll;
+    /* Change background color within container */
+    background-color:gray;
+}
+
+/* Change background color of card to white - Almonzo */
+.card-body
+{
+    background-color: white;
 }
 
 /* Code for dynamic backgorund - do not touch - Zo */

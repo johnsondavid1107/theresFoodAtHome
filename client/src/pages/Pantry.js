@@ -131,5 +131,4 @@ function Pantry()
   );
 }
 
-
 export default Pantry;

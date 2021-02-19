@@ -3,8 +3,7 @@ import React from "react";
 import "./style.css";
 // Importing food-promo video - Zo
 import Video from "../../images/food-demo.mp4";
-// Importing cool background video loop - Zo
-import Video2 from "../../images/Cool-background-Zo.mp4";
+
 
 function NavBar() 
 {
@@ -42,8 +41,6 @@ function NavBar()
              </a>
   </nav>
 
-    {/* Cool background loop video */}
-  <video id="myVideo" loop muted autostart autoPlay src={Video2} type="video/mp4" />
 
 {/* Ending div for component - Zo */}
 </div>
