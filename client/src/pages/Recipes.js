@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo2 from "../../src/images/FaviconZo.ico.png";
 import API from "../utils/API";
-
 import { Container, Row, Col, Button, Card, Accordion, Image, Form } from "react-bootstrap";
 
 
@@ -125,33 +123,54 @@ function Recipes() {
     //If no special diet and no allergies
     if (specialDiet === "" && allergies === "") {
       API.recipeFromIngredients(ingredients).then(res => {
-        console.log(res.data);
         setSearchResults(res.data);
       })
       //If allergies but no special diet
     } else if (specialDiet === "") {
       API.recipeAllergy(ingredients, allergies).then(res => {
-        console.log(res.data);
         setSearchResults(res.data);
-      })
+        //If recipe search delivers no results, do generic search
 
-    } else {
-      //If special diet but no allergies
-      API.recipeSpecialDiet(ingredients, specialDiet).then(res => {
-        console.log(res.data);
-        setSearchResults(res.data);
       })
     }
+    else if (allergies === "") {
+      //If special diet but no allergies
+      API.recipeSpecialDiet(ingredients, specialDiet).then(res => {
+        setSearchResults(res.data);
+        //If recipe search delivers no results, do generic search
+
+      })
+
+    }
+    else {
+      //They have a special diet AND allergies
+      API.recipeSpecDietAllergy(ingredients, specialDiet, allergies).then(res => {
+        setSearchResults(res.data);
+        //If recipe search delivers no results, do generic search
+
+      })
+    }
+
+    if(searchResults.length){
+      let cardObject = [
+        {
+          name: "Sorry, no recipes found!",
+          image: "https://spoonacular.com/recipeImages/133742-312x231.jpg"
+        }
+      ]
+      setSearchResults(cardObject);
+    }
+
   }
 
 
-  let newSearchIngredients = "";
+  //Adds items that are checked to the list of ingredients to search for
   const addToList = e => {
-    const item = e.target.name;
     const index = e.target.id;
+
     //On click, change the [index] item in isChecked array from false to true OR from true to false
     trueFalseArray = isChecked;
-    if(trueFalseArray[index] === false){
+    if (trueFalseArray[index] === false) {
       trueFalseArray[index] = true;
     } else {
       trueFalseArray[index] = false;
@@ -160,18 +179,21 @@ function Recipes() {
 
     //For all items where the value is "true", add that item to the search list
     let searchList = "";
-    for(let i=0; i<foods.length; i++){
-      if(isChecked[i] === true){
+    for (let i = 0; i < foods.length; i++) {
+      if (isChecked[i] === true) {
         searchList += foods[i].name + ",";
       }
     }
-
     //Remove last comma from list
     searchList = searchList.replace(/,\s*$/, "");
     makeSearchTerm(searchList);
-    
   }
 
+  //When the image is clicked, reroutes to google search for the recipe
+  const imageClicked = e => {
+    let item = e.target.alt;
+    window.open(`https://www.google.com/search?q=${item}`);
+  }
 
   return (
     <div>
@@ -210,7 +232,7 @@ function Recipes() {
                 <Col className="col-4" xs={6} md={4} key={index}>
                   <Card>
                     {/* <img className="food-images card-img-top" src={logo2} alt="placeholder2"/> */}
-                    <Image className="food-images" src={result.image} alt={result.title} rounded />
+                    <Image className="food-images" onClick={imageClicked} src={result.image} alt={result.title} rounded />
                     <Card.Body>
                       <h5>{result.title}</h5>
                     </Card.Body>
