@@ -1,5 +1,5 @@
 import axios from "axios";
- 
+
 export default {
     getPantryItems: function (id) {
         return axios.get("/api/foods/PantryItems/" + id)
@@ -25,10 +25,10 @@ export default {
         return axios.get("/api/foods/recipes/allspec/" + ingredients + "/" + allergy + "/" + specialDiet);
     }
 };
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
 

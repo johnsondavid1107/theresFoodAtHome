@@ -2,21 +2,19 @@ import React, { Component } from "react"
 import API from "../utils/API"
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
-class PantryCard extends Component {
+class FridgeCard extends Component {
 
     state = {
-        foodPantry: [],
-
+        foodFridge: []
     };
 
     componentDidMount() {
         let idNum = 1
         API.getPantryItems(idNum).then(result =>
-            this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
+            this.setState({ foodFridge: result.data[0].foodItem.filter(item => item.location === "fridge") })
 
 
         )
-
 
 
 
@@ -26,12 +24,12 @@ class PantryCard extends Component {
 
     render() {
 
-        let renderFood = this.state.foodPantry
+        let renderFood = this.state.foodFridge
         console.log(renderFood)
         return (
             <div>
 
-                <h3 className="align-Header">Pantry</h3>
+                <h3 className="align-Header">Fridge</h3>
 
 
 
@@ -58,4 +56,4 @@ class PantryCard extends Component {
     }
 }
 
-export default PantryCard
+export default FridgeCard

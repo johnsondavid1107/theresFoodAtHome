@@ -1,6 +1,7 @@
 const db = require("../models");
 const { default: fetch } = require("node-fetch");
 const dotenv = require('dotenv');
+const { where } = require("../models/user");
 dotenv.config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
