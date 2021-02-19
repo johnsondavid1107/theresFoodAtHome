@@ -79,17 +79,6 @@ button
     background-color: white;
 }
 
-/* Code for dynamic backgorund - do not touch - Zo */
-#myVideo 
-{
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  z-index: -2;
-}
-
 /* Re-sizes search Bar based on deviced viewed - Zo */
 
 @media only screen and (max-width: 600px) 
