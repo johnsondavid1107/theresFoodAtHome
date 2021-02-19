@@ -6,7 +6,9 @@ import {auth, signOut} from "../utils/firebase"
 function Logout() 
 {
 
+
   useEffect(signOut(),[])
+
 
     return (
       <Container fluid>

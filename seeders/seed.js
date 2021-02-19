@@ -13,7 +13,7 @@ let userSeed = [
         foodItem: [
             {
                 name: "pineapple juice",
-                dateOfPurchase: "2015-02-13",
+                dateOfPurchase: "2021-02-13",
                 daysFresh: 20,
                 spoiled: false,
                 location: "pantry"
@@ -21,11 +21,11 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: 2,
+        fireBaseId: 1,
         foodItem: [
             {
                 name: "Cola",
-                dateOfPurchase: "2015-02-13",
+                dateOfPurchase: "2021-02-13",
                 daysFresh: 10,
                 spoiled: false,
                 location: "fridge"
@@ -33,11 +33,11 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: 3,
+        fireBaseId: 1,
         foodItem: [
             {
                 name: "BigMac",
-                dateOfPurchase: "2015-02-13",
+                dateOfPurchase: "2021-02-13",
                 daysFresh: 7,
                 spoiled: false,
                 location: "pantry"
@@ -45,11 +45,11 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: 4,
+        fireBaseId: 1,
         foodItem: [
             {
                 name: "milk",
-                dateOfPurchase: "2015-02-13",
+                dateOfPurchase: "2021-02-13",
                 daysFresh: 14,
                 spoiled: false,
                 location: "fridge"
