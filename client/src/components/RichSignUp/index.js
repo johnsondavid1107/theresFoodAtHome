@@ -13,9 +13,12 @@ const SignUp = () => {
     try{
       const {user} = await auth.createUserWithEmailAndPassword(email, password);
       generateUserDocument(user, {displayName});
+      console.log("cicked")
+      console.log("value of user is "+ JSON.stringify(user))
     }
     catch(error){
-      setError('Error Signing up with email and password');
+      setError('Error Signing up with email and password \n.  ' + error.message );
+      console.log(error)
     }
 
     setEmail("");
