@@ -1,19 +1,18 @@
 import React from "react";
 import { Col, Row, Container } from "../components/Grid";
-import "../../src/pages/Pantry.css";
-import logo from "../../src/images/placeholder-1.jpg"
-import logo1 from "../../src/images/placeholder-2.jpg"
-import logo2 from "../../src/images/placeholder-3.jpg"
+import "./Pantry.css";
+import PantryCard from "../components/PantryCard"
+import FridgeCard from "../components/FridgeCard"
 
-function Pantry() 
-{
+
+function Pantry() {
   return (
     <div>
 
       <Container>
         {/* Row 1 col 12 of page Zo*/}
         <Row>
-          <Col size="lg-12">
+          <Col size="md-12">
 
             {/* Search Bar + buttons for food - Zo */}
             <div className="input-group input-group-sm mb-3 ">
@@ -24,91 +23,45 @@ function Pantry()
               <button className="btn btn-info" type="button">Fridge</button>
             </div>
 
+
+
             {/* Pantry section, Box-1 Zo */}
           </Col>
         </Row>
 
         <Row>
-          <Col size="lg-12">
+          <Col size="md-12">
             <div className="Box-1">
 
-
-              <h3 className="align-Header">Pantry</h3>
-
-              {/* First Card, Pantry - Zo */}
-              <div className="card mb-3" style={{ maxWidth: "500px" }}>
-                <div className="row no-gutters">
-                  <div className="col-md-4">
-                    <img className="food-images" src={logo} alt="placeholder"/>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h5 className="card-title">Zo's Cinnamin Raisin Bagels</h5>
-                      <p className="card-text" style={{color:"white"}}>Fresh bagels, raisin  and cinnamon infused great when toasted.</p> <button type="button" className="btn btn-danger">Delete</button>
-                      <p className="card-text"><small className="text-muted">Added 3 mins ago, on 2/14/2021 @ 5: 47 pm</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Second card, Pantry- Zo */}
-              <div className="card mb-3" style={{ maxWidth: "500px" }}>
-                <div className="row no-gutters">
-                  <div className="col-md-4">
-                    <img className="food-images" src={logo1} alt="placeholder1"/>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h5 className="card-title">Zo's Jelly</h5>
-                      <p className="card-text" style={{color:"white"}}>Grape jelly, picked and squished together from heaven by the Great Zo and packed into a jar</p> <button type="button" className="btn btn-danger">Delete</button>
-                      <p className="card-text"><small className="text-muted">Added 5 mins ago, on 2/14/2021 @ 7: 57 pm</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PantryCard />
 
 
             </div>
           </Col>
+
         </Row>
 
+        {/* Do not touch - Zo ensures page is responsive during laptop view*/}
+        <br class="mobile" />
 
         <Row>
-          <Col size="lg-12">
+          <Col size="md-12">
 
 
-            <div className="Box-2">
+            <div className="Box-2" >
 
 
-              <h3 className="align-Header">Fridge</h3>
-            
-              {/* Third card, Pantry- Zo */}
-              <div className="card mb-3" style={{ maxWidth: "500px" }}>
-                <div className="row no-gutters">
-                  <div className="col-md-4">
-                    <img className="food-images" src={logo2} alt="placeholder2" />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h5 className="card-title">Zo's Cream Cheese</h5>
-                      <p className="card-text" style={{color:"white"}}>According to legend, when combined with Cinnamon bagels and Jelly a great tasting flavor is born! </p> <button type="button" className="btn btn-danger">Delete</button>
-                      <p className="card-text" style={{color:"white"}} ><small className="text-muted">Added 7 mins ago, on 2/14/2021 @ 8: 13 pm</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <FridgeCard />
 
             </div>
           </Col>
         </Row>
 
-<br/>
 
       </Container>
 
     </div>
   );
 }
-
 
 export default Pantry;

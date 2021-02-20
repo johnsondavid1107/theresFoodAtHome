@@ -10,9 +10,9 @@ function NavBar()
   return (
     <div>
 
-      {/* There's Food video pro - Zo*/}
+      {/* There's Food video demo - Zo*/}
       <video width="100%" height="240" muted autostart loop autoPlay src={Video} type="video/mp4" className = "video-Zo" />
-
+    
       <br/>
 
       {/* Title of Team App */}
@@ -40,6 +40,7 @@ function NavBar()
              <span role="img" aria-label="Logout" style = {{backgroundColor:"#EB6864"}}>➡️ Logout</span>
              </a>
   </nav>
+
 
 {/* Ending div for component - Zo */}
 </div>

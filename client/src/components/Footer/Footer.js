@@ -1,15 +1,15 @@
 import React from "react";
 
-// Footer for website - no idea why it's not linking with App.js as a seperate component
-// Team will help me figure it out - for now I put in all the pages which is not what I want - Zo
+// Team Footer for website - Zo
 function Footer() 
 {
     return (
         <div>
-                <br />
+            
             {/* Team footer for food app - Zo */}
-            <div className="card" style={{ textAlign: "center" }}>
-                <div className="card-body">
+            <div style={{ textAlign: "center", color:"white" }}>
+                {/* Added Google blue hex styling for footer */}
+                <div className="card-body" style={{backgroundColor:"#146eb4"}}>
                     <p className="card-title">© 2021 <span className="title">Wait!</span> There's Food </p> Team 4, Project 3 😎
                </div>
             </div>

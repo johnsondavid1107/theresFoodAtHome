@@ -20,14 +20,17 @@ const SignUp = () => {
     password
   ) => {
     event.preventDefault();
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      generateUserDocument(user, { displayName });
-    } catch (error) {
-      setError("Error Signing up with email and password");
+    try{
+      const {user} = await auth.createUserWithEmailAndPassword(email, password);
+      generateUserDocument(user, {displayName});
+      console.log("clicked")
+      console.log("value of user is "+ JSON.stringify(user))
+      window.location.href="/"
+    }
+    catch(error){
+      setError('Error Signing up with email and password \n.  ' + error.message );
+      console.log(error)
+
     }
 
     setEmail("");

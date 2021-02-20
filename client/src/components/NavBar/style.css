@@ -4,12 +4,13 @@
 h2
 {
     text-align: center;
+    color:white;
 }
 
 /* Color - code given by teammates - Zo*/
 .title
 {
-    color: #BA324F;
+    color: #EB6864;
 }
 
 /* NavBar akaTabs section - Zo */
@@ -21,4 +22,8 @@ h2
     justify-content: space-evenly;
 }
 
-
+/* Added a Google blue background to keep it plain per majority team request - Almonzo */
+*
+{
+    background-color: #146eb4;
+}

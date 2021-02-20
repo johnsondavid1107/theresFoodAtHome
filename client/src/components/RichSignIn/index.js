@@ -4,16 +4,17 @@ import { signInWithGoogle, auth } from "../../utils/firebase";
 import "./style.css";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const signInWithEmailAndPasswordHandler = (event, email, password) => {
-    event.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).catch((error) => {
-      setError("Error signing in with password and email!");
-      console.error("Error signing in with password and email", error);
-    });
-  };
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const signInWithEmailAndPasswordHandler = (event, email, password) => {
+        event.preventDefault();
+        auth.signInWithEmailAndPassword(email, password).then(window.location.href="/").catch(error => {
+          setError("Error signing in with password and email!");
+          console.error("Error signing in with password and email", error);
+        });
+      };
+
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
@@ -102,6 +103,10 @@ const SignIn = () => {
           <Link to="/signUp" className="signUp">
             Sign up here
           </Link>{" "}
+          <br />{" "}
+          <Link to = "reset" className="">
+            Forgot Password?
+          </Link>
         </p>
 
         <Link to="/passwordReset" className="reset">

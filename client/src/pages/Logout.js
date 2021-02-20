@@ -1,9 +1,13 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Col, Row, Container } from "../components/Grid";
+import {auth, signOut} from "../utils/firebase"
 
 
 function Logout() 
 {
+
+
+  useEffect(signOut(),[])
 
 
     return (

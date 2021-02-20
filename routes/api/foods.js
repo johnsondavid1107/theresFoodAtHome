@@ -4,32 +4,55 @@ const FoodsController = require("../../controllers/foodsController");
 const db = require("../../models")
 
 
- 
+
 // Matches with "/api/foods"
 router.route("/")
-    // .get(FoodsController.findAll);
- 
+// .get(FoodsController.findAll);
+
 //Matches with "/api/foods/user/:id"
 router.route("/user/:id")
     .get(FoodsController.findById);
- 
+
 // Matches with "/api/foods/recipes/:ingredient"
 router.route("/recipes/:ingredient")
     .get(FoodsController.findBySearch);
 
+//Finds the item within the foodItem array
+router.put("/updateFood/:id/:foodName", function (req, res) {
+    let index = parseInt(req.params.id);
+    let foodName = req.params.foodName.toLowerCase();
+    let today = new Date().toISOString();
+    today = today.slice(0,10);
+
+    db.User.findOneAndReplace(
+        {$and: [{ fireBaseId: index },{"foodItem.name": foodName}]},
+        {"foodItem.datOfPurchase": today}
+    ).then(dbFood => {
+        res.json(dbFood);
+    }).catch(err => {
+        res.json(err);
+    })
+
+})
 
 
+router.post("/addFood/:id/:name/:daysFresh/:location", function (req, res) {
+    let id = parseInt(req.params.id);
+    let foodName = req.params.name;
+    let daysFresh = parseInt(req.params.daysFresh);
+    let location = req.params.location;
+    let today = new Date().toISOString();
+    today = today.slice(0,10);
 
-router.post("/addFood", function (req, res) {
     //the fireBaseId number needs to be a current 
-    db.User.findOneAndUpdate({ fireBaseId: 1 }, {
+    db.User.findOneAndUpdate({ fireBaseId: id }, {
         $push: {
             foodItem: {
-                name: "Stew",
-                dateOfPurchase: null,
-                daysFresh: 5,
+                name: foodName,
+                dateOfPurchase: today,
+                daysFresh: daysFresh,
                 spoiled: false,
-                location: "pantry"
+                location: location
             }
         }
 
@@ -43,19 +66,14 @@ router.post("/addFood", function (req, res) {
 // Matches with "/api/foods/recipes/:ingredient/:diet"
 router.route("/recipes/:ingredient/:diet")
     .get(FoodsController.findBySearchSpecialDiet);
- 
+
 // Matches with "/api/foods/recipes/:ingredient/:diet"
 router.route("/recipes/allergy/:ingredient/:allergy")
     .get(FoodsController.findBySearchAllergy)
- 
+
 router.route("/recipes/allspec/:ingredient/:allergy/:diet")
     .get(FoodsController.findBySearchAllergySpecialDiet)
- 
 
+
+router.route("/PantryItems/:id").get(FoodsController.findById)
 module.exports = router;
- 
- 
- 
- 
- 
-
