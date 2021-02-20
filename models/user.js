@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
 
     firebaseId: {
-        type: Number
+        type: String
     },
     foodItem: [
         {

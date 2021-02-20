@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import API from "../utils/API";
 import { Container, Row, Col, Button, Card, Accordion, Image, Form } from "react-bootstrap";
+import UserContext from "../utils/UserContext";
 
 
 function Recipes() {
   //Julie's JS
   //USER INFORMATION -- will be variables from firebase
+  const user = useContext(UserContext)
+  console.log(user.uid);
   const userId = 1;
+
+
+  //This will need to come from the checkboxes too
   const specialDiet = "";
   const allergies = "peanut";
 
