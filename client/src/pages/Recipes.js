@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import API from "../utils/API";
 import { Container, Row, Col, Button, Card, Accordion, Image, Form, Tab, Tabs } from "react-bootstrap";
+import UserContext from "../utils/UserContext";
 
 
 function Recipes() {
   //Julie's JS
   //USER INFORMATION -- will be variables from firebase
-  const userId = 1;
+
+  const user = useContext(UserContext)
+  const userId = user.uid;
   const specialDiet = "";
   const allergies = "peanut";
 
@@ -38,18 +41,21 @@ function Recipes() {
     API.getFoods(userId)
       .then(res => {
         //Makes an array of objects for each food item in pantry
-        let dbObject = res.data;
+        //Makes an array of objects for each food item in pantry
+        let dbObject = res.data[0].foodItem;
+
 
         for (let i = 0; i < dbObject.length; i++) {
 
           //get name
-          let name = dbObject[i].foodItem[0].name;
+          let name = dbObject[i].name;
+
 
           //get date of purchase
-          let dateOfPurchase = dbObject[i].foodItem[0].dateOfPurchase;
+          let dateOfPurchase = dbObject[i].dateOfPurchase;
           dateOfPurchase = new Date(dateOfPurchase);
-          let location = dbObject[i].foodItem[0].location;
-          let daysFresh = dbObject[i].foodItem[0].daysFresh;
+          let location = dbObject[i].location;
+          let daysFresh = dbObject[i].daysFresh;
 
           //Gets a spoil date for each item
           let spoilDate = new Date(dateOfPurchase.valueOf())
