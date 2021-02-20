@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {generateUserDocument, auth, signInWithGoogle } from "../../utils/firebase"
+import {
+  generateUserDocument,
+  auth,
+  signInWithGoogle,
+} from "../../utils/firebase";
+import style from "../../components/RichSignUp/index";
+import "./style.css";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState(null);
- 
-  const createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+
+  const createUserWithEmailAndPasswordHandler = async (
+    event,
+    email,
+    password
+  ) => {
     event.preventDefault();
-    try{
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName});
-    }
-    catch(error){
-      setError('Error Signing up with email and password');
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      generateUserDocument(user, { displayName });
+    } catch (error) {
+      setError("Error Signing up with email and password");
     }
 
     setEmail("");
@@ -23,7 +35,7 @@ const SignUp = () => {
     setDisplayName("");
   };
 
-  const onChangeHandler = event => {
+  const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
     if (name === "userEmail") {
       setEmail(value);
@@ -34,69 +46,92 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="">
-      <h1 className="">Sign Up</h1>
-      <div className="">
-        {error !== null && (
-          <div className="">
-            {error}
-          </div>
-        )}
-        <form className="">
-          <label htmlFor="displayName" className="">
-            Display Name:
-          </label>
-          <input
-            type="text"
-            className=""
-            name="displayName"
-            value={displayName}
-            placeholder="E.g: Rich"
-            id="displayName"
-            onChange={event => onChangeHandler(event)}
-          />
-          <label htmlFor="userEmail" className="block">
+    <div className="signUp">
+      <h1 className="header">Sign Up</h1>
+      <div className="information">
+        {error !== null && <div className="error">{error}</div>}
+
+        <form className="data">
+          {/* again both labels are green out because I don't feel we need them. */}
+          {/* <label htmlFor="displayName" className="disName">
+            Display Name:</label> */}
+          <container>
+            <div className="center">
+              <input
+                type="text"
+                className="playName"
+                name="displayName"
+                value={displayName}
+                placeholder="Full Name"
+                id="displayName"
+                onChange={(event) => onChangeHandler(event)}
+              />
+            </div>
+          </container>
+          <br />
+
+          {/* <label htmlFor="userEmail" className="block">
             Email:
-          </label>
-          <input
-            type="email"
-            className=""
-            name="userEmail"
-            value={email}
-            placeholder="E.g: email123@gmail.com"
-            id="userEmail"
-            onChange={event => onChangeHandler(event)}
-          />
-          <label htmlFor="userPassword" className="block">
+          </label> */}
+          <container>
+            <div className="center">
+              <input
+                type="email"
+                className="email"
+                name="userEmail"
+                value={email}
+                placeholder="Email"
+                id="userEmail"
+                onChange={(event) => onChangeHandler(event)}
+              />
+            </div>
+          </container>
+          <br />
+
+          {/* <label htmlFor="userPassword" className="block">
             Password:
-          </label>
-          <input
-            type="password"
-            className=""
-            name="userPassword"
-            value={password}
-            placeholder="Your Password"
-            id="userPassword"
-            onChange={event => onChangeHandler(event)}
-          />
+          </label> */}
+          <container>
+            <div className="center">
+              <input
+                type="password"
+                className="password"
+                name="userPassword"
+                value={password}
+                placeholder="Password"
+                id="userPassword"
+                onChange={(event) => onChangeHandler(event)}
+              />
+            </div>
+          </container>
+          <br />
+          <div className="center">
+            <button
+              className="btn"
+              onClick={(event) => {
+                createUserWithEmailAndPasswordHandler(event, email, password);
+              }}
+            >
+              Sign up
+            </button>
+          </div>
+        </form>
+        {/* It is my thinking that we don't need line 119 */}
+        {/* <p className="setUp">or</p> */}
+        <div className="center">
           <button
-            className=""
-            onClick={event => {
-              createUserWithEmailAndPasswordHandler(event, email, password);
+            className="google"
+            onClick={() => {
+              signInWithGoogle();
             }}
           >
-            Sign up
+            Sign In with Google
           </button>
-        </form>
-        <p className="">or</p>
-        <button
-          className="" onClick={()=>{signInWithGoogle()}}
-        >
-          Sign In with Google
-        </button>
-        <p className="">
+        </div>
+
+        <p className="account">
           Already have an account?{" "}
-          <Link to="/SignIn" className="">
+          <Link to="/SignIn" className="signIn">
             Sign in here
           </Link>
         </p>
