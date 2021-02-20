@@ -10,12 +10,12 @@ class PantryCard extends Component {
     };
 
     componentDidMount() {
-        let idNum = 1
-        API.getPantryItems(idNum).then(result =>
-            this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
+        // let idNum = "1";
+        // API.getPantryItems(idNum).then(result =>
+        //     this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
 
 
-        )
+        // )
 
 
 
