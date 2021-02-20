@@ -15,6 +15,7 @@ const SignUp = () => {
       generateUserDocument(user, {displayName});
       console.log("cicked")
       console.log("value of user is "+ JSON.stringify(user))
+      window.location.href="/"
     }
     catch(error){
       setError('Error Signing up with email and password \n.  ' + error.message );

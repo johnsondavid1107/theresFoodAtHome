@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import Pantry from "../../pages/Pantry";
-
 import Recipes from "../../pages/Recipes";
 import Logout from "../../pages/Logout";
 import NoMatch from "../../pages/NoMatch";
@@ -21,6 +20,7 @@ function Application() {
     return (
 
         user ?
+        
             <Router>
 
                 <NavBar />
