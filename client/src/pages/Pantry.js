@@ -1,10 +1,11 @@
 import React from "react";
 import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
+import PantryCard from "../components/PantryCard"
+import FridgeCard from "../components/FridgeCard"
 
 
-function Pantry() 
-{
+function Pantry() {
   return (
     <div>
 
@@ -32,52 +33,17 @@ function Pantry()
           <Col size="md-12">
             <div className="Box-1">
 
-              <h3 className="align-Header">Pantry</h3>
-
-
-
-              {/* Item 1 */}
-              <button className="btn btn-danger" type="button">Delete</button>
-
-              <div className="card">
-                <div className="card-body">
-                  Fruit Snacks
-                </div>
-              </div>
-
-              {/* Spacing */}
-              <br />
-
-              {/* Item 2 */}
-              <button className="btn btn-danger" type="button">Delete</button>
-
-              <div className="card">
-                <div className="card-body">
-                  Cheese Puffs
-                </div>
-              </div>
-
-              {/* Spacing */}
-              <br />
-
-              {/* Item 2 */}
-              <button className="btn btn-danger" type="button">Delete</button>
-
-              <div className="card">
-                <div className="card-body">
-                  Cookies
-                </div>
-              </div>
+              <PantryCard />
 
 
             </div>
           </Col>
 
         </Row>
-        
+
         {/* Do not touch - Zo ensures page is responsive during laptop view*/}
         <br class="mobile" />
-                
+
         <Row>
           <Col size="md-12">
 
@@ -85,40 +51,7 @@ function Pantry()
             <div className="Box-2" >
 
 
-              <h3 className="align-Header">Fridge</h3>
-
-              {/* Item 1 */}
-              <button className="btn btn-danger" type="button">Delete</button>
-
-              <div className="card">
-                <div className="card-body">
-                  Eggs
-                </div>
-              </div>
-
-              {/* Spacing */}
-              <br />
-
-              {/* Item 2 */}
-              <button className="btn btn-danger" type="button">Delete</button>
-
-              <div className="card">
-                <div className="card-body">
-                  Milk
-                </div>
-              </div>
-
-              {/* Spacing */}
-              <br />
-
-              {/* Item 2 */}
-              <button className="btn btn-danger" type="button">Delete</button>
-
-              <div className="card">
-                <div className="card-body">
-                  Bread
-                </div>
-              </div>
+              <FridgeCard />
 
             </div>
           </Col>
