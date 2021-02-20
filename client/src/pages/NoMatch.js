@@ -2,7 +2,8 @@ import React from "react";
 import "../pages/NoMatch.css"
 import { Col, Row, Container } from "../components/Grid";
 
-function NoMatch() {
+function NoMatch() 
+{
   return (
     <Container fluid>
       <Row>
