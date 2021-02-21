@@ -29,9 +29,9 @@ class PantryCard extends Component {
         let renderFood = this.state.foodPantry
         console.log(renderFood)
         return (
-            <div>
+            <div  style={{backgroundColor:"gray"}}>
 
-                <h3 className="align-Header">Pantry</h3>
+                <h3 className="align-Header pantry-color">Pantry</h3>
 
 
 

@@ -8,15 +8,15 @@ import Video from "../../images/food-demo.mp4";
 function NavBar() 
 {
   return (
-    <div>
+    <div container style = {{backgroundColor:"#BA324F"}}>
 
       {/* There's Food video demo - Zo*/}
-      <video width="100%" height="240" muted autostart loop autoPlay src={Video} type="video/mp4" className = "video-Zo" />
+      <video style = {{backgroundColor:"#BA324F"}} width="100%" height="240" muted autostart loop autoPlay src={Video} type="video/mp4" className = "video-Zo" />
     
       <br/>
 
       {/* Title of Team App */}
-      <h2><span className="title">Wait!</span> There's Food </h2>
+      <h2 style = {{backgroundColor:"#BA324F"}}><span className="title">Wait!</span> There's Food </h2>
 
       <br/>
 
@@ -43,7 +43,7 @@ function NavBar()
 
 
 {/* Ending div for component - Zo */}
-</div>
+</div >
   );
 }
 

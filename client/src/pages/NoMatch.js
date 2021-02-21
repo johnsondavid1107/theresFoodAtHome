@@ -5,9 +5,9 @@ import { Col, Row, Container } from "../components/Grid";
 function NoMatch() 
 {
   return (
-    <Container fluid>
+    <Container>
       <Row>
-        <Col size="md-12">
+        <Col size="lg-12">
 
           <br />
 

@@ -22,7 +22,8 @@ textarea {
 }
 /* this is the styling for the signin btn. */
 .btn:hover {
-  background-color: blue;
+ /* Rich this code affects every page that has buttons, maybe pick a different class name as .btn button is universal for all bootstrap buttons */
+  /* background-color: blue; */
   color: #fff;
   border: 1px solid #fff;
   transition: right 2s ease-in-out 0.5s;
@@ -39,6 +40,7 @@ textarea {
 }
 
 /* This is to change the color of the "link text" below the google button. I think it needs to stand out more against the background. I know we are changing the background so still something to be considered.  */
-.here .forgot {
+.here .forgot 
+{
   color: black;
 }
