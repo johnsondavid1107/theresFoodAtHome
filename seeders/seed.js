@@ -9,7 +9,8 @@ mongoose.connect("mongodb://localhost/theresfoodathome", {
 let userSeed = [
 
     {
-        fireBaseId: "NT3fCMjxFfPemnQqfs9u0OIoWHB3",
+
+        fireBaseId: "5Pr0MqP0FqRYCMui1Xzx6MP1R3d2",
         foodItem: [
             {
                 name: "pineapple juice",

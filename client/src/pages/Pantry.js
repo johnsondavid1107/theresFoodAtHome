@@ -6,6 +6,7 @@ import PantryCard from "../components/PantryCard"
 import FridgeCard from "../components/FridgeCard"
 
 
+
 function Pantry() {
 
   const [foodInput, setFoodInput] = useState({
@@ -14,7 +15,6 @@ function Pantry() {
   })
   const user = useContext(UserContext);
   console.log(user)
-
 
 
 
@@ -34,7 +34,7 @@ function Pantry() {
               <input type="text" className="form-control" placeholder="Add food to 😋..." />
 
 
-              <button className="btn btn-warning" type="button">Pantry</button>
+              <button className="btn btn-warning" style= {{color:"black"}} type="button">Pantry</button>
               <button className="btn btn-info" type="button">Fridge</button>
             </div>
 
@@ -72,7 +72,6 @@ function Pantry() {
             </div>
           </Col>
         </Row>
-
 
       </Container>
 

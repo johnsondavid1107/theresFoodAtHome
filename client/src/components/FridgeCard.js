@@ -1,6 +1,6 @@
 import React, { Component} from "react"
 import API from "../utils/API"
-// Didn't use or touch this, as it was confusing for me to style/ update the page
+
 
 class FridgeCard extends Component {
 
@@ -29,9 +29,9 @@ class FridgeCard extends Component {
         let renderFood = this.state.foodFridge
         console.log(renderFood)
         return (
-            <div>
+            <div style={{backgroundColor:"gray"}}>
 
-                <h3 className="align-Header">Fridge</h3>
+                <h3 className="align-Header fridge-color">Fridge</h3>
 
 
 

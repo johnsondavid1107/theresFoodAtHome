@@ -23,7 +23,8 @@ textarea {
 
 /* this is the styling for the signin btn. */
 .btn:hover {
-  background-color: blue;
+  /* Rich this code below affects every page that have buttons maybe pick a different class name  as .btn button is universal for all bootstrap buttons */
+  /* background-color: blue; */
   color: #fff;
   border: 1px solid #fff;
   transition: right 2s ease-in-out 0.5s;

@@ -76,7 +76,7 @@ const SignUp = () => {
           {/* <label htmlFor="userEmail" className="block">
             Email:
           </label> */}
-          <container>
+          <container size="lg-12">
             <div className="center">
               <input
                 type="email"
@@ -94,7 +94,9 @@ const SignUp = () => {
           {/* <label htmlFor="userPassword" className="block">
             Password:
           </label> */}
-          <container>
+          
+          {/* Added code to make page responsive - Zo */}
+          <container size="lg-12">
             <div className="center">
               <input
                 type="password"

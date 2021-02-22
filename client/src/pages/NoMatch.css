@@ -1,5 +1,6 @@
-/* No Match page style sheet  - Zo */
+/* No Match & AccessDenied page style sheet  - Zo */
 
+/* Code for No Match page below */
 h3
 {
     color: red;
@@ -7,8 +8,27 @@ h3
     padding-top: 20px;
 }
 
-img
+
+/* Code for Access Denied page below */
+
+.font-color
 {
-    display: block;
-    text-align: center;
+    color: orange;
+}
+
+a
+{
+    color:white;
+
+}
+
+a:hover
+{
+    color:  blue;
+}
+
+/* Makes Access Denied text look good on mobile - Zo */
+@media screen and (min-width: 600px)  
+{
+    .mobile-break { display: none; }
 }

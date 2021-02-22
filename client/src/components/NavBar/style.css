@@ -10,7 +10,7 @@ h2
 /* Color - code given by teammates - Zo*/
 .title
 {
-    color: #EB6864;
+    color:orange;
 }
 
 /* NavBar akaTabs section - Zo */
@@ -20,10 +20,4 @@ h2
     display: flex;
     flex-wrap:nowrap;
     justify-content: space-evenly;
-}
-
-/* Added a Google blue background to keep it plain per majority team request - Almonzo */
-*
-{
-    background-color: #146eb4;
 }
