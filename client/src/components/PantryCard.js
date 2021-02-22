@@ -3,19 +3,27 @@ import API from "../utils/API"
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
 class PantryCard extends Component {
+    constructor(props) {
+        super(props);
+
+    }
+    NT3fCMjxFfPemnQqfs9u0OIoWHB3
+
+
 
     state = {
         foodPantry: [],
-
+        foodFridge: []
     };
 
     componentDidMount() {
-        // let idNum = "1";
-        // API.getPantryItems(idNum).then(result =>
-        //     this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
+        console.log(this.props.currentUser)
+        let idNum = this.props.currentUser
+        API.getPantryItems(idNum).then(result =>
+            this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
 
 
-        // )
+        )
 
 
 
@@ -28,6 +36,7 @@ class PantryCard extends Component {
 
         let renderFood = this.state.foodPantry
         console.log(renderFood)
+
         return (
             <div  style={{backgroundColor:"gray"}}>
 
