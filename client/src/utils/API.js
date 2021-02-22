@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//make Async to use 
 export default {
     getPantryItems: function (id) {
         return axios.get("/api/foods/PantryItems/" + id)
