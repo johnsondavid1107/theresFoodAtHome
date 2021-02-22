@@ -244,10 +244,10 @@ function Recipes() {
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check inline label="Ingredient 1" type={type} id={`inline-${type}-1`} />
-                                <Form.Check inline label="Ingredient 2" type={type} id={`inline-${type}-2`} />
-                                <Form.Check inline label="Ingredient 3" type={type} id={`inline-${type}-3`} />
-                                <Form.Check inline label="Ingredient 4" type={type} id={`inline-${type}-4`} />
+                                <Form.Check inline label="Ingredient 5" type={type} id={`inline-${type}-5`} />
+                                <Form.Check inline label="Ingredient 6" type={type} id={`inline-${type}-6`} />
+                                <Form.Check inline label="Ingredient 7" type={type} id={`inline-${type}-7`} />
+                                <Form.Check inline label="Ingredient 8" type={type} id={`inline-${type}-8`} />
                               </div>
                             ))}
                           </Form>
@@ -267,10 +267,10 @@ function Recipes() {
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check inline label="Ingredient 1" type={type} id={`inline-${type}-1`} />
-                                <Form.Check inline label="Ingredient 2" type={type} id={`inline-${type}-2`} />
-                                <Form.Check inline label="Ingredient 3" type={type} id={`inline-${type}-3`} />
-                                <Form.Check inline label="Ingredient 4" type={type} id={`inline-${type}-4`} />
+                                <Form.Check inline label="Ingredient 9" type={type} id={`inline-${type}-9`} />
+                                <Form.Check inline label="Ingredient 10" type={type} id={`inline-${type}-10`} />
+                                <Form.Check inline label="Ingredient 11" type={type} id={`inline-${type}-11`} />
+                                <Form.Check inline label="Ingredient 12" type={type} id={`inline-${type}-12`} />
                               </div>
                             ))}
                           </Form>
@@ -292,10 +292,10 @@ function Recipes() {
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check inline label="Ingredient 1" type={type} id={`inline-${type}-1`} />
-                                <Form.Check inline label="Ingredient 2" type={type} id={`inline-${type}-2`} />
-                                <Form.Check inline label="Ingredient 3" type={type} id={`inline-${type}-3`} />
-                                <Form.Check inline label="Ingredient 4" type={type} id={`inline-${type}-4`} />
+                                <Form.Check inline label="Ingredient 13" type={type} id={`inline-${type}-13`} />
+                                <Form.Check inline label="Ingredient 14" type={type} id={`inline-${type}-14`} />
+                                <Form.Check inline label="Ingredient 15" type={type} id={`inline-${type}-15`} />
+                                <Form.Check inline label="Ingredient 16" type={type} id={`inline-${type}-16`} />
                               </div>
                             ))}
                           </Form>
@@ -316,10 +316,10 @@ function Recipes() {
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check inline label="Ingredient 1" type={type} id={`inline-${type}-1`} />
-                                <Form.Check inline label="Ingredient 2" type={type} id={`inline-${type}-2`} />
-                                <Form.Check inline label="Ingredient 3" type={type} id={`inline-${type}-3`} />
-                                <Form.Check inline label="Ingredient 4" type={type} id={`inline-${type}-4`} />
+                                <Form.Check inline label="Ingredient 17" type={type} id={`inline-${type}-17`} />
+                                <Form.Check inline label="Ingredient 18" type={type} id={`inline-${type}-18`} />
+                                <Form.Check inline label="Ingredient 19" type={type} id={`inline-${type}-19`} />
+                                <Form.Check inline label="Ingredient 20" type={type} id={`inline-${type}-20`} />
                               </div>
                             ))}
                           </Form>
