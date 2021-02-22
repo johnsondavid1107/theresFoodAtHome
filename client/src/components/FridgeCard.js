@@ -3,10 +3,7 @@ import API from "../utils/API"
 
 
 class FridgeCard extends Component {
-    constructor(props) {
-        super(props);
 
-    }
 
     state = {
         foodFridge: []

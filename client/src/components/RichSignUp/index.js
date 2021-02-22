@@ -5,7 +5,6 @@ import {
   auth,
   signInWithGoogle,
 } from "../../utils/firebase";
-import style from "../../components/RichSignUp/index";
 import "./style.css";
 
 const SignUp = () => {
@@ -20,15 +19,15 @@ const SignUp = () => {
     password
   ) => {
     event.preventDefault();
-    try{
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, {displayName});
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      generateUserDocument(user, { displayName });
       console.log("clicked")
-      console.log("value of user is "+ JSON.stringify(user))
-      window.location.href="/"
+      console.log("value of user is " + JSON.stringify(user))
+      window.location.href = "/"
     }
-    catch(error){
-      setError('Error Signing up with email and password \n.  ' + error.message );
+    catch (error) {
+      setError('Error Signing up with email and password \n.  ' + error.message);
       console.log(error)
 
     }
@@ -94,7 +93,7 @@ const SignUp = () => {
           {/* <label htmlFor="userPassword" className="block">
             Password:
           </label> */}
-          
+
           {/* Added code to make page responsive - Zo */}
           <container size="lg-12">
             <div className="center">

@@ -3,7 +3,9 @@ import Pantry from "../../pages/Pantry";
 import Recipes from "../../pages/Recipes";
 import Logout from "../../pages/Logout";
 //import AccessDenied from "../../pages/AccessDenied";
+//if NoMatch is removed, it changes the placement of Pantry in yellow on the pantry page..
 import NoMatch from "../../pages/NoMatch";
+
 import NavBar from "../NavBar";
 import Footer from "../Footer/Footer";
 import SignIn from "../RichSignIn/index"

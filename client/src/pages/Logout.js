@@ -1,29 +1,28 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Container } from "../components/Grid";
-import {auth, signOut} from "../utils/firebase"
+import { signOut } from "../utils/firebase"
 
 
-function Logout() 
-{
+function Logout() {
 
 
-  useEffect(signOut(),[])
+  useEffect(signOut(), [])
 
 
-    return (
-      <Container fluid>
-        <Row>
-          <Col size="lg-12">
-            
-              <div>
+  return (
+    <Container fluid>
+      <Row>
+        <Col size="lg-12">
 
-              
+          <div>
 
-              </div>
-          </Col>
-        </Row>
-      </Container>
-    );
+
+
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
 

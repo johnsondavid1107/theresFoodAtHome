@@ -1,10 +1,8 @@
 import React, { Component } from "react"
-import API from "../utils/API"
+
 
 class InputFood extends Component {
-    constructor(props) {
-        super(props)
-    }
+
 
 
     componentDidMount() {
