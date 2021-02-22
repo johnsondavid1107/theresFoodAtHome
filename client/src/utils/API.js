@@ -1,12 +1,13 @@
 import axios from "axios";
 //make Async to use 
 export default {
-    getPantryItems: function (id) {
-        return axios.get("/api/foods/PantryItems/" + id)
-    },
+
     //Gets all food from the user's pantry
     getFoods: function (id) {
-        return axios.get("/api/foods/user/" + id);
+        return axios.get("/api/foods/allFoods/" + id);
+    },
+    getUser: function (id) {
+        return axios.get("/api/foods/getUser/" + id)
     },
     //searches for recipes - just from ingredients, no other 
     recipeFromIngredients: function (ingredients) {

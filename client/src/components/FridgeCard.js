@@ -14,13 +14,15 @@ class FridgeCard extends Component {
 
     componentDidMount() {
 
-        let idNum = this.props.currentUser;
-        API.getPantryItems(idNum).then(result => {
-            console.log(result);
-            this.setState({ foodFridge: result.data[0].foodItem.filter(item => item.location === "fridge") })
-        }
+        let idNum = this.props.currentUser
+        API.getFoods(idNum).then(result => {
+            if (result.data[0] === undefined) {
+                this.setState({ foodFridge: "No food found" })
+            } else {
+                this.setState({ foodFridge: result.data[0].foodItem.filter(item => item.location === "fridge") })
+            }
+        })
 
-        )
 
 
 
@@ -32,27 +34,32 @@ class FridgeCard extends Component {
 
         let renderFood = this.state.foodFridge
         console.log(renderFood)
+        if (renderFood === "No food found") {
+            var noFood = "Please add food to list"
+        }
         return (
-            <div style={{backgroundColor:"gray"}}>
+            <div style={{ backgroundColor: "gray" }}>
 
                 <h3 className="align-Header fridge-color">Fridge</h3>
 
 
 
-                {renderFood.map(item =>
-                    <div>
-                        <button className="btn btn-danger" type="button">Delete</button>
+                {<h2>{noFood}</h2> ||
 
-                        <div className="card">
-                            <div className="card-body">
-                                {item.name}
+                    renderFood.map(item =>
+                        <div>
+                            <button className="btn btn-danger" type="button">Delete</button>
+
+                            <div className="card">
+                                <div className="card-body">
+                                    {item.name}
+                                </div>
                             </div>
+
+
+                            <br />
                         </div>
-
-
-                        <br />
-                    </div>
-                )}
+                    )}
 
 
 
