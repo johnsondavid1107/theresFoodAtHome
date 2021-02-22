@@ -1,8 +1,12 @@
-import React, { Component} from "react"
+import React, { Component } from "react"
 import API from "../utils/API"
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
 class FridgeCard extends Component {
+    constructor(props) {
+        super(props);
+
+    }
 
     state = {
         foodFridge: []
@@ -10,13 +14,13 @@ class FridgeCard extends Component {
 
     componentDidMount() {
 
-        // let idNum = "5Pr0MqP0FqRYCMui1Xzx6MP1R3d2";
-        // API.getPantryItems(idNum).then(result => {
-        //     console.log(result);
-        //     this.setState({ foodFridge: result.data[0].foodItem.filter(item => item.location === "fridge") })
-        // }
+        let idNum = this.props.currentUser;
+        API.getPantryItems(idNum).then(result => {
+            console.log(result);
+            this.setState({ foodFridge: result.data[0].foodItem.filter(item => item.location === "fridge") })
+        }
 
-        // )
+        )
 
 
 

@@ -67,7 +67,10 @@ function Pantry() {
             <div className="Box-2" >
 
 
-              <FridgeCard />
+              <FridgeCard
+                currentUser={user.uid}
+                key={user.uid}
+              />
 
             </div>
           </Col>
