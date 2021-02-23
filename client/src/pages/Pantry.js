@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import UserContext from "../utils/UserContext"
 import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
@@ -10,10 +10,7 @@ import InputFood from "../components/InputFood"
 
 function Pantry() {
 
-  const [foodInput, setFoodInput] = useState({
-    userInput: [],
 
-  })
   const user = useContext(UserContext);
   console.log(user)
 

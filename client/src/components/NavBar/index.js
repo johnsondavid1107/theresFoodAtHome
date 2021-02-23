@@ -7,10 +7,10 @@ import Video from "../../images/food-demo.mp4";
 
 function NavBar() {
   return (
-    <div container style={{ backgroundColor: "#BA324F" }}>
+    <div container="true" style={{ backgroundColor: "#BA324F" }}>
 
       {/* There's Food video demo - Zo*/}
-      <video style={{ backgroundColor: "#BA324F" }} width="100%" height="240" muted autostart loop autoPlay src={Video} type="video/mp4" className="video-Zo" />
+      <video style={{ backgroundColor: "#BA324F" }} width="100%" height="240" muted autostart="true" loop autoPlay src={Video} type="video/mp4" className="video-Zo" />
 
       <br />
 
