@@ -36,6 +36,24 @@ module.exports = {
             }
         )
     },
+    addFood: function (req, res) {
+        console.log(req.body)
+        db.User.update({ fireBaseId: req.body.user }, {
+            $push: {
+                foodItem: {
+                    name: req.body.name,
+                    dateOfPurchase: req.body.dateOfPurchase,
+                    daysFresh: req.body.daysFresh,
+                    spoiled: req.body.spoiled,
+                    location: req.body.location
+                }
+            }
+
+        }).then(
+            console.log("status okay"),
+            res.send("Added food")
+        )
+    },
 
     //Searches for recipes based on just ingredients and no allergies/special diet
     findBySearch: function (req, res) {

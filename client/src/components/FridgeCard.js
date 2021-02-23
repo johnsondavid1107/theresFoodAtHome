@@ -41,7 +41,7 @@ class FridgeCard extends Component {
 
 
 
-                {<h2>{noFood}</h2> ||
+                {noFood ||
 
                     renderFood.map(item =>
                         <div>
@@ -56,7 +56,9 @@ class FridgeCard extends Component {
 
                             <br />
                         </div>
-                    )}
+                    )
+
+                }
 
 
 

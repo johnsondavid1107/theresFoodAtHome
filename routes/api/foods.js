@@ -77,5 +77,6 @@ router.route("/allFoods/:id")
     .get(FoodsController.findById);
 
 router.route("/getUser/:id").get(FoodsController.findOrCreate)
+router.route("/addFood").post(FoodsController.addFood)
 
 module.exports = router;

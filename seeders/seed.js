@@ -10,7 +10,7 @@ let userSeed = [
 
     {
 
-        fireBaseId: "5Pr0MqP0FqRYCMui1Xzx6MP1R3d2",
+        fireBaseId: "NT3fCMjxFfPemnQqfs9u0OIoWHB3",
         foodItem: [
             {
                 name: "pineapple juice",

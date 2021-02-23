@@ -9,6 +9,16 @@ export default {
     getUser: function (id) {
         return axios.get("/api/foods/getUser/" + id)
     },
+    makeFood: function (food) {
+        return axios.post("/api/foods/addFood", {
+            user: food.user,
+            name: food.name,
+            dateOfPurchase: food.dateOfPurchase,
+            daysFresh: food.daysFresh,
+            spoiled: food.spoiled,
+            location: food.location
+        })
+    },
     //searches for recipes - just from ingredients, no other 
     recipeFromIngredients: function (ingredients) {
         return axios.get("/api/foods/recipes/" + ingredients);
