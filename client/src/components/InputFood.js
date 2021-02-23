@@ -28,6 +28,7 @@ function InputFood(props) {
         console.log(combo.location)
         API.makeFood(combo).then(function (response) {
             console.log(response)
+            window.location.reload(true)
         })
     }
 
