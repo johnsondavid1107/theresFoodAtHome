@@ -4,6 +4,7 @@ import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
 import PantryCard from "../components/PantryCard"
 import FridgeCard from "../components/FridgeCard"
+import InputFood from "../components/InputFood"
 
 
 
@@ -30,13 +31,9 @@ function Pantry() {
           <Col size="md-12">
 
             {/* Search Bar + buttons for food - Zo */}
-            <div className="input-group input-group-sm mb-3">
-              <input type="text" className="form-control" placeholder="Add food to 😋..." />
-
-
-              <button className="btn btn-warning" style= {{color:"black"}} type="button">Pantry</button>
-              <button className="btn btn-info" type="button">Fridge</button>
-            </div>
+            <InputFood
+              currentUser={user.uid}
+              key={user.uid} />
 
 
 
