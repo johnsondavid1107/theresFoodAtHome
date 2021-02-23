@@ -44,7 +44,7 @@ class PantryCard extends Component {
 
 
 
-                {<h2>{noFood} </h2> ||
+                { noFood ||
 
                     renderFood.map(item =>
                         <div>
