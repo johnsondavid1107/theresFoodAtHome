@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import Pantry from "../../pages/Pantry";
 import Recipes from "../../pages/Recipes";
 import Logout from "../../pages/Logout";
-import AccessDenied from "../../pages/AccessDenied";
+//import AccessDenied from "../../pages/AccessDenied";
 import NoMatch from "../../pages/NoMatch";
 import NavBar from "../NavBar";
 import Footer from "../Footer/Footer";
@@ -21,7 +21,7 @@ function Application() {
     return (
 
         user ?
-        
+
             <Router>
 
                 <NavBar />
@@ -42,10 +42,10 @@ function Application() {
 
 
                     <Route>
-                        <AccessDenied />
+                        {/* <AccessDenied /> */}
                     </Route>
 
-                    
+
 
                 </Switch>
 
@@ -61,9 +61,9 @@ function Application() {
                 <Switch>
 
                     <Route exact path={["/", "/signin"]}>
-                    <SignIn />
+                        <SignIn />
                     </Route>
-                    
+
                     <Route exact path="/signup">
                         <SignUp />
                     </Route>
@@ -71,10 +71,10 @@ function Application() {
                     <Route exact path="/reset" >
                         <PwReset />
                     </Route>
-                    
+
                     {/* Added per Rich - Zo */}
                     <Route>
-                        <AccessDenied />
+                        {/* <AccessDenied /> */}
                     </Route>
 
                 </Switch>
