@@ -2,7 +2,9 @@ import React, { useContext } from "react"
 import Pantry from "../../pages/Pantry";
 import Recipes from "../../pages/Recipes";
 import Logout from "../../pages/Logout";
+//if NoMatch is removed, it changes the placement of Pantry in yellow on the pantry page..
 import NoMatch from "../../pages/NoMatch";
+
 import NavBar from "../NavBar";
 import Footer from "../Footer/Footer";
 import SignIn from "../RichSignIn/index"
@@ -21,7 +23,7 @@ function Application() {
     return (
 
         user ?
-        
+
             <Router>
 
                 <NavBar />
@@ -42,10 +44,12 @@ function Application() {
 
 
                     <Route>
+
                         <AccessDenied />
+
                     </Route>
 
-                    
+
 
                 </Switch>
 
@@ -61,9 +65,9 @@ function Application() {
                 <Switch>
 
                     <Route exact path={["/", "/signin"]}>
-                    <SignIn />
+                        <SignIn />
                     </Route>
-                    
+
                     <Route exact path="/signup">
                         <SignUp />
                     </Route>
@@ -72,8 +76,11 @@ function Application() {
                         <PwReset />
                     </Route>
 
+                    {/* Added per Rich - Zo */}
                     <Route>
+
                         <AccessDenied/>
+
                     </Route>
 
                 </Switch>

@@ -4,19 +4,22 @@ import API from "../utils/API"
 
 class PantryCard extends Component {
 
-    state = {
-        foodPantry: [],
 
+
+    state = {
+        foodPantry: []
     };
 
     componentDidMount() {
-        // let idNum = "1";
-        // API.getPantryItems(idNum).then(result =>
-        //     this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
-
-
-        // )
-
+        console.log(this.props.currentUser)
+        let idNum = this.props.currentUser
+        API.getFoods(idNum).then(result => {
+            if (result.data[0] === undefined) {
+                this.setState({ foodPantry: "No food found" })
+            } else {
+                this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
+            }
+        })
 
 
 
@@ -28,27 +31,36 @@ class PantryCard extends Component {
 
         let renderFood = this.state.foodPantry
         console.log(renderFood)
+        if (renderFood === "No food found") {
+            var noFood = "Please add food to list"
+        }
+
+
+
         return (
-            <div>
+            <div style={{ backgroundColor: "gray" }}>
 
-                <h3 className="align-Header">Pantry</h3>
+                <h3 className="align-Header pantry-color">Pantry</h3>
 
 
 
-                {renderFood.map(item =>
-                    <div>
-                        <button className="btn btn-danger" type="button">Delete</button>
+                { noFood ||
 
-                        <div className="card">
-                            <div className="card-body">
-                                {item.name}
+                    renderFood.map(item =>
+                        <div>
+                            <button className="btn btn-danger" type="button">Delete</button>
+
+                            <div className="card">
+                                <div className="card-body">
+                                    {item.name}
+                                </div>
                             </div>
+
+
+                            <br />
                         </div>
-
-
-                        <br />
-                    </div>
-                )}
+                    )
+                }
 
 
 

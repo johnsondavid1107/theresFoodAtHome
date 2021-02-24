@@ -56,8 +56,9 @@ const SignIn = () => {
           </label> */}
           </container>
           <br />
-
-          <container>
+          
+          {/* Added code to container make page responsive */}
+          <container size="lg-12">
             <div className="center">
               <input
                 type="password"

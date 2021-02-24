@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../utils/UserContext"
 import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
 import PantryCard from "../components/PantryCard"
 import FridgeCard from "../components/FridgeCard"
+import InputFood from "../components/InputFood"
+
 
 
 function Pantry() {
+
+
+  const user = useContext(UserContext);
+  console.log(user)
+
+
+
+
+
+
   return (
     <div>
 
@@ -15,13 +28,9 @@ function Pantry() {
           <Col size="md-12">
 
             {/* Search Bar + buttons for food - Zo */}
-            <div className="input-group input-group-sm mb-3 ">
-              <input type="text" className="form-control" placeholder="Add food to 😋..." />
-
-
-              <button className="btn btn-warning" type="button">Pantry</button>
-              <button className="btn btn-info" type="button">Fridge</button>
-            </div>
+            <InputFood
+              currentUser={user.uid}
+              key={user.uid} />
 
 
 
@@ -33,7 +42,8 @@ function Pantry() {
           <Col size="md-12">
             <div className="Box-1">
 
-              <PantryCard />
+              <PantryCard currentUser={user.uid}
+                key={user.uid} />
 
 
             </div>
@@ -42,7 +52,7 @@ function Pantry() {
         </Row>
 
         {/* Do not touch - Zo ensures page is responsive during laptop view*/}
-        <br class="mobile" />
+        <br className="mobile" />
 
         <Row>
           <Col size="md-12">
@@ -51,17 +61,20 @@ function Pantry() {
             <div className="Box-2" >
 
 
-              <FridgeCard />
+              <FridgeCard
+                currentUser={user.uid}
+                key={user.uid}
+              />
 
             </div>
           </Col>
         </Row>
 
-
       </Container>
 
-    </div>
+    </div >
   );
+
 }
 
 export default Pantry;

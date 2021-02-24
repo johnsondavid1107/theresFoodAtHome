@@ -10,8 +10,6 @@ router.route("/")
 // .get(FoodsController.findAll);
 
 //Matches with "/api/foods/user/:id"
-router.route("/user/:id")
-    .get(FoodsController.findById);
 
 // Matches with "/api/foods/recipes/:ingredient"
 router.route("/recipes/:ingredient")
@@ -22,11 +20,11 @@ router.put("/updateFood/:id/:foodName", function (req, res) {
     let index = parseInt(req.params.id);
     let foodName = req.params.foodName.toLowerCase();
     let today = new Date().toISOString();
-    today = today.slice(0,10);
+    today = today.slice(0, 10);
 
     db.User.findOneAndReplace(
-        {$and: [{ fireBaseId: index },{"foodItem.name": foodName}]},
-        {"foodItem.datOfPurchase": today}
+        { $and: [{ fireBaseId: index }, { "foodItem.name": foodName }] },
+        { "foodItem.datOfPurchase": today }
     ).then(dbFood => {
         res.json(dbFood);
     }).catch(err => {
@@ -42,7 +40,7 @@ router.post("/addFood/:id/:name/:daysFresh/:location", function (req, res) {
     let daysFresh = parseInt(req.params.daysFresh);
     let location = req.params.location;
     let today = new Date().toISOString();
-    today = today.slice(0,10);
+    today = today.slice(0, 10);
 
     //the fireBaseId number needs to be a current 
     db.User.findOneAndUpdate({ fireBaseId: id }, {
@@ -75,5 +73,10 @@ router.route("/recipes/allspec/:ingredient/:allergy/:diet")
     .get(FoodsController.findBySearchAllergySpecialDiet)
 
 
-router.route("/PantryItems/:id").get(FoodsController.findById)
+router.route("/allFoods/:id")
+    .get(FoodsController.findById);
+
+router.route("/getUser/:id").get(FoodsController.findOrCreate)
+router.route("/addFood").post(FoodsController.addFood)
+
 module.exports = router;
