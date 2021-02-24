@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import Pantry from "../../pages/Pantry";
 import Recipes from "../../pages/Recipes";
 import Logout from "../../pages/Logout";
-//import AccessDenied from "../../pages/AccessDenied";
 //if NoMatch is removed, it changes the placement of Pantry in yellow on the pantry page..
 import NoMatch from "../../pages/NoMatch";
 
@@ -13,6 +12,7 @@ import SignUp from "../RichSignUp/index"
 import PwReset from "../../pages/PasswordReset"
 import UserContext from "../../utils/UserContext"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AccessDenied from "../../pages/AccessDenied";
 
 // The app will not render correctly until you setup a Route component.
 // Refer to the Basic Example documentation if you need to.
@@ -44,7 +44,9 @@ function Application() {
 
 
                     <Route>
-                        {/* <AccessDenied /> */}
+
+                        <AccessDenied />
+
                     </Route>
 
 
@@ -76,7 +78,9 @@ function Application() {
 
                     {/* Added per Rich - Zo */}
                     <Route>
-                        {/* <AccessDenied /> */}
+
+                        <AccessDenied/>
+
                     </Route>
 
                 </Switch>
