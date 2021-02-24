@@ -7,8 +7,8 @@ import NoMatch from "../../pages/NoMatch";
 
 import NavBar from "../NavBar";
 import Footer from "../Footer/Footer";
-import SignIn from "../RichSignIn/index"
-import SignUp from "../RichSignUp/index"
+import SignIn from "../SignIn/index"
+import SignUp from "../SignUp/index"
 import PwReset from "../../pages/PasswordReset"
 import UserContext from "../../utils/UserContext"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
