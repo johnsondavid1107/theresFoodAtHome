@@ -2,6 +2,7 @@ const db = require("../models");
 const { default: fetch } = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
+const mongoose = require("mongoose")
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -37,7 +38,7 @@ module.exports = {
         )
     },
     addFood: function (req, res) {
-        console.log(req.body)
+        console.log(req.body, "line 40")
         db.User.update({ fireBaseId: req.body.user }, {
             $push: {
                 foodItem: {
@@ -46,14 +47,38 @@ module.exports = {
                     daysFresh: req.body.daysFresh,
                     spoiled: req.body.spoiled,
                     location: req.body.location
+
                 }
             }
 
-        }).then(
-            console.log("status okay"),
-            res.send("Added food")
-        )
+        }).then(function (response) {
+            console.log(response)
+            res.json(response)
+        })
     },
+    trashFood: function (req, res) {
+
+        console.log(req.body, "line61")
+        db.User.updateOne({ fireBaseId: req.body.user }, {
+            $pull: {
+                foodItem: {
+                    _id: req.body.selection
+                }
+
+            }
+
+        }).then(function (response) {
+            console.log(response, "line69")
+            res.send(response)
+        })
+
+
+
+
+
+
+    },
+
 
     //Searches for recipes based on just ingredients and no allergies/special diet
     findBySearch: function (req, res) {

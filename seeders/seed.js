@@ -91,7 +91,7 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: "2",
+        fireBaseId: "3",
         foodItem: [
             {
                 name: "Cranberry Juice",

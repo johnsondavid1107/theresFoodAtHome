@@ -6,10 +6,12 @@ class FridgeCard extends Component {
 
 
     state = {
-        foodFridge: []
+        foodFridge: [],
+        user: ''
     };
 
     componentDidMount() {
+        this.setState({ user: this.props.currentUser })
 
         let idNum = this.props.currentUser
         API.getFoods(idNum).then(result => {
@@ -25,7 +27,25 @@ class FridgeCard extends Component {
 
     }
 
+    handleDelete(event) {
 
+
+        let deleteChoice = {
+            //need to actually add user that is logged in
+            user: "NT3fCMjxFfPemnQqfs9u0OIoWHB3",
+            deleteFood: event.target.value
+        }
+
+
+        console.log(event.target.value)
+        API.deleteFood(deleteChoice)
+            .then(function (response) {
+                console.log(response)
+
+            })
+
+        window.location.reload(true)
+    }
 
     render() {
 
@@ -43,9 +63,9 @@ class FridgeCard extends Component {
 
                 {noFood ||
 
-                    renderFood.map(item =>
-                        <div>
-                            <button className="btn btn-danger" type="button">Delete</button>
+                    renderFood.map((item, index) =>
+                        <div key={index}>
+                            <button className="btn btn-danger" type="button" onClick={this.handleDelete} value={item._id}>Delete</button>
 
                             <div className="card">
                                 <div className="card-body">
