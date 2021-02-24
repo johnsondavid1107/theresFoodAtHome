@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import UserContext from "../utils/UserContext"
 import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
 import PantryCard from "../components/PantryCard"
 import FridgeCard from "../components/FridgeCard"
 import InputFood from "../components/InputFood"
+import API from "../utils/API"
 
 
 
@@ -17,7 +18,10 @@ function Pantry() {
 
 
 
+  useEffect(() => {
 
+    API.getUser(user.uid).then(function (response) { console.log(response) })
+  })
 
   return (
     <div>

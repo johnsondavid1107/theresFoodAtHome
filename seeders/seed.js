@@ -10,7 +10,7 @@ let userSeed = [
 
     {
 
-        fireBaseId: "NT3fCMjxFfPemnQqfs9u0OIoWHB3",
+        fireBaseId: "5Pr0MqP0FqRYCMui1Xzx6MP1R3d2",
         foodItem: [
             {
                 name: "pineapple juice",
@@ -91,7 +91,7 @@ let userSeed = [
         ]
     },
     {
-        fireBaseId: "3",
+        fireBaseId: "2",
         foodItem: [
             {
                 name: "Cranberry Juice",
@@ -169,6 +169,12 @@ let userSeed = [
                 spoiled: false,
                 location: "fridge"
             }
+        ]
+    },
+    {
+        fireBaseId: "3",
+        foodItem: [
+            
         ]
     }
 

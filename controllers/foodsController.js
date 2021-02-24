@@ -11,12 +11,12 @@ module.exports = {
 
     //Gets all items from the pantry of a specific user - finding by fireBaseId
     findById: function (req, res) {
-        console.log("this")
-        console.log(req.params.id, "line 13 controller")
+
+        // console.log(req.params.id, "line 13 controller")
         let index = req.params.id;
         db.User.find({ fireBaseId: index })
             .then(dbModel => {
-                console.log(dbModel, "line17 controller")
+                // console.log(dbModel, "line17 controller")
                 res.json(dbModel);
             })
             .catch(err => {
@@ -25,14 +25,24 @@ module.exports = {
     },
     findOrCreate: function (req, res) {
         let user = req.params.id
-        console.log(req.params.id, "line27 controller")
+        console.log(req.params.id, "line28 controller")
         db.User.find({ fireBaseId: user }).then(
             function (response) {
-                if (!response) {
-                    console.log("No user found.  Proceed to create user")
-                    db.User.create({ fireBaseId: req.params.id }).then(dbUser => res.json(dbUser))
+                console.log(response, "line31")
+                if (response.length === 0) {
+                    console.log("No user found.  Proceed to create user", req.params.id)
+                    db.User.collection.insert({
+                        fireBaseId: user,
+                        foodItem: [
+                            {
+
+                            }
+                        ]
+                    }).then(dbUser => res.json(dbUser))
 
 
+                } else {
+                    res.json(response)
                 }
             }
         )
