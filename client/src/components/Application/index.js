@@ -10,6 +10,7 @@ import SignUp from "../RichSignUp/index"
 import PwReset from "../../pages/PasswordReset"
 import UserContext from "../../utils/UserContext"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AccessDenied from "../../pages/AccessDenied";
 
 // The app will not render correctly until you setup a Route component.
 // Refer to the Basic Example documentation if you need to.
@@ -41,7 +42,7 @@ function Application() {
 
 
                     <Route>
-                        <NoMatch />
+                        <AccessDenied />
                     </Route>
 
                     
@@ -72,7 +73,7 @@ function Application() {
                     </Route>
 
                     <Route>
-                        <NoMatch />
+                        <AccessDenied/>
                     </Route>
 
                 </Switch>
