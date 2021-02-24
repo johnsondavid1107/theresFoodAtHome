@@ -101,6 +101,7 @@ const SignIn = () => {
 
         <p className="account">
           Don't have an account?{" "}
+          <br/>
           <Link to="/signUp" className="signUp">
             Sign up here
           </Link>{" "}
@@ -109,12 +110,6 @@ const SignIn = () => {
             Forgot Password?
           </Link>
         </p>
-
-        <Link to="/passwordReset" className="reset">
-          <div className="center">
-            <p className="forgot"> Forgot Password? </p>
-          </div>
-        </Link>
       </div>
     </div>
   );

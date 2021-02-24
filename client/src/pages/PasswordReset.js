@@ -12,8 +12,10 @@ const PasswordReset = () => {
       setEmail(value);
     }
   };
-  const sendResetEmail = event => {
+
+  const sendResetEmail = (event) => {
     event.preventDefault();
+    console.log(event)
     auth
       .sendPasswordResetEmail(email)
       .then(() => {
@@ -56,6 +58,7 @@ const PasswordReset = () => {
           />
           <button
             className=""
+            onClick={(event)=>{sendResetEmail(event)}}
           >
             Send me a reset link
           </button>
