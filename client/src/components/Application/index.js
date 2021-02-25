@@ -41,11 +41,15 @@ function Application() {
                     <Route exact path="/logout">
                         <Logout />
                     </Route>
+                    
+                    <Route exact path="/signup">
+                        <Pantry/>
+                    </Route>
 
                    
                     <Route>
 
-                        <AccessDenied />
+                        <NoMatch/>
 
                     </Route>
 
