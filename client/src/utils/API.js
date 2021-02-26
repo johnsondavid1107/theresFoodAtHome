@@ -4,7 +4,13 @@ export default {
 
     //Gets all food from the user's pantry
     getFoods: function (id) {
-        return axios.get("/api/foods/allFoods/" + id);
+        return axios.get("/api/foods/userFoods/" + id);
+    },
+    getAllFoods: function () {
+        return axios.get("/api/foods/allFoods")
+    },
+    checkAllFoods: function (item) {
+        return axios.get("/api/foods/checkFoods/" + item)
     },
     getUser: function (id) {
         return axios.get("/api/foods/getUser/" + id)

@@ -2,7 +2,8 @@ const db = require("../models");
 const { default: fetch } = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { allFoods } = require("../models");
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -23,12 +24,40 @@ module.exports = {
                 res.status(400).json(err);
             })
     },
+    allFoods: function (req, res) {
+        db.allFoods.find({}).then(foodModel => {
+            // console.log(foodModel,"line29")
+            res.send(foodModel)
+        })
+    },
+    checkMe: function (req, res) {
+        console.log(req.params.item, "line 34")
+        let item = req.params.item
+        //found on Stackoverflow, honeslty so excited that it works
+        db.allFoods.find({ "allFoods.name": item }, { _id: 0, allFoods: { $elemMatch: { name: item } } }).then(function (response) {
+            console.log(response, "line36")
+            if (response.length === 0) {
+                console.log("not enough")
+                db.allFoods.insert({
+                    allFoods: [{
+                        name: item,
+                        daysFresh: 10
+                    }
+                    ]
+                })
+            } else {
+                res.send("ok")
+            }
+        })
+
+    },
+
     findOrCreate: function (req, res) {
         let user = req.params.id
-        console.log(req.params.id, "line28 controller")
+        // console.log(req.params.id, "line28 controller")
         db.User.find({ fireBaseId: user }).then(
             function (response) {
-                console.log(response, "line31")
+                // console.log(response, "line44")
                 if (response.length === 0) {
                     console.log("No user found.  Proceed to create user", req.params.id)
                     db.User.collection.insert({
@@ -48,7 +77,7 @@ module.exports = {
         )
     },
     addFood: function (req, res) {
-        console.log(req.body, "line 40")
+        // console.log(req.body, "line 66")
         db.User.update({ fireBaseId: req.body.user }, {
             $push: {
                 foodItem: {

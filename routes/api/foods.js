@@ -73,11 +73,14 @@ router.route("/recipes/allspec/:ingredient/:allergy/:diet")
     .get(FoodsController.findBySearchAllergySpecialDiet)
 
 
-router.route("/allFoods/:id")
+router.route("/userFoods/:id")
     .get(FoodsController.findById);
+
+router.route("/allFoods").get(FoodsController.allFoods)
 
 router.route("/getUser/:id").get(FoodsController.findOrCreate)
 router.route("/addFood").post(FoodsController.addFood)
 router.route("/deleteFood").put(FoodsController.trashFood)
+router.route("/checkFoods/:item").get(FoodsController.checkMe)
 
 module.exports = router;

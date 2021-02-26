@@ -6,175 +6,54 @@ mongoose.connect("mongodb://localhost/theresfoodathome", {
     useFindAndModify: false
 })
 
-let userSeed = [
+let foodSeed = [
 
     {
 
-        fireBaseId: "5Pr0MqP0FqRYCMui1Xzx6MP1R3d2",
-        foodItem: [
+        allFoods: [
             {
                 name: "pineapple juice",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 20,
-                spoiled: false,
-                location: "pantry"
+                daysFresh: 20
             },
             {
                 name: "Tea",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
+                daysFresh: 14
             }, {
                 name: "Cola",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 10,
-                spoiled: false,
-                location: "fridge"
+                daysFresh: 10
             },
             {
                 name: "Bread",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 7,
-                spoiled: false,
-                location: "pantry"
+                daysFresh: 7
             },
             {
                 name: "Milk",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
+                daysFresh: 14
             },
             {
                 name: "Eggs",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
+                daysFresh: 14
             },
             {
                 name: "Yogurt",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
+                daysFresh: 14
             },
             {
                 name: "Tuna",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
+                daysFresh: 14
             },
             {
                 name: "noodles",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
+                daysFresh: 14
             },
             {
                 name: "Nuts",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
+                daysFresh: 14
             },
             {
                 name: "Salmon",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
+                daysFresh: 14
             }
-        ]
-    },
-    {
-        fireBaseId: "2",
-        foodItem: [
-            {
-                name: "Cranberry Juice",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 20,
-                spoiled: false,
-                location: "pantry"
-            },
-            {
-                name: "Oranges",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
-            }, {
-                name: "Butter",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 10,
-                spoiled: false,
-                location: "fridge"
-            },
-            {
-                name: "Potatoes",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 7,
-                spoiled: false,
-                location: "pantry"
-            },
-            {
-                name: "Milk",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
-            },
-            {
-                name: "Whip cream",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
-            },
-            {
-                name: "Coffee",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
-            },
-            {
-                name: "Spaghetti",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
-            },
-            {
-                name: "Vienna Sausages",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
-            },
-            {
-                name: "Nuts",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "pantry"
-            },
-            {
-                name: "Salami",
-                dateOfPurchase: "2021-02-13",
-                daysFresh: 14,
-                spoiled: false,
-                location: "fridge"
-            }
-        ]
-    },
-    {
-        fireBaseId: "3",
-        foodItem: [
-            
         ]
     }
 
@@ -183,8 +62,8 @@ let userSeed = [
 ]
 
 
-db.User.deleteMany({})
-    .then(() => db.User.collection.insertMany(userSeed))
+db.allFoods.deleteMany({})
+    .then(() => db.allFoods.collection.insertMany(foodSeed))
     .then(data => {
         console.log(data.result.n + " records inserted!!!!!!!!!");
         process.exit(0)
