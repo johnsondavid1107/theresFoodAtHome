@@ -66,6 +66,7 @@ class FridgeCard extends Component {
                     renderFood.map((item, index) =>
                         <div key={index}>
                             <button className="btn btn-danger" type="button" onClick={this.handleDelete} value={item._id}>Delete</button>
+                            <button className="btn btn-danger" type="button" >Renew</button>
 
                             <div className="card">
                                 <div className="card-body">

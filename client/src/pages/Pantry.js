@@ -20,27 +20,25 @@ function Pantry() {
 
   useEffect(() => {
 
-    API.getUser(user.uid).then(function (response) { console.log(response) })
-  })
+    API.getUser(user.uid).then(function (response) { console.log(response.data) })
+  }, [])
 
   return (
     <div>
 
       <Container>
         {/* Row 1 col 12 of page Zo*/}
-        <Row>
-          <Col size="md-12">
-
-            {/* Search Bar + buttons for food - Zo */}
-            <InputFood
-              currentUser={user.uid}
-              key={user.uid} />
 
 
+        {/* Search Bar + buttons for food - Zo */}
+        <InputFood
+          currentUser={user.uid}
+          key={user.uid} />
 
-            {/* Pantry section, Box-1 Zo */}
-          </Col>
-        </Row>
+
+
+        {/* Pantry section, Box-1 Zo */}
+
 
         <Row>
           <Col size="md-12">
