@@ -35,7 +35,7 @@ function Pantry() {
           currentUser={user.uid}
           key={user.uid} />
 
-
+      
 
         {/* Pantry section, Box-1 Zo */}
 
