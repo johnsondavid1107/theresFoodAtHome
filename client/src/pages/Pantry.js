@@ -13,10 +13,6 @@ function Pantry() {
 
 
   const user = useContext(UserContext);
-  console.log(user)
-
-
-
 
   useEffect(() => {
 
@@ -35,7 +31,7 @@ function Pantry() {
           currentUser={user.uid}
           key={user.uid} />
 
-
+      
 
         {/* Pantry section, Box-1 Zo */}
 

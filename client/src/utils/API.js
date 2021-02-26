@@ -1,7 +1,7 @@
 import axios from "axios";
 //make Async to use 
 export default {
-
+ 
     //Gets all food from the user's pantry
     getFoods: function (id) {
         return axios.get("/api/foods/userFoods/" + id);
@@ -29,9 +29,13 @@ export default {
         return axios.put("/api/foods/deleteFood", {
             selection: food.deleteFood,
             user: food.user
-
-
+ 
+ 
         })
+    },
+    //Updates the database with a new date
+    updateFood: function(id, foodName){
+        return axios.put(`/updateFood/${id}/${foodName}`);
     },
     //searches for recipes - just from ingredients, no other 
     recipeFromIngredients: function (ingredients) {
@@ -50,10 +54,12 @@ export default {
         return axios.get("/api/foods/recipes/allspec/" + ingredients + "/" + allergy + "/" + specialDiet);
     }
 };
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
