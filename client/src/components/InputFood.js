@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import API from "../utils/API"
 import { Col, Row } from "../components/Grid"
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
 
 
 function InputFood(props) {
@@ -99,8 +101,15 @@ function InputFood(props) {
             </Row>
             <Row>
                 <Col size="md-12">
-                    <h4>Search Suggestions: </h4>
 
+                {/* Added Hever's food expiration date selection react code into Pantry page - Zo */}
+                <div style={{float:"right"}}>
+            <p>Please type a day:</p>
+            <DayPickerInput onDayChange={day => console.log(day)} />
+          </div>
+                   
+                    <h4>Search Suggestions: </h4> 
+                    
                     {nada || renderSearch}
                 </Col>
             </Row>
