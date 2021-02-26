@@ -35,7 +35,7 @@ class PantryCard extends Component {
    
                 let newFoodArray = [];
                 for (let i = 0; i < foodValues.length; i++) {
-                    console.log(foodValues[i]);
+                    // console.log(foodValues[i]);
                     let dateOfPurchase = foodValues[i].dateOfPurchase;
 
                     //If no date of purchase, make it one week ago

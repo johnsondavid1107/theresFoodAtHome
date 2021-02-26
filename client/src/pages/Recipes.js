@@ -161,7 +161,7 @@ function Recipes() {
   //decides which API route to call and calls it based on ingredients as a parameter
   const makeSearchTerm = ingredients => {
     //If no special diet and no allergies
-    console.log(specialDiet);
+    // console.log(specialDiet);
     if (specialDiet === "" && allergies === "") {
       API.recipeFromIngredients(ingredients).then(res => {
         setSearchResults(res.data);
@@ -316,7 +316,6 @@ function Recipes() {
 
   //Sets the special diet preferences
   const setSpecialDietString = event => {
-    event.preventDefault();
 
     let id = event.target.id;
     id = id.slice(id.length - 1);
@@ -350,7 +349,7 @@ function Recipes() {
   }
 
   const setAllergiesString = event => {
-    event.preventDefault();
+    // event.preventDefault();
 
     let id = event.target.id;
     id = id.slice(id.length - 1);
