@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import API from "../utils/API";
+import SuccessAlert from "../components/SuccessAlert";
 
 
 // Didn't use or touch this, as it was confusing for me to style/ update the page
@@ -10,7 +11,10 @@ class PantryCard extends Component {
 
     state = {
         foodPantry: [],
-        idNumber: ""
+        idNumber: "",
+        show: true,
+        successIndex: 0,
+        successName: ""
     };
 
     componentDidMount() {
@@ -32,7 +36,7 @@ class PantryCard extends Component {
                 let dayString = todayDate[9] + todayDate[10];
                 let yearString = todayDate[1] + todayDate[2] + todayDate[3] + todayDate[4];
                 todayDate = `${monthString}/${dayString}/${yearString}`;
-   
+
                 let newFoodArray = [];
                 for (let i = 0; i < foodValues.length; i++) {
                     // console.log(foodValues[i]);
@@ -48,25 +52,36 @@ class PantryCard extends Component {
                         let dayString = oneWeekAgo[9] + oneWeekAgo[10];
                         let yearString = oneWeekAgo[1] + oneWeekAgo[2] + oneWeekAgo[3] + oneWeekAgo[4];
                         oneWeekAgo = `${monthString}/${dayString}/${yearString}`;
-                        
+
                         dateOfPurchase = oneWeekAgo;
-                    } 
+                    }
+                    //Need to figure out the spoil date - take date of purchase and add the number of days fresh
+                    let spoilDate = new Date(dateOfPurchase);
+                    spoilDate.setDate(spoilDate.getDate() + foodValues[i].daysFresh);
+                    spoilDate = JSON.stringify(spoilDate);
+                    let monthString = spoilDate[6] + spoilDate[7];
+                    let dayString = spoilDate[9] + spoilDate[10];
+                    let yearString = spoilDate[1] + spoilDate[2] + spoilDate[3] + spoilDate[4];
+                    spoilDate = `${monthString}/${dayString}/${yearString}`;
+
 
                     //Now to categorize foods into amount of time remaining
-                    let total = Math.floor((new Date(todayDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    total = total + foodValues[i].daysFresh;
+
+
                     //Give classnames based on total time remaining
                     let timeColor;
-                    if(total >= 0 && total <7){
+                    if (total >= 0 && total < 7) {
                         //ORANGE
                         timeColor = "#FAC002";
-                    } else if (total <0){
+                    } else if (total < 0) {
                         //RED
                         timeColor = "#E31009";
                     } else {
                         //Green
                         timeColor = "#59F56B"
                     }
-                    
                     let newObject = {
                         _id: foodValues[i]._id,
                         dateOfPurchase: dateOfPurchase,
@@ -79,9 +94,8 @@ class PantryCard extends Component {
                     newFoodArray.push(newObject);
 
                 }
-                console.log(newFoodArray);
                 // this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") });
-                this.setState({foodPantry: newFoodArray})
+                this.setState({ foodPantry: newFoodArray })
 
             }
         });
@@ -101,7 +115,8 @@ class PantryCard extends Component {
             user: idNum,
             deleteFood: event.target.value
         }
-
+        console.log(event.target.name);
+        this.setState({successName: event.target.name});
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -138,6 +153,7 @@ class PantryCard extends Component {
 
         return (
             <div style={{ backgroundColor: "gray" }}>
+                <SuccessAlert show={this.state.open} index={this.state.successIndex} name={this.state.successName} />
 
                 <h3 className="align-Header pantry-color">Pantry</h3>
 
@@ -147,11 +163,11 @@ class PantryCard extends Component {
 
                     renderFood.map((item, index) =>
                         <div key={index}>
-                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id}>Delete</button>
+                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                             <div className="card">
-                                <div className="card-body" style={{backgroundColor: `${item.timeColor}`}}>
+                                <div className="card-body" style={{ backgroundColor: `${item.timeColor}` }}>
                                     {item.name}
                                 </div>
                             </div>

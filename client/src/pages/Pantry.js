@@ -6,21 +6,25 @@ import PantryCard from "../components/PantryCard"
 import FridgeCard from "../components/FridgeCard"
 import InputFood from "../components/InputFood"
 import API from "../utils/API"
-import SuccessAlert from "../components/SuccessAlert";
+
 
 
 function Pantry() {
 
 
   const user = useContext(UserContext);
-  const [open, setOpen] = useState(true);
-  const [successIndex, setSuccessIndex] = useState(0);
-  const [successName, setSuccessName] = useState("");
+
+
 
   useEffect(() => {
 
     API.getUser(user.uid).then(function (response) { console.log(response.data) })
-  }, [])
+  }, []);
+
+  const getSuccessInfo = (index, name) => {
+    console.log(index);
+    console.log(name);
+  }
 
   return (
     <div>
@@ -41,11 +45,11 @@ function Pantry() {
 
         <Row>
           <Col size="md-12">
-          <SuccessAlert show={open} index={successIndex} name={successName} />
             <div className="Box-1">
 
               <PantryCard currentUser={user.uid}
-                key={user.uid} />
+                key={user.uid} 
+                getSuccessInfo={getSuccessInfo}/>
 
 
             </div>

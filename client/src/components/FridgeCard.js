@@ -50,10 +50,21 @@ class FridgeCard extends Component {
 
                         dateOfPurchase = oneWeekAgo;
                     }
+                    //Need to figure out the spoil date - take date of purchase and add the number of days fresh
+                    let spoilDate = new Date(dateOfPurchase);
+                    spoilDate.setDate(spoilDate.getDate() + foodValues[i].daysFresh);
+                    spoilDate = JSON.stringify(spoilDate);
+                    let monthString = spoilDate[6] + spoilDate[7];
+                    let dayString = spoilDate[9] + spoilDate[10];
+                    let yearString = spoilDate[1] + spoilDate[2] + spoilDate[3] + spoilDate[4];
+                    spoilDate = `${monthString}/${dayString}/${yearString}`;
+
 
                     //Now to categorize foods into amount of time remaining
-                    let total = Math.floor((new Date(todayDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
-                    console.log(total);
+                    let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    total = total + foodValues[i].daysFresh;
+
+
                     //Give classnames based on total time remaining
                     let timeColor;
                     if (total >= 0 && total < 7) {
