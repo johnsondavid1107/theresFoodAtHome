@@ -18,7 +18,7 @@ function InputFood(props) {
     useEffect(() => {
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
         API.getAllFoods().then(function (response) {
-            console.log(response.data[0].allFoods)
+            // console.log(response.data[0].allFoods)
             setAllFoods(response.data[0].allFoods)
 
 
@@ -33,21 +33,21 @@ function InputFood(props) {
 
     function handleInputChange(event) {
         const { value } = event.target
-        console.log(value)
+        // console.log(value)
         setFood(value)
 
         //for the all foods search
         setSearchFoods(value)
-        console.log(searchFoods)
+        // console.log(searchFoods)
 
         setPlaceHolderFood(allFoods.filter(option =>
             option.name.toLowerCase().includes(value))
         )
-        console.log(placeHolderFood)
+        // console.log(placeHolderFood)
 
 
         setInputVal(value)
-        console.log(inputVal)
+        // console.log(inputVal)
 
 
     }
@@ -62,7 +62,7 @@ function InputFood(props) {
             location: event.target.value,
 
         }
-        console.log(combo.location)
+        // console.log(combo.location)
         API.makeFood(combo).then(function (response) {
             console.log(response)
             window.location.reload(true)

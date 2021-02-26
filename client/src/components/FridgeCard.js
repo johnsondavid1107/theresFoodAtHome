@@ -12,10 +12,10 @@ class FridgeCard extends Component {
     };
  
     componentDidMount() {
-        this.setState({ user: this.props.currentUser });
  
         let idNum = this.props.currentUser;
         this.setState({idNumber: this.props.currentUser});
+
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
                 this.setState({ foodFridge: "No food found" })
@@ -64,8 +64,8 @@ class FridgeCard extends Component {
  
     render() {
  
-        let renderFood = this.state.foodFridge
-        console.log(renderFood)
+        let renderFood = this.state.foodFridge;
+        // console.log(renderFood)
         if (renderFood === "No food found") {
             var noFood = "Please add food to list"
         }
