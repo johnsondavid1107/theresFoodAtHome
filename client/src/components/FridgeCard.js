@@ -109,7 +109,7 @@ class FridgeCard extends Component {
             user: idNum,
             deleteFood: event.target.value
         }
-        
+
         this.setState({successName: event.target.name});
         this.setState({show: true});
 
@@ -127,6 +127,9 @@ class FridgeCard extends Component {
         event.preventDefault();
 
         let foodName = event.target.value;
+
+        this.setState({show: true});
+        this.setState({successName: foodName});
         //Need the ID and the foodname
         //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
         API.updateFood(idNumber, foodName)
