@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import API from "../utils/API";
 
+
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
 
@@ -16,21 +17,77 @@ class PantryCard extends Component {
 
         let idNum = this.props.currentUser;
         this.setState({ idNumber: this.props.currentUser });
-        
+
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
                 this.setState({ foodPantry: "No food found" })
             } else {
-                // console.log(result)
-                this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") })
+                let foodValues = result.data[0].foodItem.filter(item => item.location === "pantry");
+                //Calculate time remaining - categorize it into "fresh", "expiring soon", and "expired"
+                //If null date of purchase, set it to one week ago
+                let todayDate = new Date();
+
+                todayDate = JSON.stringify(todayDate);
+                let monthString = todayDate[6] + todayDate[7];
+                let dayString = todayDate[9] + todayDate[10];
+                let yearString = todayDate[1] + todayDate[2] + todayDate[3] + todayDate[4];
+                todayDate = `${monthString}/${dayString}/${yearString}`;
+   
+                let newFoodArray = [];
+                for (let i = 0; i < foodValues.length; i++) {
+                    console.log(foodValues[i]);
+                    let dateOfPurchase = foodValues[i].dateOfPurchase;
+
+                    //If no date of purchase, make it one week ago
+                    if (!dateOfPurchase) {
+                        //Set the value to one week ago
+                        let oneWeekAgo = new Date();
+                        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+                        oneWeekAgo = JSON.stringify(oneWeekAgo);
+                        let monthString = oneWeekAgo[6] + oneWeekAgo[7];
+                        let dayString = oneWeekAgo[9] + oneWeekAgo[10];
+                        let yearString = oneWeekAgo[1] + oneWeekAgo[2] + oneWeekAgo[3] + oneWeekAgo[4];
+                        oneWeekAgo = `${monthString}/${dayString}/${yearString}`;
+                        
+                        dateOfPurchase = oneWeekAgo;
+                    } 
+
+                    //Now to categorize foods into amount of time remaining
+                    let total = Math.floor((new Date(todayDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    //Give classnames based on total time remaining
+                    let timeColor;
+                    if(total >= 0 && total <7){
+                        console.log("expiring soon");
+                        timeColor = "#cc7906";
+                    } else if (total <0){
+                        timeColor = "#cc1606";
+                    } else {
+                        timeColor = "#06cc44"
+                    }
+                    
+                    let newObject = {
+                        _id: foodValues[i]._id,
+                        dateOfPurchase: dateOfPurchase,
+                        daysFresh: foodValues[i].daysFresh,
+                        location: foodValues[i].location,
+                        name: foodValues[i].name,
+                        timeColor: timeColor
+                    }
+
+                    newFoodArray.push(newObject);
+
+                }
+                // this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") });
+                this.setState({foodPantry: newFoodArray})
+
             }
-        })
-
-
-
-
+        });
 
     }
+
+
+
+
 
     handleDelete(event, idNum) {
         event.preventDefault();
@@ -91,7 +148,7 @@ class PantryCard extends Component {
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                             <div className="card">
-                                <div className="card-body">
+                                <div className="card-body" style={{backgroundColor: `${item.timeColor}`}}>
                                     {item.name}
                                 </div>
                             </div>

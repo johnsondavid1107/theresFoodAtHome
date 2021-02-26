@@ -13,10 +13,6 @@ function Pantry() {
 
 
   const user = useContext(UserContext);
-  console.log(user)
-
-
-
 
   useEffect(() => {
 
