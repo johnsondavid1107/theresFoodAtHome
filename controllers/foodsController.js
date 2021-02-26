@@ -38,13 +38,18 @@ module.exports = {
             console.log(response, "line36")
             if (response.length === 0) {
                 console.log("not enough")
-                db.allFoods.insert({
-                    allFoods: [{
-                        name: item,
-                        daysFresh: 10
+                db.allFoods.update({
+                    $push: {
+                        allFoods: {
+                            name: item,
+                            daysFresh: 10
+                        }
                     }
-                    ]
+                }).then(function (response) {
+                    console.log(response)
+                    console.log("added new item")
                 })
+
             } else {
                 res.send("ok")
             }
