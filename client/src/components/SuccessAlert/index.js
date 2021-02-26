@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert'
 
 function SuccessAlert(props) {
     return (
-        <Alert show={props.show} key={props.index} variant={props.name}>
+        <Alert show={props.show} key={props.index} variant='success'>
             {props.name} record successfully updated!
         </Alert>
     )
