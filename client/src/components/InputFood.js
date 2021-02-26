@@ -83,6 +83,11 @@ function InputFood(props) {
 
     }
 
+    const handleDayChange = event => {
+        // event.preventDefault();
+
+        console.log(event);
+    }
 
 
     return (
@@ -105,7 +110,7 @@ function InputFood(props) {
                 {/* Added Hever's food expiration date selection react code into Pantry page - Zo */}
                 <div style={{float:"right"}}>
             <p>Please type a day:</p>
-            <DayPickerInput onDayChange={day => console.log(day)} />
+            <DayPickerInput onDayChange={handleDayChange} />
           </div>
                    
                     <h4>Search Suggestions: </h4> 
