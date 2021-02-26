@@ -58,11 +58,11 @@ class PantryCard extends Component {
                     let timeColor;
                     if(total >= 0 && total <7){
                         console.log("expiring soon");
-                        timeColor = "#cc7906";
+                        timeColor = "#FAC002";
                     } else if (total <0){
-                        timeColor = "#cc1606";
+                        timeColor = "#E31009";
                     } else {
-                        timeColor = "#06cc44"
+                        timeColor = "#59F56B"
                     }
                     
                     let newObject = {
@@ -77,6 +77,7 @@ class PantryCard extends Component {
                     newFoodArray.push(newObject);
 
                 }
+                console.log(newFoodArray);
                 // this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") });
                 this.setState({foodPantry: newFoodArray})
 

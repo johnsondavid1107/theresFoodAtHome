@@ -14,8 +14,17 @@ function InputFood(props) {
     const [placeHolderFood, setPlaceHolderFood] = useState()
     const [inputVal, setInputVal] = useState();
     const [daysFresh, setDaysFresh] = useState(0);
+    const [todayDate, setTodayDate] = useState("");
+    
 
     useEffect(() => {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        setTodayDate(today);
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
         API.getAllFoods().then(function (response) {
             // console.log(response.data[0].allFoods)
@@ -56,7 +65,7 @@ function InputFood(props) {
         let combo = {
             user: props.currentUser,
             name: foodChoice,
-            dateOfPurchase: null,
+            dateOfPurchase: todayDate,
             daysFresh: daysFresh,
             spoiled: false,
             location: event.target.value,
@@ -93,14 +102,14 @@ function InputFood(props) {
         let dateString = `${monthString}/${dayString}/${yearString}`;
 
         let date1 = new Date(dateString)
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
+        // let today = new Date();
+        // let dd = String(today.getDate()).padStart(2, '0');
+        // let mm = String(today.getMonth() + 1).padStart(2, '0');
+        // let yyyy = today.getFullYear();
 
-        today = mm + '/' + dd + '/' + yyyy;
+        // today = mm + '/' + dd + '/' + yyyy;
 
-        let daysFreshNum = Math.floor((new Date(date1) - new Date(today)) / (1000 * 3600 * 24));
+        let daysFreshNum = Math.floor((new Date(date1) - new Date(todayDate)) / (1000 * 3600 * 24));
 
         setDaysFresh(daysFreshNum);
 

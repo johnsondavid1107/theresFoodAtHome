@@ -52,16 +52,19 @@ class FridgeCard extends Component {
 
                     //Now to categorize foods into amount of time remaining
                     let total = Math.floor((new Date(todayDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    console.log(total);
                     //Give classnames based on total time remaining
                     let timeColor;
                     if(total >= 0 && total <7){
-                        timeColor = "#cc7906";
+                        //ORANGE
+                        timeColor = "#FAC002";
                     } else if (total <0){
-                        timeColor = "#cc1606";
+                        //RED
+                        timeColor = "#E31009";
                     } else {
-                        timeColor = "#06cc44"
+                        //Green
+                        timeColor = "#59F56B"
                     }
-                    
                     let newObject = {
                         _id: foodValues[i]._id,
                         dateOfPurchase: dateOfPurchase,
