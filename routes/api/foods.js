@@ -78,5 +78,6 @@ router.route("/allFoods/:id")
 
 router.route("/getUser/:id").get(FoodsController.findOrCreate)
 router.route("/addFood").post(FoodsController.addFood)
+router.route("/deleteFood").put(FoodsController.trashFood)
 
 module.exports = router;

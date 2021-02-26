@@ -19,6 +19,14 @@ export default {
             location: food.location
         })
     },
+    deleteFood: function (food) {
+        return axios.put("/api/foods/deleteFood", {
+            selection: food.deleteFood,
+            user: food.user
+
+
+        })
+    },
     //searches for recipes - just from ingredients, no other 
     recipeFromIngredients: function (ingredients) {
         return axios.get("/api/foods/recipes/" + ingredients);
