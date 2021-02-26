@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext"
 import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
@@ -6,13 +6,16 @@ import PantryCard from "../components/PantryCard"
 import FridgeCard from "../components/FridgeCard"
 import InputFood from "../components/InputFood"
 import API from "../utils/API"
-
+import SuccessAlert from "../components/SuccessAlert";
 
 
 function Pantry() {
 
 
   const user = useContext(UserContext);
+  const [open, setOpen] = useState(true);
+  const [successIndex, setSuccessIndex] = useState(0);
+  const [successName, setSuccessName] = useState("");
 
   useEffect(() => {
 
@@ -38,6 +41,7 @@ function Pantry() {
 
         <Row>
           <Col size="md-12">
+          <SuccessAlert show={open} index={successIndex} name={successName} />
             <div className="Box-1">
 
               <PantryCard currentUser={user.uid}

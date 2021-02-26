@@ -57,11 +57,13 @@ class PantryCard extends Component {
                     //Give classnames based on total time remaining
                     let timeColor;
                     if(total >= 0 && total <7){
-                        console.log("expiring soon");
+                        //ORANGE
                         timeColor = "#FAC002";
                     } else if (total <0){
+                        //RED
                         timeColor = "#E31009";
                     } else {
+                        //Green
                         timeColor = "#59F56B"
                     }
                     
