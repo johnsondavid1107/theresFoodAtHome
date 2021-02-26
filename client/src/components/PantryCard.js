@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import API from "../utils/API"
-// Didn't use or touch this, as it was confusing for me to style/ update the page
 
 class PantryCard extends Component {
 
