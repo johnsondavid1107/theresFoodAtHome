@@ -1,20 +1,24 @@
 import React, { Component } from "react"
-import API from "../utils/API"
+import API from "../utils/API";
+
 // Didn't use or touch this, as it was confusing for me to style/ update the page
+
 
 class PantryCard extends Component {
 
 
-
     state = {
-        foodPantry: []
+        foodPantry: [],
+        idNumber: ""
     };
 
     componentDidMount() {
-        console.log(this.props.currentUser)
+        console.log(this.props.currentUser);
         // let idNum = this.props.currentUser
-        let idNum = this.props.currentUser
-        API.getFoods(idNum).then(result => {
+        // let idNum = this.props.currentUser;
+        this.setState({idNumber: this.props.currentUser});
+
+        API.getFoods(this.state.idNum).then(result => {
             if (result.data[0] === undefined) {
                 this.setState({ foodPantry: "No food found" })
             } else {
@@ -28,25 +32,25 @@ class PantryCard extends Component {
 
     }
 
-    handleDelete(event) {
+    handleDelete(event, idNum) {
+        event.preventDefault();
+
 
         let deleteChoice = {
             //need to actually add user that is logged in
-            user: "NT3fCMjxFfPemnQqfs9u0OIoWHB3",
+            user: idNum,
             deleteFood: event.target.value
         }
 
 
-        console.log(event.target.value)
         API.deleteFood(deleteChoice)
             .then(function (response) {
                 console.log(response)
 
             })
 
-        window.location.reload(true)
+        window.location.reload(true);
     }
-
 
 
     render() {
@@ -70,8 +74,8 @@ class PantryCard extends Component {
 
                     renderFood.map((item, index) =>
                         <div key={index}>
-                            <button className="btn btn-danger" type="button" onClick={this.handleDelete} value={item._id}>Delete</button>
-                            <button className="btn btn-danger" type="button" >Renew</button>
+                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id}>Delete</button>
+                            <button className="btn btn-danger" type="button">Renew</button>
 
                             <div className="card">
                                 <div className="card-body">

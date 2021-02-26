@@ -7,13 +7,15 @@ class FridgeCard extends Component {
 
     state = {
         foodFridge: [],
-        user: ''
+        user: '',
+        idNumber: ""
     };
 
     componentDidMount() {
-        this.setState({ user: this.props.currentUser })
+        this.setState({ user: this.props.currentUser });
 
-        let idNum = this.props.currentUser
+        let idNum = this.props.currentUser;
+        this.setState({idNumber: this.props.currentUser});
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
                 this.setState({ foodFridge: "No food found" })
@@ -27,24 +29,24 @@ class FridgeCard extends Component {
 
     }
 
-    handleDelete(event) {
+    handleDelete(event, idNum) {
+        event.preventDefault();
 
 
         let deleteChoice = {
             //need to actually add user that is logged in
-            user: "NT3fCMjxFfPemnQqfs9u0OIoWHB3",
+            user: idNum,
             deleteFood: event.target.value
         }
 
 
-        console.log(event.target.value)
         API.deleteFood(deleteChoice)
             .then(function (response) {
                 console.log(response)
 
             })
 
-        window.location.reload(true)
+        window.location.reload(true);
     }
 
     render() {
@@ -65,7 +67,7 @@ class FridgeCard extends Component {
 
                     renderFood.map((item, index) =>
                         <div key={index}>
-                            <button className="btn btn-danger" type="button" onClick={this.handleDelete} value={item._id}>Delete</button>
+                            <button className="btn btn-danger" type="button" onClick={(e) =>this.handleDelete(e, this.state.idNumber)}  value={item._id}>Delete</button>
                             <button className="btn btn-danger" type="button" >Renew</button>
 
                             <div className="card">
