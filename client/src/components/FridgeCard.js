@@ -1,16 +1,20 @@
 import React, { Component } from "react"
-import API from "../utils/API"
- 
- 
+import API from "../utils/API";
+import SuccessAlert from "../components/SuccessAlert";
+
+
 class FridgeCard extends Component {
- 
- 
+
+
     state = {
         foodFridge: [],
         user: '',
-        idNumber: ""
+        idNumber: "",
+        show: false,
+        successIndex: 0,
+        successName: ""
     };
- 
+
     componentDidMount() {
 
         let idNum = this.props.currentUser;
@@ -30,7 +34,7 @@ class FridgeCard extends Component {
                 let dayString = todayDate[9] + todayDate[10];
                 let yearString = todayDate[1] + todayDate[2] + todayDate[3] + todayDate[4];
                 todayDate = `${monthString}/${dayString}/${yearString}`;
-   
+
                 let newFoodArray = [];
                 for (let i = 0; i < foodValues.length; i++) {
                     // console.log(foodValues[i]);
@@ -46,22 +50,36 @@ class FridgeCard extends Component {
                         let dayString = oneWeekAgo[9] + oneWeekAgo[10];
                         let yearString = oneWeekAgo[1] + oneWeekAgo[2] + oneWeekAgo[3] + oneWeekAgo[4];
                         oneWeekAgo = `${monthString}/${dayString}/${yearString}`;
-                        
+
                         dateOfPurchase = oneWeekAgo;
-                    } 
+                    }
+                    //Need to figure out the spoil date - take date of purchase and add the number of days fresh
+                    let spoilDate = new Date(dateOfPurchase);
+                    spoilDate.setDate(spoilDate.getDate() + foodValues[i].daysFresh);
+                    spoilDate = JSON.stringify(spoilDate);
+                    let monthString = spoilDate[6] + spoilDate[7];
+                    let dayString = spoilDate[9] + spoilDate[10];
+                    let yearString = spoilDate[1] + spoilDate[2] + spoilDate[3] + spoilDate[4];
+                    spoilDate = `${monthString}/${dayString}/${yearString}`;
+
 
                     //Now to categorize foods into amount of time remaining
-                    let total = Math.floor((new Date(todayDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                    total = total + foodValues[i].daysFresh;
+
+
                     //Give classnames based on total time remaining
                     let timeColor;
-                    if(total >= 0 && total <7){
-                        timeColor = "#cc7906";
-                    } else if (total <0){
-                        timeColor = "#cc1606";
+                    if (total >= 0 && total < 7) {
+                        //ORANGE
+                        timeColor = "#FAC002";
+                    } else if (total < 0) {
+                        //RED
+                        timeColor = "#E31009";
                     } else {
-                        timeColor = "#06cc44"
+                        //Green
+                        timeColor = "#59F56B"
                     }
-                    
                     let newObject = {
                         _id: foodValues[i]._id,
                         dateOfPurchase: dateOfPurchase,
@@ -75,47 +93,54 @@ class FridgeCard extends Component {
 
                 }
                 // this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") });
-                this.setState({foodFridge: newFoodArray})
+                this.setState({ foodFridge: newFoodArray })
 
             }
         });
 
     }
+
     handleDelete(event, idNum) {
         event.preventDefault();
- 
- 
+
+
         let deleteChoice = {
             //need to actually add user that is logged in
             user: idNum,
             deleteFood: event.target.value
         }
- 
- 
+
+        this.setState({successName: event.target.name});
+        this.setState({show: true});
+
         API.deleteFood(deleteChoice)
             .then(function (response) {
                 console.log(response)
- 
+
             })
- 
+
         window.location.reload(true);
     }
- 
-    handleUpdate(event, idNumber){
+
+
+    handleUpdate(event, idNumber) {
         event.preventDefault();
- 
+
         let foodName = event.target.value;
+
+        this.setState({show: true});
+        this.setState({successName: foodName});
         //Need the ID and the foodname
         //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
         API.updateFood(idNumber, foodName)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
- 
+            .then(response => console.log(response))
+            .catch(err => console.log(err));
+
         window.location.reload(true);
     }
- 
+
     render() {
- 
+
         let renderFood = this.state.foodFridge;
         // console.log(renderFood)
         if (renderFood === "No food found") {
@@ -123,38 +148,37 @@ class FridgeCard extends Component {
         }
         return (
             <div style={{ backgroundColor: "gray" }}>
- 
+
                 <h3 className="align-Header fridge-color">Fridge</h3>
- 
- 
- 
+                <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
+
                 {noFood ||
- 
+
                     renderFood.map((item, index) =>
-                        <div key={index}>
-                            <button className="btn btn-danger" type="button" onClick={(e) =>this.handleDelete(e, this.state.idNumber)}  value={item._id}>Delete</button>
-                            <button className="btn btn-danger" type="button" onClick={(e) =>this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
- 
-                            <div className="card">
-                            <div className="card-body" style={{backgroundColor: `${item.timeColor}`}}>
-                                    {item.name}
+                        <div>
+                            <div key={index}>
+                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
+                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+
+                                <div className="card">
+                                    <div className="card-body" style={{ backgroundColor: `${item.timeColor}` }}>
+                                        {item.name}
+                                    </div>
                                 </div>
+
+
+                                <br />
                             </div>
- 
- 
-                            <br />
                         </div>
                     )
- 
+
                 }
- 
- 
- 
+
             </div >
- 
+
         )
     }
 }
- 
+
 export default FridgeCard
 

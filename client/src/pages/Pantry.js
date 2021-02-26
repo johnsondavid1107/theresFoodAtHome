@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../utils/UserContext"
 import { Col, Row, Container } from "../components/Grid";
 import "./Pantry.css";
@@ -14,10 +14,17 @@ function Pantry() {
 
   const user = useContext(UserContext);
 
+
+
   useEffect(() => {
 
     API.getUser(user.uid).then(function (response) { console.log(response.data) })
-  }, [])
+  }, []);
+
+  const getSuccessInfo = (index, name) => {
+    console.log(index);
+    console.log(name);
+  }
 
   return (
     <div>
@@ -41,7 +48,8 @@ function Pantry() {
             <div className="Box-1">
 
               <PantryCard currentUser={user.uid}
-                key={user.uid} />
+                key={user.uid} 
+                getSuccessInfo={getSuccessInfo}/>
 
 
             </div>

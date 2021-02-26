@@ -70,13 +70,21 @@ function Recipes() {
 
           //get date of purchase
           let dateOfPurchase = dbObject[i].dateOfPurchase;
-          dateOfPurchase = new Date(dateOfPurchase);
+          if (!dateOfPurchase) {
+            dateOfPurchase = new Date();
+          } else {
+            dateOfPurchase = new Date(dateOfPurchase);
+          }
           let location = dbObject[i].location;
           let daysFresh = dbObject[i].daysFresh;
 
           //Gets a spoil date for each item
           let spoilDate = new Date(dateOfPurchase.valueOf())
           spoilDate.setDate(spoilDate.getDate() + daysFresh);
+          if(spoilDate == "Invalid Date"){
+            spoilDate = "";
+          }
+
 
           //Gets number of days fresh for each item - difference between today's date and the spoil date
           let today = new Date();
@@ -87,6 +95,11 @@ function Recipes() {
           today = mm + '/' + dd + '/' + yyyy;
 
           let total = Math.floor((new Date(spoilDate) - new Date(today)) / (1000 * 3600 * 24));
+          if(isNaN(total)){
+            //If it isn't a number, assume it is nonperishable and make it 100 days by default
+            total = 100;
+          }
+          console.log(total);
 
           //Gets id - may remove this later if not needed
           let id = dbObject[i]._id;
@@ -329,18 +342,18 @@ function Recipes() {
     }
 
     setIsCheckedSpecialDiet(specDietYesNo);
-    
+
     let specDietString = "";
-    if(isCheckedSpecialDiet[0] === true){
+    if (isCheckedSpecialDiet[0] === true) {
       specDietString += "vegetarian,";
     }
-    if(isCheckedSpecialDiet[1] === true){
+    if (isCheckedSpecialDiet[1] === true) {
       specDietString += "pescatarian,";
     }
-    if(isCheckedSpecialDiet[2]===true){
+    if (isCheckedSpecialDiet[2] === true) {
       specDietString += "vegan,";
     }
-    if(isCheckedSpecialDiet[3]===true){
+    if (isCheckedSpecialDiet[3] === true) {
       specDietString += "glutenfree";
     }
 
@@ -363,15 +376,15 @@ function Recipes() {
     }
 
     setIsCheckedAllergies(allergiesYesNo);
-    
+
     let allergiesString = "";
-    if(isCheckedAllergies[0] === true){
+    if (isCheckedAllergies[0] === true) {
       allergiesString += "peanuts,";
     }
-    if(isCheckedAllergies[1] === true){
+    if (isCheckedAllergies[1] === true) {
       allergiesString += "treenuts,";
     }
-    if(isCheckedAllergies[2]===true){
+    if (isCheckedAllergies[2] === true) {
       allergiesString += "fish,";
     }
 
