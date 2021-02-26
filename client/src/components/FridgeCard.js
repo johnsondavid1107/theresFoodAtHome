@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import API from "../utils/API";
-
+import SuccessAlert from "../components/SuccessAlert";
 
 
 class FridgeCard extends Component {
@@ -9,7 +9,10 @@ class FridgeCard extends Component {
     state = {
         foodFridge: [],
         user: '',
-        idNumber: ""
+        idNumber: "",
+        show: false,
+        successIndex: 0,
+        successName: ""
     };
 
     componentDidMount() {
@@ -106,7 +109,9 @@ class FridgeCard extends Component {
             user: idNum,
             deleteFood: event.target.value
         }
-
+        
+        this.setState({successName: event.target.name});
+        this.setState({show: true});
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -142,14 +147,14 @@ class FridgeCard extends Component {
             <div style={{ backgroundColor: "gray" }}>
 
                 <h3 className="align-Header fridge-color">Fridge</h3>
-
+                <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
 
                 {noFood ||
 
                     renderFood.map((item, index) =>
                         <div>
                             <div key={index}>
-                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id}>Delete</button>
+                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
                                 <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                                 <div className="card">

@@ -12,7 +12,7 @@ class PantryCard extends Component {
     state = {
         foodPantry: [],
         idNumber: "",
-        show: true,
+        show: false,
         successIndex: 0,
         successName: ""
     };
@@ -115,8 +115,9 @@ class PantryCard extends Component {
             user: idNum,
             deleteFood: event.target.value
         }
-        console.log(event.target.name);
+
         this.setState({successName: event.target.name});
+        this.setState({show: true});
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -153,9 +154,9 @@ class PantryCard extends Component {
 
         return (
             <div style={{ backgroundColor: "gray" }}>
-                <SuccessAlert show={this.state.open} index={this.state.successIndex} name={this.state.successName} />
 
                 <h3 className="align-Header pantry-color">Pantry</h3>
+                <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
 
 
 
