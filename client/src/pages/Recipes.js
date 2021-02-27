@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import API from "../utils/API";
 import { Container, Row, Col, Button, Card, Accordion, Image, Form, Tab, Tabs } from "react-bootstrap";
 import UserContext from "../utils/UserContext";
-
+import "./Recipe.css";
 
 function Recipes() {
   //Julie's JS
@@ -404,35 +404,10 @@ function Recipes() {
                 <Accordion defaultActiveKey="0" className="mt-3">
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="0" className="text-center">
-                      Fresh
+                      Expiring Soon
                      </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                       <Card.Body>
-                        <Form>
-                          <Form>
-                            {['checkbox'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                {freshList.map((item, index) => {
-                                  return (
-                                    <Form.Check onChange={addToListFresh} inline label={item.name} type={type} id={index} />
-                                  );
-                                })}
-                              </div>
-                            ))}
-                          </Form>
-                        </Form>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-                </Accordion>
-                <Accordion defaultActiveKey="0" >
-                  <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="1" className="text-center">
-                      Expiring Soon
-                     </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="1">
-                      <Card.Body>
-                        <Form>
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
@@ -444,7 +419,28 @@ function Recipes() {
                               </div>
                             ))}
                           </Form>
-                        </Form>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+                <Accordion defaultActiveKey="0">
+                  <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="0" className="text-center">
+                      Fresh
+                     </Accordion.Toggle>
+                    <Accordion.Collapse eventKey="0">
+                      <Card.Body>
+                          <Form>
+                            {['checkbox'].map((type) => (
+                              <div key={`inline-${type}`} className="mb-3">
+                                {freshList.map((item, index) => {
+                                  return (
+                                    <Form.Check onChange={addToListFresh} inline label={item.name} type={type} id={index} />
+                                  );
+                                })}
+                              </div>
+                            ))}
+                          </Form>
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
@@ -456,7 +452,6 @@ function Recipes() {
                      </Accordion.Toggle>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                        <Form>
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
@@ -468,7 +463,6 @@ function Recipes() {
                               </div>
                             ))}
                           </Form>
-                        </Form>
                       </Card.Body>
                     </Accordion.Collapse>
                     <Button onClick={runAPI} variant="primary">Submit</Button>{' '}
@@ -483,18 +477,16 @@ function Recipes() {
                   </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                       <Card.Body>
-                        <Form>
                           <Form>
                             {['checkbox'].map((type) => (
                               <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check onChange={setSpecialDietString} inline label="Vegetarian" type={type} id={`inline-${type}-1`} />
-                                <Form.Check onChange={setSpecialDietString} inline label="Pescatarian" type={type} id={`inline-${type}-2`} />
-                                <Form.Check onChange={setSpecialDietString} inline label="Vegan" type={type} id={`inline-${type}-3`} />
-                                <Form.Check onChange={setSpecialDietString} inline label="Gluten-free" type={type} id={`inline-${type}-4`} />
+                                <Form.Check onChange={setSpecialDietString} inline label="Vegetarian" type={type} id={`inline-${type}-sd1`} />
+                                <Form.Check onChange={setSpecialDietString} inline label="Pescatarian" type={type} id={`inline-${type}-sd2`} />
+                                <Form.Check onChange={setSpecialDietString} inline label="Vegan" type={type} id={`inline-${type}-sd3`} />
+                                <Form.Check onChange={setSpecialDietString} inline label="Gluten-free" type={type} id={`inline-${type}-sd4`} />
                               </div>
                             ))}
                           </Form>
-                        </Form>
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
@@ -511,9 +503,9 @@ function Recipes() {
                         <Form>
                           {['checkbox'].map((type) => (
                             <div key={`inline-${type}`} className="mb-3">
-                              <Form.Check onChange={setAllergiesString} inline label="Peanuts" type={type} id={`inline-${type}-1`} />
-                              <Form.Check onChange={setAllergiesString} inline label="Tree nuts" type={type} id={`inline-${type}-2`} />
-                              <Form.Check onChange={setAllergiesString} inline label="Fish" type={type} id={`inline-${type}-3`} />
+                              <Form.Check onChange={setAllergiesString} inline label="Peanuts" type={type} id={`inline-${type}-a1`} />
+                              <Form.Check onChange={setAllergiesString} inline label="Tree nuts" type={type} id={`inline-${type}-a2`} />
+                              <Form.Check onChange={setAllergiesString} inline label="Fish" type={type} id={`inline-${type}-a3`} />
                             </div>
                           ))}
                         </Form>
@@ -523,7 +515,6 @@ function Recipes() {
                 </Accordion>
               </Tab>
             </Tabs>
-
           </Card.Body>
         </Card>
 
@@ -533,7 +524,6 @@ function Recipes() {
               return (
                 <Col className="col-4" xs={6} md={4} key={index}>
                   <Card>
-                    {/* <img className="food-images card-img-top" src={logo2} alt="placeholder2"/> */}
                     <Image className="food-images" onClick={imageClicked} src={result.image} alt={result.title} rounded />
                     <Card.Body>
                       <h5>{result.title}</h5>
