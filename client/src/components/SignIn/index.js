@@ -97,12 +97,13 @@ const SignIn = () => {
           <p className="account"> </p>
         </div>
 
-        <p className="account">
-          Don't have an account?{" "}
+        <div className="account">
+          <p className="lack"> Don't have an account? </p>{" "}
           <Link to="/signUp" className="signUp">
-            Sign up here
+            <br />
+            <p> Sign up here </p>
           </Link>{" "}
-        </p>
+        </div>
 
         <Link to="/passwordReset" className="reset">
           <div className="center">

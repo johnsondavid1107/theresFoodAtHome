@@ -128,12 +128,13 @@ const SignUp = () => {
           </button>
         </div>
 
-        <p className="account">
+        <div className="account">
           Already have an account?{" "}
           <Link to="/SignIn" className="signIn">
-            Sign in here
+            <br />
+            <p> Sign in here </p>
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   );

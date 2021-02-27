@@ -12,8 +12,10 @@
 }
 
 /* my intention here is to center the  "Don't have an account" text however right not it is not working  */
-.acount {
+.account {
   text-align: center;
+  color: black;
+  font-size: bold;
 }
 
 input,
@@ -39,7 +41,6 @@ textarea {
   text-align: center;
 }
 
-/* This is to change the color of the "link text" below the google button. I think it needs to stand out more against the background. I know we are changing the background so still something to be considered.  */
-.here .forgot {
-  color: black;
+a {
+  color: #f39b6d;
 }
