@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import API from "../utils/API";
 import SuccessAlert from "../components/SuccessAlert";
 import "./PantryCard.css";
+import DeleteSuccess from "../components/DeleteSuccess";
 
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
@@ -13,8 +14,11 @@ class PantryCard extends Component {
         foodPantry: [],
         idNumber: "",
         show: false,
+        showDelete: false,
         successIndex: 0,
-        successName: ""
+        deleteIndex: 0,
+        successName: "",
+        deleteName: ""
     };
 
     componentDidMount() {
@@ -116,8 +120,8 @@ class PantryCard extends Component {
             deleteFood: event.target.value
         }
 
-        this.setState({successName: event.target.name});
-        this.setState({show: true});
+        this.setState({deleteName: event.target.name});
+        this.setState({showDelete: true});
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -158,6 +162,7 @@ class PantryCard extends Component {
             <div style={{ backgroundColor: "gray" }}>
 
                 <h3 className="align-Header pantry-color">Pantry</h3>
+                <DeleteSuccess show={this.state.showDelete} index={this.state.deleteIndex} name={this.state.deleteName} />
                 <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
 
 
