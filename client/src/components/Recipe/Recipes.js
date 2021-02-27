@@ -471,29 +471,6 @@ function Recipes() {
                   </Card>
                 </Accordion>
               </Tab>
-              <Tab eventKey="specialDiet" title="Special Diet">
-                <Accordion defaultActiveKey="0" className="mt-3">
-                  <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0" className="text-center">
-                      Options
-                  </Accordion.Toggle>
-                    <Accordion.Collapse eventKey="0">
-                      <Card.Body>
-                          <Form>
-                            {['checkbox'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check onChange={setSpecialDietString} inline label="Vegetarian" type={type} id={`inline-${type}-sd1`} />
-                                <Form.Check onChange={setSpecialDietString} inline label="Pescatarian" type={type} id={`inline-${type}-sd2`} />
-                                <Form.Check onChange={setSpecialDietString} inline label="Vegan" type={type} id={`inline-${type}-sd3`} />
-                                <Form.Check onChange={setSpecialDietString} inline label="Gluten-free" type={type} id={`inline-${type}-sd4`} />
-                              </div>
-                            ))}
-                          </Form>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-                </Accordion>
-              </Tab>
               <Tab eventKey="allergy" title="Allergy">
                 <Accordion defaultActiveKey="0" className="mt-3">
                   <Card>
