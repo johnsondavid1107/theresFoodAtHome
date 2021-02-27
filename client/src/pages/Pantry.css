@@ -49,6 +49,14 @@ button
     float: right;
 }
 
+/* Added to another class for the Renew button - Zo - will fix bug with AccessDenied*/
+.btn-success
+{
+
+    float: right;
+}
+
+
 /* Color for Pantry button */
 .pantry-color
 {
@@ -123,6 +131,7 @@ button
   {
       width: 100%;
       font-weight: bold;
+      padding: 10px 0px 10px 0px;
   }
 
 
@@ -147,6 +156,31 @@ button
     }
 
   }
+
+   /* Media Query to change effects during screen size for Ipad - Zo */
+   @media only screen and (min-width: 768px) 
+   {
+
+    .Box-1
+    {
+        margin: 0 auto; 
+        
+    }
+
+    .Box-2
+    {  
+        margin: 0 auto;
+    }
+
+    
+        .mobile 
+        {
+          display: block;
+
+        }
+      
+
+    }
 
     /* Media Query to change effects during screen size - Zo */
     @media only screen and (min-width: 992px) 

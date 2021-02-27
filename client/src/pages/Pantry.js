@@ -9,6 +9,8 @@ import API from "../utils/API"
 
 
 
+
+
 function Pantry() {
 
 
@@ -24,7 +26,7 @@ function Pantry() {
   }, [])
 
   return (
-    <div>
+    <div className= "Ipad-center">
 
       <Container>
         {/* Row 1 col 12 of page Zo*/}
@@ -32,6 +34,7 @@ function Pantry() {
 
         {/* Search Bar + buttons for food - Zo */}
         <InputFood
+          
           currentUser={user.uid}
           key={user.uid} />
 
@@ -59,7 +62,7 @@ function Pantry() {
         <Row>
           <Col size="md-12">
 
-
+              
             <div className="Box-2" >
 
 
