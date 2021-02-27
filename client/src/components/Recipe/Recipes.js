@@ -12,8 +12,7 @@ function Recipes() {
   const user = useContext(UserContext)
   let userId = user.uid;
 
-  //This will need to come from the checkboxes too
-  const [specialDiet, setSpecialDiet] = useState("");
+  //User's allergies
   const [allergies, setAllergies] = useState("");
 
   //All foods from the db as a hook 
@@ -39,7 +38,6 @@ function Recipes() {
   const [isCheckedFresh, setIsCheckedFresh] = useState([false]);
   const [isCheckedExpiring, setIsCheckedExpiring] = useState([false]);
   const [isCheckedExpired, setIsCheckedExpired] = useState([false]);
-  const [isCheckedSpecialDiet, setIsCheckedSpecialDiet] = useState([false, false, false, false]);
   const [isCheckedAllergies, setIsCheckedAllergies] = useState([false, false, false]);
 
   //Different list of ingredients
@@ -83,7 +81,7 @@ function Recipes() {
           //Gets a spoil date for each item
           let spoilDate = new Date(dateOfPurchase.valueOf())
           spoilDate.setDate(spoilDate.getDate() + daysFresh);
-          if(spoilDate == "Invalid Date"){
+          if (spoilDate == "Invalid Date") {
             spoilDate = "";
           }
 
@@ -97,7 +95,7 @@ function Recipes() {
           today = mm + '/' + dd + '/' + yyyy;
 
           let total = Math.floor((new Date(spoilDate) - new Date(today)) / (1000 * 3600 * 24));
-          if(isNaN(total)){
+          if (isNaN(total)) {
             //If it isn't a number, assume it is nonperishable and make it 100 days by default
             total = 100;
           }
@@ -177,29 +175,14 @@ function Recipes() {
   const makeSearchTerm = ingredients => {
     //If no special diet and no allergies
     // console.log(specialDiet);
-    if (specialDiet === "" && allergies === "") {
+    if (allergies === "") {
       API.recipeFromIngredients(ingredients).then(res => {
         setSearchResults(res.data);
       })
       //If allergies but no special diet
-    } else if (specialDiet === "") {
-      API.recipeAllergy(ingredients, allergies).then(res => {
-        setSearchResults(res.data);
-        //If recipe search delivers no results, do generic search
-
-      })
-    }
-    else if (allergies === "") {
-      //If special diet but no allergies
-      API.recipeSpecialDiet(ingredients, specialDiet).then(res => {
-        setSearchResults(res.data);
-        //If recipe search delivers no results, do generic search
-      })
-
-    }
-    else {
+    } else {
       //They have a special diet AND allergies
-      API.recipeSpecDietAllergy(ingredients, specialDiet, allergies).then(res => {
+      API.recipeAllergy(ingredients, allergies).then(res => {
         setSearchResults(res.data);
         //If recipe search delivers no results, do generic search
 
@@ -329,40 +312,7 @@ function Recipes() {
     window.open(`https://www.google.com/search?q=${item}`);
   }
 
-  //Sets the special diet preferences
-  const setSpecialDietString = event => {
-
-    let id = event.target.id;
-    id = id.slice(id.length - 1);
-    id = id - 1;
-    let specDietYesNo = isCheckedSpecialDiet;
-
-    if (specDietYesNo[id] === false) {
-      specDietYesNo[id] = true;
-    } else {
-      specDietYesNo[id] = false;
-    }
-
-    setIsCheckedSpecialDiet(specDietYesNo);
-
-    let specDietString = "";
-    if (isCheckedSpecialDiet[0] === true) {
-      specDietString += "vegetarian,";
-    }
-    if (isCheckedSpecialDiet[1] === true) {
-      specDietString += "pescatarian,";
-    }
-    if (isCheckedSpecialDiet[2] === true) {
-      specDietString += "vegan,";
-    }
-    if (isCheckedSpecialDiet[3] === true) {
-      specDietString += "glutenfree";
-    }
-
-    specDietString = specDietString.replace(/,\s*$/, "");
-    setSpecialDiet(specDietString);
-  }
-
+  
   const setAllergiesString = event => {
     // event.preventDefault();
 
@@ -410,17 +360,17 @@ function Recipes() {
                      </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                       <Card.Body>
-                          <Form>
-                            {['checkbox'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                {expiringList.map((item, index) => {
-                                  return (
-                                    <Form.Check onChange={addToListExpiring} inline label={item.name} type={type} id={index} />
-                                  );
-                                })}
-                              </div>
-                            ))}
-                          </Form>
+                        <Form>
+                          {['checkbox'].map((type) => (
+                            <div key={`inline-${type}`} className="mb-3">
+                              {expiringList.map((item, index) => {
+                                return (
+                                  <Form.Check onChange={addToListExpiring} inline label={item.name} type={type} id={index} />
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </Form>
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
@@ -432,17 +382,17 @@ function Recipes() {
                      </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                       <Card.Body>
-                          <Form>
-                            {['checkbox'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                {freshList.map((item, index) => {
-                                  return (
-                                    <Form.Check onChange={addToListFresh} inline label={item.name} type={type} id={index} />
-                                  );
-                                })}
-                              </div>
-                            ))}
-                          </Form>
+                        <Form>
+                          {['checkbox'].map((type) => (
+                            <div key={`inline-${type}`} className="mb-3">
+                              {freshList.map((item, index) => {
+                                return (
+                                  <Form.Check onChange={addToListFresh} inline label={item.name} type={type} id={index} />
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </Form>
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
@@ -454,17 +404,17 @@ function Recipes() {
                      </Accordion.Toggle>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
-                          <Form>
-                            {['checkbox'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                {expiredList.map((item, index) => {
-                                  return (
-                                    <Form.Check onChange={addToListExpired} inline label={item.name} type={type} id={index} />
-                                  );
-                                })}
-                              </div>
-                            ))}
-                          </Form>
+                        <Form>
+                          {['checkbox'].map((type) => (
+                            <div key={`inline-${type}`} className="mb-3">
+                              {expiredList.map((item, index) => {
+                                return (
+                                  <Form.Check onChange={addToListExpired} inline label={item.name} type={type} id={index} />
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </Form>
                       </Card.Body>
                     </Accordion.Collapse>
                     <Button onClick={runAPI} variant="primary">Submit</Button>{' '}
