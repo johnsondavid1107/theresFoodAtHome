@@ -170,7 +170,7 @@ class PantryCard extends Component {
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                             <div className="card">
-                                <div className="card-body" style={{ backgroundColor: `${item.timeColor}` }}>
+                                <div className="card-body" style={{ border: `${item.timeColor} 5px solid` }}>
                                     {item.name}
                                 </div>
                             </div>
