@@ -106,7 +106,7 @@ const SignUp = () => {
           <br />
           <div className="center">
             <button
-              className="btn"
+              className="signUp_Btn"
               onClick={(event) => {
                 createUserWithEmailAndPasswordHandler(event, email, password);
               }}

@@ -72,7 +72,7 @@ const SignIn = () => {
           <br />
           <div className="center">
             <button
-              className="btn"
+              className="signUp_Btn"
               onClick={(event) => {
                 signInWithEmailAndPasswordHandler(event, email, password);
               }}

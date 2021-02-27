@@ -10,17 +10,24 @@ import UserContext from "../../utils/UserContext";
 
 
 function Pantry() {
+
+
   const user = useContext(UserContext);
-  console.log(user)
+
 
 
   useEffect(() => {
+
     API.getUser(user.uid).then(function (response) { console.log(response.data) })
-  }, [])
-  
+  }, []);
+
+  const getSuccessInfo = (index, name) => {
+    console.log(index);
+    console.log(name);
+  }
 
   return (
-    <div>
+    <div className= "Ipad-center">
 
       <Container>
         {/* Row 1 col 12 of page Zo*/}
@@ -31,7 +38,7 @@ function Pantry() {
           currentUser={user.uid}
           key={user.uid} />
 
-
+      
 
         {/* Pantry section, Box-1 Zo */}
 
@@ -41,7 +48,8 @@ function Pantry() {
             <div className="Box-1">
 
               <PantryCard currentUser={user.uid}
-                key={user.uid} />
+                key={user.uid} 
+                getSuccessInfo={getSuccessInfo}/>
 
 
             </div>
