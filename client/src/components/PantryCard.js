@@ -92,7 +92,8 @@ class PantryCard extends Component {
                         daysFresh: foodValues[i].daysFresh,
                         location: foodValues[i].location,
                         name: foodValues[i].name,
-                        timeColor: timeColor
+                        timeColor: timeColor,
+                        timeRemaining: total
                     }
 
                     newFoodArray.push(newObject);
@@ -176,7 +177,7 @@ class PantryCard extends Component {
 
                             <div className="card">
                                 <div className="card-body" style={{ border: `${item.timeColor} 5px solid` }}>
-                                    {item.name}
+                                {item.name}, expiring in {item.timeRemaining} days
                                 </div>
                             </div>
 

@@ -162,7 +162,7 @@ function InputFood(props) {
                             {/* Adding this so it works good in mobile */}
                             <br className="mobile-break" />
                             <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
-                            <DayPickerInput onDayChange={day => console.log(day)} />
+                            <DayPickerInput onDayChange={handleDayChange} />
                         </div>
 
                     </Col>

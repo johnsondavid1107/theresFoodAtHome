@@ -70,6 +70,7 @@ class FridgeCard extends Component {
                     //Now to categorize foods into amount of time remaining
                     let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
                     total = total + foodValues[i].daysFresh;
+                    console.log(total);
 
 
                     //Give classnames based on total time remaining
@@ -90,7 +91,8 @@ class FridgeCard extends Component {
                         daysFresh: foodValues[i].daysFresh,
                         location: foodValues[i].location,
                         name: foodValues[i].name,
-                        timeColor: timeColor
+                        timeColor: timeColor,
+                        timeRemaining: total
                     }
 
                     newFoodArray.push(newObject);
@@ -114,20 +116,18 @@ class FridgeCard extends Component {
             deleteFood: event.target.value
         }
 
-        // this.setState({successType: "danger"});
-        // this.setState({successName: event.target.name});
-        // this.setState({show: true});  
+
 
         this.setState({deleteName: event.target.name});
         this.setState({showDelete: true});
-        
+
         API.deleteFood(deleteChoice)
             .then(function (response) {
                 console.log(response)
 
             })
 
-        // window.location.reload(true);
+        window.location.reload(true);
     }
 
 
@@ -171,7 +171,7 @@ class FridgeCard extends Component {
 
                                 <div className="card">
                                     <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
-                                        {item.name}
+                                        {item.name}, expiring in {item.timeRemaining} days
                                     </div>
                                 </div>
 
