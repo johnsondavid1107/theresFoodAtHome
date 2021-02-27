@@ -27,7 +27,7 @@ function Pantry() {
   }
 
   return (
-    <div>
+    <div className= "Ipad-center">
 
       <Container>
         {/* Row 1 col 12 of page Zo*/}

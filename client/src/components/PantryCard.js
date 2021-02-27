@@ -125,7 +125,7 @@ class PantryCard extends Component {
 
             })
 
-        window.location.reload(true);
+        // window.location.reload(true);
     }
 
     handleUpdate(event, idNumber) {
@@ -167,7 +167,7 @@ class PantryCard extends Component {
                     renderFood.map((item, index) =>
                         <div key={index}>
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                             <div className="card">
                                 <div className="card-body" style={{ backgroundColor: `${item.timeColor}` }}>
