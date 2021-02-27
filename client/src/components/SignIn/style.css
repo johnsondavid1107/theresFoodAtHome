@@ -23,8 +23,10 @@ textarea {
   background-color: #fff;
 }
 /* this is the styling for the signin btn. */
+ /* This class name ".btn:hover" effects all buttons on website pages - 
+  Instead create a class name and apply it to the button in order to make it not effect other buttons*/
 .btn:hover {
-  background-color: gray;
+  /* background-color: gray; */
   color: #fff;
   border: 1px solid #fff;
   transition: right 2s ease-in-out 0.5s;

@@ -17,7 +17,7 @@ function AccessDenied()
 
         <br /> 
 
-        <button type="button" class="btn btn-success" ><a href="/">Click here to login</a></button>
+        <button type="button" style={{backgroundColor:"#22B24C" , borderRadius:"10px", padding:"5px"}} ><a href="/">Click here to login</a></button>
         
       </div>
         </Col>

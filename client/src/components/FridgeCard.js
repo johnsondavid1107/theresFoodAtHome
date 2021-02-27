@@ -158,7 +158,7 @@ class FridgeCard extends Component {
                         <div>
                             <div key={index}>
                                 <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+                                <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                                 <div className="card">
                                     <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
