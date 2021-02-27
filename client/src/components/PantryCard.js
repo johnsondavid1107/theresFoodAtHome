@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import API from "../utils/API";
 import SuccessAlert from "../components/SuccessAlert";
-
+import "./PantryCard.css";
 
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
