@@ -171,7 +171,7 @@ class FridgeCard extends Component {
 
                                 <div className="card">
                                     <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
-                                        {item.name}
+                                        {item.name}, expiring in {item.timeRemaining} days
                                     </div>
                                 </div>
 
