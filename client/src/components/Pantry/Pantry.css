@@ -1,0 +1,173 @@
+/* Pantry CSS - Zo */
+
+/* Searh bar   - Zo*/
+.input-group
+{
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 70%;
+}
+
+.mobile 
+{
+    display: none;
+}
+
+.form-control
+{
+    border-radius: 10px !important;
+    height: 40px;
+    margin-top: 5px;
+}
+
+button
+{
+    margin:8px;
+}
+
+.align-Header
+{
+    text-align: left;
+    color: white;
+    padding-bottom: 20px;
+    background-color: gray;
+}
+
+.align-text
+{
+    justify-content: center;
+    width:40%;
+    padding:10px;
+    margin-left: 150px;
+}
+
+
+.btn-danger
+{
+
+    background-color: red;
+    float: right;
+}
+
+/* Color for Pantry button */
+.pantry-color
+{
+    color: #FCFF4B;
+    font-weight:bold;
+    
+}
+
+/* Color for fridge button */
+.fridge-color
+{
+    color: royalblue;
+    font-weight:bold;
+}
+
+.Box-1
+{
+    height:300px;
+    border-radius: 10px;
+    margin:20px;
+    padding:10px;
+    overflow: scroll;
+    /* Change background color within container */
+    background-color: gray;
+}
+
+.Box-2
+{
+    height:300px;
+    border-radius: 10px;
+    margin:20px;
+    padding:10px;
+    overflow: scroll;
+    /* Change background color within container */
+    background-color:gray;
+}
+
+/* Change background color of card to white - Almonzo */
+.card-body
+{
+    background-color: white;
+}
+
+/* Re-sizes search Bar based on deviced viewed - Zo */
+
+@media only screen and (max-width: 600px) 
+{
+    .input-group 
+    {
+      width: 100%;
+    }
+    
+        .align-text
+        {
+          width: 90%;
+        }
+
+  }
+
+  .card-title
+  {
+      font-weight: bold;
+      color:white;
+  }
+
+  .card
+  {
+      border-radius: 10px;
+  }
+
+  .card-body
+  {
+      width: 100%;
+      font-weight: bold;
+  }
+
+
+  /* Media Query to change effects during screen size - Zo */
+    @media only screen and (min-width: 600px) 
+ {
+    .align-Header
+    {
+        margin-left:170px;
+    }
+
+    .Box-1
+    {
+        width:700px;
+    
+       
+    }
+    .Box-2
+    {
+        width:700px;
+       
+    }
+
+  }
+
+    /* Media Query to change effects during screen size - Zo */
+    @media only screen and (min-width: 992px) 
+ {
+
+    .Box-1
+    {
+        margin: 0 auto; 
+        
+    }
+
+    .Box-2
+    {  
+        margin: 0 auto;
+    }
+
+    
+        .mobile 
+        {
+          display: block;
+
+        }
+      
+  }
