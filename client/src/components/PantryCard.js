@@ -130,7 +130,7 @@ class PantryCard extends Component {
 
             })
 
-        // window.location.reload(true);
+        window.location.reload(true);
     }
 
     handleUpdate(event, idNumber) {
