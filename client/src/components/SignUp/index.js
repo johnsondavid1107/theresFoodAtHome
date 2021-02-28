@@ -68,10 +68,6 @@ const SignUp = () => {
             </div>
           </container>
           <br />
-
-          {/* <label htmlFor="userEmail" className="block">
-            Email:
-          </label> */}
           <container>
             <div className="center">
               <input
@@ -87,9 +83,6 @@ const SignUp = () => {
           </container>
           <br />
 
-          {/* <label htmlFor="userPassword" className="block">
-            Password:
-          </label> */}
           <container>
             <div className="center">
               <input
@@ -129,8 +122,9 @@ const SignUp = () => {
         </div>
 
         <p className="account">
-          Already have an account?{" "}
-          <Link to="/SignIn" className="signIn">
+          Already have an account?
+          <br />
+          <Link to="/SignIn" className="signin">
             Sign in here
           </Link>
         </p>

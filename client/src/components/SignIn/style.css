@@ -11,10 +11,10 @@
   text-align: center;
 }
 
-/* my intention here is to center the  "Don't have an account" text however right not it is not working  */
+/* this is to center the text the following text, Don't have an accout */
 .account {
   text-align: center;
-  color: black;
+  color: #f39b6d;
   font-size: bold;
 }
 
@@ -40,6 +40,14 @@ textarea {
   text-align: center;
 }
 
-a {
+.forgot {
+  color: #f39b6d;
+}
+
+.signup {
+  color: #f39b6d;
+}
+
+.signin {
   color: #f39b6d;
 }
