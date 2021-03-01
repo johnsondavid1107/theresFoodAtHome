@@ -162,7 +162,6 @@ function InputFood(props) {
                             <button className="btn btn-warning" type="button" style={{ color: "black" }} type="button" onClick={handleAddFood} value="pantry">Pantry</button>
                             <button className="btn btn-info" type="button" value="fridge" onClick={handleAddFood}>Fridge</button>
 
-                            <button >Test button</button>
 
                         </div>
                     </Col>

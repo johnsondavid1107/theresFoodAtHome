@@ -31,6 +31,9 @@ class FridgeCard extends Component {
 
     foodLoad() {
         let idNum = this.props.currentUser;
+
+        this.setState({show: false});
+        this.setState({showDelete: false});
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
                 this.setState({ foodPantry: "No food found" })
