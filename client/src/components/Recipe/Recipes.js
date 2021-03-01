@@ -99,7 +99,6 @@ function Recipes() {
             //If it isn't a number, assume it is nonperishable and make it 100 days by default
             total = 100;
           }
-          console.log(total);
 
           //Gets id - may remove this later if not needed
           let id = dbObject[i]._id;
@@ -127,8 +126,11 @@ function Recipes() {
             expiringArray.push(foodObject);
             trueFalseArrayExpiring.push(false);
           } else {
-            expiredArray.push(foodObject);
-            trueFalseArrayExpired.push(false);
+            if(!foodObject.name){
+            } else {
+              expiredArray.push(foodObject);
+              trueFalseArrayExpired.push(false);
+            }
           }
         }
 
@@ -174,7 +176,6 @@ function Recipes() {
   //decides which API route to call and calls it based on ingredients as a parameter
   const makeSearchTerm = ingredients => {
     //If no special diet and no allergies
-    // console.log(specialDiet);
     if (allergies === "") {
       API.recipeFromIngredients(ingredients).then(res => {
         setSearchResults(res.data);
@@ -341,7 +342,6 @@ function Recipes() {
     }
 
     allergiesString = allergiesString.replace(/,\s*$/, "");
-    console.log(allergiesString);
     setAllergies(allergiesString);
   }
 
