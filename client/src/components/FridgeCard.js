@@ -21,9 +21,16 @@ class FridgeCard extends Component {
 
     componentDidMount() {
 
-        let idNum = this.props.currentUser;
-        this.setState({ idNumber: this.props.currentUser });
 
+        this.setState({ idNumber: this.props.currentUser });
+        this.foodLoad()
+
+
+
+    }
+
+    foodLoad() {
+        let idNum = this.props.currentUser;
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
                 this.setState({ foodPantry: "No food found" })
@@ -98,11 +105,16 @@ class FridgeCard extends Component {
                     newFoodArray.push(newObject);
 
                 }
-                // this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") });
                 this.setState({ foodFridge: newFoodArray })
 
             }
         });
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.render !== prevProps.render) {
+            this.foodLoad()
+        }
 
     }
 
@@ -118,8 +130,8 @@ class FridgeCard extends Component {
 
 
 
-        this.setState({deleteName: event.target.name});
-        this.setState({showDelete: true});
+        this.setState({ deleteName: event.target.name });
+        this.setState({ showDelete: true });
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -127,7 +139,7 @@ class FridgeCard extends Component {
 
             })
 
-        window.location.reload(true);
+        this.foodLoad()
     }
 
 
@@ -136,21 +148,21 @@ class FridgeCard extends Component {
 
         let foodName = event.target.value;
 
-        this.setState({successName: foodName});
-        this.setState({successType: "success"});
-        this.setState({show: true});
+        this.setState({ successName: foodName });
+        this.setState({ successType: "success" });
+        this.setState({ show: true });
         //Need the ID and the foodname
         //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
         API.updateFood(idNumber, foodName)
             .then(response => console.log(response))
             .catch(err => console.log(err));
 
-        window.location.reload(true);
+        this.foodLoad()
     }
 
     render() {
 
-        let renderFood = this.state.foodFridge;
+        var renderFood = this.state.foodFridge;
         // console.log(renderFood)
         if (renderFood === "No food found") {
             var noFood = "Please add food to list"
@@ -164,21 +176,21 @@ class FridgeCard extends Component {
                 {noFood ||
 
                     renderFood.map((item, index) =>
-                        <div>
-                            <div key={index}>
-                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                                <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
-                                <div className="card">
-                                    <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
-                                        {item.name}, expiring in {item.timeRemaining} days
+                        <div key={index}>
+                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
+                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+
+                            <div className="card">
+                                <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
+                                    {item.name}, expiring in {item.timeRemaining} days
                                     </div>
-                                </div>
-
-
-                                <br />
                             </div>
+
+
+                            <br />
                         </div>
+
                     )
 
                 }

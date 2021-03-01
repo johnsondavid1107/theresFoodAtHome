@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useContext, useState } from "react"
 import API from "../utils/API"
 import { Col, Container, Row } from "../components/Grid"
 // Added new imports to make calender work on page for food expiration - Zo/Hever
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+import UserContext from "../utils/UserContext"
+import PantryCard from "./PantryCard"
+import FridgeCard from "./FridgeCard"
 
+//David - I might need to turn this whole thing into a class component
 
 function InputFood(props) {
 
@@ -16,9 +20,14 @@ function InputFood(props) {
     const [inputVal, setInputVal] = useState();
     const [daysFresh, setDaysFresh] = useState(0);
     const [todayDate, setTodayDate] = useState("");
+    //test state prop drill with a buttonclick
+    const [renderState, setRenderState] = useState();
 
+    const user = useContext(UserContext)
 
     useEffect(() => {
+        console.log(user)
+        API.getUser(user.uid).then(function (response) { console.log(response.data) })
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
         let mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -29,15 +38,29 @@ function InputFood(props) {
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
         API.getAllFoods().then(function (response) {
             // console.log(response.data[0].allFoods)
-            setAllFoods(response.data[0].allFoods)
+            console.log(response)
+
+            if (response.data.length === 0) {
+                return
+            } else {
+                setAllFoods(response.data[0].allFoods)
+            }
 
 
 
         })
 
+
         console.log(placeHolderFood)
 
     }, [])
+
+    const getSuccessInfo = (index, name) => {
+        console.log(index);
+        console.log(name);
+    }
+
+
 
 
 
@@ -57,14 +80,14 @@ function InputFood(props) {
 
 
         setInputVal(value)
-        // console.log(inputVal)
+        console.log(inputVal)
 
 
     }
 
     function handleAddFood(event) {
         let combo = {
-            user: props.currentUser,
+            user: user.uid,
             name: foodChoice,
             dateOfPurchase: todayDate,
             daysFresh: daysFresh,
@@ -72,13 +95,22 @@ function InputFood(props) {
             location: event.target.value,
 
         }
-        // console.log(combo.location)
+        console.log(combo)
         API.makeFood(combo).then(function (response) {
             console.log(response)
-            window.location.reload(true)
+
+
+            API.getFoods(combo.user).then(function (answer) {
+                console.log(answer)
+                setRenderState(answer)
+            })
+
+            // window.location.reload(true)
         });
         API.checkAllFoods(foodChoice).then(function (response2) {
-            console.log(response2)
+            if (response2 === undefined) {
+                return
+            }
         })
     }
 
@@ -130,6 +162,8 @@ function InputFood(props) {
                             <button className="btn btn-warning" type="button" style={{ color: "black" }} type="button" onClick={handleAddFood} value="pantry">Pantry</button>
                             <button className="btn btn-info" type="button" value="fridge" onClick={handleAddFood}>Fridge</button>
 
+                            <button >Test button</button>
+
                         </div>
                     </Col>
                 </Row>
@@ -138,10 +172,10 @@ function InputFood(props) {
 
                         {/* Added Legend section - Zo */}
                         <h4>Food Status*</h4>
-                        
-                            <p style={{ marginBottom: "10px", listStyle:"none"}}><span style={{ backgroundColor: "#22B24C", borderRadius: "5px", padding: "5px" }}>Fresh 🤤</span></p>
-                            <p style={{ marginBottom: "10px", listStyle:"none"}}><span style={{ backgroundColor: "#FFA500", borderRadius: "5px", padding: "5px" }}>Edible 🙂</span></p>
-                            <p style={{ marginBottom: "10px", listStyle:"none"}}><span style={{ backgroundColor: "#FF0000", borderRadius: "5px", padding: "5px" }}>Expired 😓</span></p>
+
+                        <p style={{ marginBottom: "10px", listStyle: "none" }}><span style={{ backgroundColor: "#22B24C", borderRadius: "5px", padding: "5px" }}>Fresh 🤤</span></p>
+                        <p style={{ marginBottom: "10px", listStyle: "none" }}><span style={{ backgroundColor: "#FFA500", borderRadius: "5px", padding: "5px" }}>Edible 🙂</span></p>
+                        <p style={{ marginBottom: "10px", listStyle: "none" }}><span style={{ backgroundColor: "#FF0000", borderRadius: "5px", padding: "5px" }}>Expired 😓</span></p>
 
                     </Col>
 
@@ -149,7 +183,7 @@ function InputFood(props) {
 
                         {/* David's code */}
                         <h4>Search Suggestions:</h4>
-                        
+
                         {nada || renderSearch}
 
                     </Col>
@@ -165,6 +199,43 @@ function InputFood(props) {
                             <DayPickerInput onDayChange={handleDayChange} />
                         </div>
 
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col size="md-12">
+                        <div className="Box-1">
+
+                            <PantryCard currentUser={user.uid}
+                                key={user.uid}
+                                getSuccessInfo={getSuccessInfo}
+                                render={renderState} />
+
+
+                        </div>
+                    </Col>
+
+                </Row>
+
+                {/* Do not touch - Zo ensures page is responsive during laptop view*/}
+                <br className="mobile" />
+
+                <Row>
+                    <Col size="md-12">
+
+
+                        <div className="Box-2" >
+
+
+                            <FridgeCard
+                                currentUser={user.uid}
+                                key={user.uid}
+                                getSuccessInfo={getSuccessInfo}
+                                render={renderState}
+
+                            />
+
+                        </div>
                     </Col>
                 </Row>
             </Container>

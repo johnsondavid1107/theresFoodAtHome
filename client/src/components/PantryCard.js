@@ -4,12 +4,7 @@ import SuccessAlert from "../components/SuccessAlert";
 import "./PantryCard.css";
 import DeleteSuccess from "../components/DeleteSuccess";
 
-// Didn't use or touch this, as it was confusing for me to style/ update the page
-
-
 class PantryCard extends Component {
-
-
     state = {
         foodPantry: [],
         idNumber: "",
@@ -18,13 +13,20 @@ class PantryCard extends Component {
         successIndex: 0,
         deleteIndex: 0,
         successName: "",
-        deleteName: ""
+        deleteName: "",
+        test: 0
     };
 
     componentDidMount() {
+        this.setState({ idNumber: this.props.currentUser });
+        this.foodLoad()
+
+
+    }
+
+    foodLoad() {
 
         let idNum = this.props.currentUser;
-        this.setState({ idNumber: this.props.currentUser });
 
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
@@ -99,17 +101,24 @@ class PantryCard extends Component {
                     newFoodArray.push(newObject);
 
                 }
-                // this.setState({ foodPantry: result.data[0].foodItem.filter(item => item.location === "pantry") });
+
                 this.setState({ foodPantry: newFoodArray })
+                console.log(this.state.foodPantry)
 
             }
         });
-
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.render !== prevProps.render) {
+            console.log(prevProps)
+            console.log(this.props.render)
+            this.foodLoad()
 
 
+        }
 
+    }
 
     handleDelete(event, idNum) {
         event.preventDefault();
@@ -121,8 +130,8 @@ class PantryCard extends Component {
             deleteFood: event.target.value
         }
 
-        this.setState({deleteName: event.target.name});
-        this.setState({showDelete: true});
+        this.setState({ deleteName: event.target.name });
+        this.setState({ showDelete: true });
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -130,33 +139,36 @@ class PantryCard extends Component {
 
             })
 
-        window.location.reload(true);
+
+        this.foodLoad()
+
     }
 
     handleUpdate(event, idNumber) {
         event.preventDefault();
 
         let foodName = event.target.value;
-        this.setState({show: true});
-        this.setState({successName: foodName});
+        this.setState({ show: true });
+        this.setState({ successName: foodName });
         //Need the ID and the foodname
         //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
         API.updateFood(idNumber, foodName)
             .then(response => console.log(response))
             .catch(err => console.log(err));
 
-        window.location.reload(true);
+        this.foodLoad()
     }
+
 
 
     render() {
 
-        let renderFood = this.state.foodPantry;
-        // console.log("THISSSS:" + renderFood)
+
+        var renderFood = this.state.foodPantry;
+
         if (renderFood === "No food found") {
             var noFood = "Please add food to list"
         }
-
 
 
         return (
@@ -172,20 +184,25 @@ class PantryCard extends Component {
 
                     renderFood.map((item, index) =>
                         <div key={index}>
-                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber) || item._id} value={item._id} name={item.name}>Delete</button>
+                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber) || item.id} value={item.name}>Renew</button>
 
                             <div className="card">
                                 <div className="card-body" style={{ border: `${item.timeColor} 5px solid` }}>
-                                {item.name}, expiring in {item.timeRemaining} days
+                                    {item.name}, expiring in {item.timeRemaining} days
                                 </div>
                             </div>
+
 
 
                             <br />
                         </div>
                     )
                 }
+
+
+
+
 
 
 
