@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import API from "../utils/API";
 import SuccessAlert from "../components/SuccessAlert";
+import DeleteSuccess from "../components/DeleteSuccess";
 
 
 class FridgeCard extends Component {
@@ -11,8 +12,11 @@ class FridgeCard extends Component {
         user: '',
         idNumber: "",
         show: false,
+        showDelete: false,
         successIndex: 0,
-        successName: ""
+        deleteIndex: 0,
+        successName: "",
+        deleteName: ""
     };
 
     componentDidMount() {
@@ -66,6 +70,7 @@ class FridgeCard extends Component {
                     //Now to categorize foods into amount of time remaining
                     let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
                     total = total + foodValues[i].daysFresh;
+                    console.log(total);
 
 
                     //Give classnames based on total time remaining
@@ -86,7 +91,8 @@ class FridgeCard extends Component {
                         daysFresh: foodValues[i].daysFresh,
                         location: foodValues[i].location,
                         name: foodValues[i].name,
-                        timeColor: timeColor
+                        timeColor: timeColor,
+                        timeRemaining: total
                     }
 
                     newFoodArray.push(newObject);
@@ -110,8 +116,10 @@ class FridgeCard extends Component {
             deleteFood: event.target.value
         }
 
-        this.setState({successName: event.target.name});
-        this.setState({show: true});
+
+
+        this.setState({deleteName: event.target.name});
+        this.setState({showDelete: true});
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -128,8 +136,9 @@ class FridgeCard extends Component {
 
         let foodName = event.target.value;
 
-        this.setState({show: true});
         this.setState({successName: foodName});
+        this.setState({successType: "success"});
+        this.setState({show: true});
         //Need the ID and the foodname
         //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
         API.updateFood(idNumber, foodName)
@@ -150,19 +159,19 @@ class FridgeCard extends Component {
             <div style={{ backgroundColor: "gray" }}>
 
                 <h3 className="align-Header fridge-color">Fridge</h3>
+                <DeleteSuccess show={this.state.showDelete} index={this.state.deleteIndex} name={this.state.deleteName} />
                 <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
-
                 {noFood ||
 
                     renderFood.map((item, index) =>
                         <div>
                             <div key={index}>
                                 <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                                <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+                                <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                                 <div className="card">
-                                    <div className="card-body" style={{ backgroundColor: `${item.timeColor}` }}>
-                                        {item.name}
+                                    <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
+                                        {item.name}, expiring in {item.timeRemaining} days
                                     </div>
                                 </div>
 

@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import API from "../utils/API";
 import SuccessAlert from "../components/SuccessAlert";
-
+import "./PantryCard.css";
+import DeleteSuccess from "../components/DeleteSuccess";
 
 // Didn't use or touch this, as it was confusing for me to style/ update the page
 
@@ -13,8 +14,11 @@ class PantryCard extends Component {
         foodPantry: [],
         idNumber: "",
         show: false,
+        showDelete: false,
         successIndex: 0,
-        successName: ""
+        deleteIndex: 0,
+        successName: "",
+        deleteName: ""
     };
 
     componentDidMount() {
@@ -88,7 +92,8 @@ class PantryCard extends Component {
                         daysFresh: foodValues[i].daysFresh,
                         location: foodValues[i].location,
                         name: foodValues[i].name,
-                        timeColor: timeColor
+                        timeColor: timeColor,
+                        timeRemaining: total
                     }
 
                     newFoodArray.push(newObject);
@@ -116,8 +121,8 @@ class PantryCard extends Component {
             deleteFood: event.target.value
         }
 
-        this.setState({successName: event.target.name});
-        this.setState({show: true});
+        this.setState({deleteName: event.target.name});
+        this.setState({showDelete: true});
 
         API.deleteFood(deleteChoice)
             .then(function (response) {
@@ -158,6 +163,7 @@ class PantryCard extends Component {
             <div style={{ backgroundColor: "gray" }}>
 
                 <h3 className="align-Header pantry-color">Pantry</h3>
+                <DeleteSuccess show={this.state.showDelete} index={this.state.deleteIndex} name={this.state.deleteName} />
                 <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
 
 
@@ -167,11 +173,11 @@ class PantryCard extends Component {
                     renderFood.map((item, index) =>
                         <div key={index}>
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                            <button className="btn btn-danger" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
 
                             <div className="card">
-                                <div className="card-body" style={{ backgroundColor: `${item.timeColor}` }}>
-                                    {item.name}
+                                <div className="card-body" style={{ border: `${item.timeColor} 5px solid` }}>
+                                {item.name}, expiring in {item.timeRemaining} days
                                 </div>
                             </div>
 

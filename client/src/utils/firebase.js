@@ -21,6 +21,7 @@ export const firestore = firebase.firestore();
 
 
 const provider = new firebase.auth.GoogleAuthProvider();
+
 export const signInWithGoogle = () => {
   auth.signInWithPopup(provider).then().catch(err=>{console.log(err)});
 };
@@ -29,8 +30,7 @@ export const signOut =  ()=>{
         auth.signOut().then(() => {
                 window.location.href="/"
               }).catch((error) => {
-                // An error happened.
-
+                console.log(error)      
               });
 }
 
@@ -55,7 +55,7 @@ export const generateUserDocument = async (user, additionalData) => {
         return getUserDocument(user.uid);
 };
 
-const getUserDocument = async uid => {
+export const getUserDocument = async uid => {
         if (!uid) return null;
         try {
                 const userDocument = await firestore.doc(`users/${uid}`).get();

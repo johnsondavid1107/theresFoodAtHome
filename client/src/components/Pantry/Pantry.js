@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../utils/UserContext"
-import { Col, Row, Container } from "../components/Grid";
+import React, { useContext, useEffect } from "react";
+import { Col, Row, Container } from "../Grid";
 import "./Pantry.css";
-import PantryCard from "../components/PantryCard"
-import FridgeCard from "../components/FridgeCard"
-import InputFood from "../components/InputFood"
-import API from "../utils/API"
+import PantryCard from "../PantryCard"
+import FridgeCard from "../FridgeCard"
+import InputFood from "../InputFood"
+import API from "../../utils/API";
+import UserContext from "../../utils/UserContext";
 
 
 
@@ -27,7 +27,7 @@ function Pantry() {
   }
 
   return (
-    <div>
+    <div className= "Ipad-center">
 
       <Container>
         {/* Row 1 col 12 of page Zo*/}

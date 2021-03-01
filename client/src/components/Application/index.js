@@ -1,96 +1,65 @@
-import React, { useContext } from "react"
-import Pantry from "../../pages/Pantry";
-import Recipes from "../../pages/Recipes";
+import React from "react"
+import PantryPage from "../../pages/PantryPage";
+import RecipePage from "../../pages/RecipePage";
 import Logout from "../../pages/Logout";
-//if NoMatch is removed, it changes the placement of Pantry in yellow on the pantry page..
 import NoMatch from "../../pages/NoMatch";
-
 import NavBar from "../NavBar";
 import Footer from "../Footer/Footer";
 import SignIn from "../SignIn/index"
 import SignUp from "../SignUp/index"
 import PwReset from "../../pages/PasswordReset"
-import UserContext from "../../utils/UserContext"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AccessDenied from "../../pages/AccessDenied";
 
-// The app will not render correctly until you setup a Route component.
-// Refer to the Basic Example documentation if you need to.
-// (https://reacttraining.com/react-router/web/example/basic)
+
+
 function Application() {
-    const user = useContext(UserContext);
+
 
     return (
 
-        user ?
+        <Router>
 
-            <Router>
+            <NavBar />
 
-                <NavBar />
+            <Switch>
 
-                <Switch>
+                <Route exact path={["/", "/signin"]}>
+                    <SignIn />
+                </Route>
 
-                    <Route exact path={["/", "/pantry"]}>
-                        <Pantry />
-                    </Route>
+                <Route exact path={"/pantry"}>
+                    <PantryPage />
+                </Route>
 
-                    <Route exact path="/recipes">
-                        <Recipes />
-                    </Route>
+                <Route exact path="/recipes">
+                    <RecipePage />
+                </Route>
 
-                    <Route exact path="/logout">
-                        <Logout />
-                    </Route>
-                    
-                    <Route exact path="/signup">
-                        <Pantry/>
-                    </Route>
+                <Route exact path="/logout">
+                    <Logout />
+                </Route>
 
-                   
-                    <Route>
+                <Route exact path="/signup">
+                    <SignUp />
+                </Route>
 
-                        <NoMatch/>
+                <Route exact path="/reset" >
+                    <PwReset />
+                </Route>
 
-                    </Route>
+                <Route exact path="/accessdenied">
+                    <AccessDenied />
+                </Route>
 
+                <Route>
+                    <NoMatch />
+                </Route>
 
+            </Switch>
 
-                </Switch>
-
-                <Footer />
-            </Router>
-
-            :
-
-            <Router>
-
-                <NavBar />
-
-                <Switch>
-
-                    <Route exact path={["/", "/signin"]}>
-                        <SignIn />
-                    </Route>
-
-                    <Route exact path="/signup">
-                        <SignUp />
-                    </Route>
-
-                    <Route exact path="/reset" >
-                        <PwReset />
-                    </Route>
-
-                    {/* Added per Rich - Zo */}
-                    <Route>
-
-                        <AccessDenied/>
-
-                    </Route>
-
-                </Switch>
-
-                <Footer />
-            </Router>
+            <Footer />
+        </Router>
 
     );
 }

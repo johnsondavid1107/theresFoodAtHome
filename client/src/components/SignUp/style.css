@@ -24,7 +24,7 @@ textarea {
 }
 
 /* this is the styling for the signin btn. */
-.btn:hover {
+.signUp_Btn:hover {
   background-color: gray;
   color: #fff;
   border: 1px solid #fff;
@@ -47,6 +47,12 @@ textarea {
   color: #f39b6d;
 }
 
-.signin {
+
+.signIn  {
+
+  color: #f39b6d;
+}
+
+.reset  {
   color: #f39b6d;
 }

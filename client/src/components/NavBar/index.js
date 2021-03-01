@@ -8,7 +8,7 @@ import Video from "../../images/food-demo.mp4";
 function NavBar() {
   return (
     <div container="true" style={{ backgroundColor: "#BA324F" }}>
-
+      <Container-fluid>
       {/* There's Food video demo - Zo*/}
       <video style={{ backgroundColor: "#BA324F" }} width="100%" height="240" muted autostart="true" loop autoPlay src={Video} type="video/mp4" className="video-Zo" />
 
@@ -40,7 +40,7 @@ function NavBar() {
         </a>
       </nav>
 
-
+      </Container-fluid>
       {/* Ending div for component - Zo */}
     </div >
   );

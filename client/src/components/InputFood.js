@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import API from "../utils/API"
-import { Col, Row } from "../components/Grid"
+import { Col, Container, Row } from "../components/Grid"
+// Added new imports to make calender work on page for food expiration - Zo/Hever
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
@@ -15,7 +16,7 @@ function InputFood(props) {
     const [inputVal, setInputVal] = useState();
     const [daysFresh, setDaysFresh] = useState(0);
     const [todayDate, setTodayDate] = useState("");
-    
+
 
     useEffect(() => {
         let today = new Date();
@@ -119,32 +120,54 @@ function InputFood(props) {
 
     return (
         <div>
-            <Row>
-                <Col size="md-12">
-                    <div className="input-group input-group-sm mb-3">
-                        <input type="text" className="form-control" placeholder="Add food to 😋..." onChange={handleInputChange} />
+            <Container>
+                <Row>
+                    <Col size="md-12">
+                        <div className="input-group input-group-sm mb-3">
+                            <input type="text" className="form-control" placeholder="Add food to 😋..." onChange={handleInputChange} />
 
 
-                        <button className="btn btn-warning" style={{ color: "black" }} type="button" onClick={handleAddFood} value="pantry">Pantry</button>
-                        <button className="btn btn-info" type="button" value="fridge" onClick={handleAddFood}>Fridge</button>
+                            <button className="btn btn-warning" type="button" style={{ color: "black" }} type="button" onClick={handleAddFood} value="pantry">Pantry</button>
+                            <button className="btn btn-info" type="button" value="fridge" onClick={handleAddFood}>Fridge</button>
 
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <Col size="md-12">
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size="md-4">
 
-                    {/* Added Hever's food expiration date selection react code into Pantry page - Zo */}
-                    <div style={{ float: "right" }}>
-                        <p>Please type a day:</p>
-                        <DayPickerInput onDayChange={handleDayChange} />
-                    </div>
+                        {/* Added Legend section - Zo */}
+                        <h4>Food Status*</h4>
+                        
+                            <p style={{ marginBottom: "10px", listStyle:"none"}}><span style={{ backgroundColor: "#22B24C", borderRadius: "5px", padding: "5px" }}>Fresh 🤤</span></p>
+                            <p style={{ marginBottom: "10px", listStyle:"none"}}><span style={{ backgroundColor: "#FFA500", borderRadius: "5px", padding: "5px" }}>Edible 🙂</span></p>
+                            <p style={{ marginBottom: "10px", listStyle:"none"}}><span style={{ backgroundColor: "#FF0000", borderRadius: "5px", padding: "5px" }}>Expired 😓</span></p>
 
-                    <h4>Search Suggestions: </h4>
+                    </Col>
 
-                    {nada || renderSearch}
-                </Col>
-            </Row>
+                    <Col size="md-4">
+
+                        {/* David's code */}
+                        <h4>Search Suggestions:</h4>
+                        
+                        {nada || renderSearch}
+
+                    </Col>
+
+
+                    <Col size="md-4">
+
+                        {/* Added Hever's food expiration date selection react code into Pantry page - Zo */}
+                        <div >
+                            {/* Adding this so it works good in mobile */}
+                            <br className="mobile-break" />
+                            <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
+                            <DayPickerInput onDayChange={handleDayChange} />
+                        </div>
+
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 
