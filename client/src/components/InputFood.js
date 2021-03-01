@@ -15,7 +15,6 @@ function InputFood(props) {
 
     const [foodChoice, setFood] = useState();
     const [allFoods, setAllFoods] = useState();
-    const [searchFoods, setSearchFoods] = useState();
     const [placeHolderFood, setPlaceHolderFood] = useState()
     const [inputVal, setInputVal] = useState();
     const [daysFresh, setDaysFresh] = useState(0);
@@ -69,18 +68,14 @@ function InputFood(props) {
         // console.log(value)
         setFood(value)
 
-        //for the all foods search
-        setSearchFoods(value)
-        // console.log(searchFoods)
 
         setPlaceHolderFood(allFoods.filter(option =>
             option.name.toLowerCase().includes(value))
         )
-        // console.log(placeHolderFood)
+
 
 
         setInputVal(value)
-        console.log(inputVal)
 
 
     }
