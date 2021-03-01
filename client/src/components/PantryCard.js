@@ -139,7 +139,9 @@ class PantryCard extends Component {
 
             })
 
+
         this.foodLoad()
+
     }
 
     handleUpdate(event, idNumber) {

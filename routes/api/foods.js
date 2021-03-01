@@ -61,16 +61,12 @@ router.post("/addFood/:id/:name/:daysFresh/:location", function (req, res) {
 
 })
 
-// Matches with "/api/foods/recipes/:ingredient/:diet"
-router.route("/recipes/:ingredient/:diet")
-    .get(FoodsController.findBySearchSpecialDiet);
+
 
 // Matches with "/api/foods/recipes/:ingredient/:diet"
 router.route("/recipes/allergy/:ingredient/:allergy")
     .get(FoodsController.findBySearchAllergy)
 
-router.route("/recipes/allspec/:ingredient/:allergy/:diet")
-    .get(FoodsController.findBySearchAllergySpecialDiet)
 
 
 router.route("/userFoods/:id")

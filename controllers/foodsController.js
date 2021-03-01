@@ -135,19 +135,6 @@ module.exports = {
         }).then(response => res.json(response))
     },
 
-    //Searches for recipes by special diet - supports gluten free, vegetarian, vegan, pescatarian
-    findBySearchSpecialDiet: function (req, res) {
-        const ingredients = req.params.ingredient;
-        const specDiet = req.params.diet;
-
-
-        let requestString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=3&+&diet=${specDiet}&apiKey=${API_KEY}`;
-
-        fetch(requestString).then(result => {
-            return result.json();
-        }).then(response => res.json(response))
-    },
-
     //Searches for recipes excluding allergies - supports peanut, tree nut, and shellfish
     findBySearchAllergy: function (req, res) {
         const ingredients = req.params.ingredient;
@@ -158,20 +145,8 @@ module.exports = {
         fetch(requestString).then(result => {
             return result.json();
         }).then(response => res.json(response));
-    },
-
-    //Searches by special diet AND allergy - all same options supported 
-    findBySearchAllergySpecialDiet: function (req, res) {
-        const ingredients = req.params.ingredient;
-        const specDiet = req.params.diet;
-        const allergy = req.params.allergy;
-
-        let requestString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=3&+&intoleranges=${allergy}+&diet=${specDiet}&apiKey=${API_KEY}`;
-
-        fetch(requestString).then(result => {
-            return result.json();
-        }).then(response => res.json(response));
     }
+
 };
 
 
