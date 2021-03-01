@@ -24,7 +24,7 @@ const SignUp = () => {
         email,
         password
       );
-      generateUserDocument(user, { displayName });
+      generateUserDocument(user, { displayName }).then(checkIfSignedIn())
     } catch (error) {
       setError("Error Signing up with email and password");
     }
@@ -33,6 +33,18 @@ const SignUp = () => {
     setPassword("");
     setDisplayName("");
   };
+
+  const checkIfSignedIn = () => {
+    auth.onAuthStateChanged(async userAuth => {
+      const user = await generateUserDocument(userAuth);
+
+      if (user) {
+        return window.location.href = "/pantry"
+      } else {
+        return null
+      }
+    });
+  }
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
@@ -114,7 +126,7 @@ const SignUp = () => {
           <button
             className="google"
             onClick={() => {
-              signInWithGoogle();
+              signInWithGoogle().then(checkIfSignedIn());
             }}
           >
             Sign In with Google
