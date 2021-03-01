@@ -31,11 +31,6 @@ const SignIn = () => {
       <div className="Info">
         {error !== null && <div className="errorDiv_Styling">{error}</div>}
         <form className="SignIn">
-          {/* both labels are green out because we don't need them */}
-          {/* <label htmlFor="userEmail" className="userEmail">
-            Email:
-          </label> */}
-
           {/* both inputs where put in seperate <container> tags with a <br /> in between to allow for seperating the two box and spacing them. */}
           {/* some elements where put into <div> tags to allow them to be center on the page. They all share the same className */}
           <container>
@@ -50,9 +45,6 @@ const SignIn = () => {
                 onChange={(event) => onChangeHandler(event)}
               />
             </div>
-            {/* <label htmlFor="userPassword" className="userPassword">
-            Password:
-          </label> */}
           </container>
           <br />
 
@@ -98,8 +90,8 @@ const SignIn = () => {
         </div>
 
         <p className="account">
-          Don't have an account?{" "}
-          <Link to="/signUp" className="signUp">
+          Don't have an account? <br />
+          <Link to="/signUp" className="signup">
             Sign up here
           </Link>{" "}
         </p>
