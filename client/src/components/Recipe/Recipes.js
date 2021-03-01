@@ -127,8 +127,12 @@ function Recipes() {
             expiringArray.push(foodObject);
             trueFalseArrayExpiring.push(false);
           } else {
-            expiredArray.push(foodObject);
-            trueFalseArrayExpired.push(false);
+            if(!foodObject.name){
+              console.log("test");
+            } else {
+              expiredArray.push(foodObject);
+              trueFalseArrayExpired.push(false);
+            }
           }
         }
 
