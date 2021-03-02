@@ -5,7 +5,6 @@ import UserContext from "../../utils/UserContext";
 import "./Recipe.css";
 
 
-
 function Recipes() {
   //Julie's JS
   //USER INFORMATION -- will be variables from firebase
@@ -60,6 +59,7 @@ function Recipes() {
   const loadFoods = userId => {
     API.getFoods(userId)
       .then(res => {
+        console.log(res.data);
         //Makes an array of objects for each food item in pantry
         let dbObject = res.data[0].foodItem;
 
@@ -178,12 +178,14 @@ function Recipes() {
     //If no special diet and no allergies
     if (allergies === "") {
       API.recipeFromIngredients(ingredients).then(res => {
+        console.log(res.data);
         setSearchResults(res.data);
       })
       //If allergies but no special diet
     } else {
       //They have a special diet AND allergies
       API.recipeAllergy(ingredients, allergies).then(res => {
+        console.log(res.data);
         setSearchResults(res.data);
         //If recipe search delivers no results, do generic search
 
