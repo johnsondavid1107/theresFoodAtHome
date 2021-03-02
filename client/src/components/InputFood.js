@@ -12,14 +12,22 @@ import FridgeCard from "./FridgeCard"
 
 function InputFood(props) {
 
-
+    //sets value of the input to send up to the users database.  TolowerCase placed in the object going to the database in handleAddFood function
     const [foodChoice, setFood] = useState();
-    const [allFoods, setAllFoods] = useState();
+
+    //onload call all items from database and setting as state.
+    const [allFoods, setAllFoods] = useState([]);
+
+    //holding all foods set as state from above using a filter function to search all foods as the user types
     const [placeHolderFood, setPlaceHolderFood] = useState()
+
+    //keeping track of what is placed in the input field to know when it is empty.  When it is empty "Nothing searched yet will display"
     const [inputVal, setInputVal] = useState();
+
+
     const [daysFresh, setDaysFresh] = useState(0);
     const [todayDate, setTodayDate] = useState("");
-    //test state prop drill with a buttonclick
+    //sending state (prop drill) down to pantry and fridge cards with a buttonclick
     const [renderState, setRenderState] = useState();
 
     const user = useContext(UserContext)
@@ -37,12 +45,15 @@ function InputFood(props) {
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
         API.getAllFoods().then(function (response) {
             // console.log(response.data[0].allFoods)
-            console.log(response)
+            console.log(response.data.length)
 
             if (response.data.length === 0) {
                 return
             } else {
                 setAllFoods(response.data[0].allFoods)
+                console.log(response.data[0].allFoods)
+
+
             }
 
 
@@ -50,7 +61,7 @@ function InputFood(props) {
         })
 
 
-        console.log(placeHolderFood)
+
 
     }, [])
 
@@ -66,24 +77,21 @@ function InputFood(props) {
     function handleInputChange(event) {
         const { value } = event.target
         // console.log(value)
-        setFood(value)
+        setFood(value.toLowerCase())
 
 
         setPlaceHolderFood(allFoods.filter(option =>
-            option.name.toLowerCase().includes(value))
+            option.name.toLowerCase().includes(value.toLowerCase()))
         )
-
-
-
         setInputVal(value)
-
 
     }
 
     function handleAddFood(event) {
+        console.log(allFoods)
         let combo = {
             user: user.uid,
-            name: foodChoice,
+            name: foodChoice.toLowerCase(),
             dateOfPurchase: todayDate,
             daysFresh: daysFresh,
             spoiled: false,
@@ -100,23 +108,40 @@ function InputFood(props) {
                 setRenderState(answer)
             })
 
-            // window.location.reload(true)
         });
-        API.checkAllFoods(foodChoice).then(function (response2) {
+
+        let newAllFood = {
+            name: foodChoice,
+            daysFresh: daysFresh
+        }
+        API.checkAllFoods(newAllFood).then(function (response2) {
             if (response2 === undefined) {
                 return
+            } else {
+                console.log(response2.data[0].allFoods)
             }
         })
+
+
     }
 
+    function handleDaysFresh(event) {
+        console.log(event.target.id)
+        console.log(todayDate)
+        console.log(event.target.value)
+
+        //Talk to Julie about it to see if we can append the new day fresh in the value of the calendar on click.  Need help calculating the new expiration date from today and value of days fresh from button click.  
+
+    }
 
     if (placeHolderFood === undefined || inputVal === "") {
         var nada = "Nothing searched yet"
     } else {
+        console.log(placeHolderFood)
         var renderSearch = placeHolderFood.map((item, index) =>
-            <div key={index}>
-                <button className="btn btn-outline-success" type="button">{item.name}</button>
-            </div>
+
+            <button className="btn btn-outline-success" type="button" key={index} id={item._id} value={item.daysFresh} onClick={handleDaysFresh}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</button>
+
         )
 
     }
@@ -145,6 +170,8 @@ function InputFood(props) {
     }
 
 
+
+
     return (
         <div>
             <Container>
@@ -162,6 +189,16 @@ function InputFood(props) {
                     </Col>
                 </Row>
                 <Row>
+                    <Col size="md-12">
+
+                        {/* David's code */}
+                        <h4>Search Suggestions:</h4>
+
+                        {nada || renderSearch}
+
+                    </Col>
+                </Row>
+                <Row>
                     <Col size="md-4">
 
                         {/* Added Legend section - Zo */}
@@ -173,14 +210,7 @@ function InputFood(props) {
 
                     </Col>
 
-                    <Col size="md-4">
 
-                        {/* David's code */}
-                        <h4>Search Suggestions:</h4>
-
-                        {nada || renderSearch}
-
-                    </Col>
 
 
                     <Col size="md-4">
@@ -190,7 +220,8 @@ function InputFood(props) {
                             {/* Adding this so it works good in mobile */}
                             <br className="mobile-break" />
                             <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
-                            <DayPickerInput onDayChange={handleDayChange} />
+                            {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////// */}
+                            <DayPickerInput onDayChange={handleDayChange} value={"2021-3-10"} />
                         </div>
 
                     </Col>

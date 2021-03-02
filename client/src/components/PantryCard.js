@@ -30,83 +30,81 @@ class PantryCard extends Component {
         this.setState({ showDelete: false });
 
         API.getFoods(idNum).then(result => {
-            if (result.data[0] === undefined) {
-                this.setState({ foodPantry: "No food found" })
-            } else {
-                let foodValues = result.data[0].foodItem.filter(item => item.location === "pantry");
-                //Calculate time remaining - categorize it into "fresh", "expiring soon", and "expired"
-                //If null date of purchase, set it to one week ago
-                let todayDate = new Date();
 
-                todayDate = JSON.stringify(todayDate);
-                let monthString = todayDate[6] + todayDate[7];
-                let dayString = todayDate[9] + todayDate[10];
-                let yearString = todayDate[1] + todayDate[2] + todayDate[3] + todayDate[4];
-                todayDate = `${monthString}/${dayString}/${yearString}`;
+            let foodValues = result.data[0].foodItem.filter(item => item.location === "pantry");
+            //Calculate time remaining - categorize it into "fresh", "expiring soon", and "expired"
+            //If null date of purchase, set it to one week ago
+            let todayDate = new Date();
 
-                let newFoodArray = [];
-                for (let i = 0; i < foodValues.length; i++) {
-                    // console.log(foodValues[i]);
-                    let dateOfPurchase = foodValues[i].dateOfPurchase;
+            todayDate = JSON.stringify(todayDate);
+            let monthString = todayDate[6] + todayDate[7];
+            let dayString = todayDate[9] + todayDate[10];
+            let yearString = todayDate[1] + todayDate[2] + todayDate[3] + todayDate[4];
+            todayDate = `${monthString}/${dayString}/${yearString}`;
 
-                    //If no date of purchase, make it one week ago
-                    if (!dateOfPurchase) {
-                        //Set the value to one week ago
-                        let oneWeekAgo = new Date();
-                        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-                        oneWeekAgo = JSON.stringify(oneWeekAgo);
-                        let monthString = oneWeekAgo[6] + oneWeekAgo[7];
-                        let dayString = oneWeekAgo[9] + oneWeekAgo[10];
-                        let yearString = oneWeekAgo[1] + oneWeekAgo[2] + oneWeekAgo[3] + oneWeekAgo[4];
-                        oneWeekAgo = `${monthString}/${dayString}/${yearString}`;
+            let newFoodArray = [];
+            for (let i = 0; i < foodValues.length; i++) {
+                // console.log(foodValues[i]);
+                let dateOfPurchase = foodValues[i].dateOfPurchase;
 
-                        dateOfPurchase = oneWeekAgo;
-                    }
-                    //Need to figure out the spoil date - take date of purchase and add the number of days fresh
-                    let spoilDate = new Date(dateOfPurchase);
-                    spoilDate.setDate(spoilDate.getDate() + foodValues[i].daysFresh);
-                    spoilDate = JSON.stringify(spoilDate);
-                    let monthString = spoilDate[6] + spoilDate[7];
-                    let dayString = spoilDate[9] + spoilDate[10];
-                    let yearString = spoilDate[1] + spoilDate[2] + spoilDate[3] + spoilDate[4];
-                    spoilDate = `${monthString}/${dayString}/${yearString}`;
+                //If no date of purchase, make it one week ago
+                if (!dateOfPurchase) {
+                    //Set the value to one week ago
+                    let oneWeekAgo = new Date();
+                    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+                    oneWeekAgo = JSON.stringify(oneWeekAgo);
+                    let monthString = oneWeekAgo[6] + oneWeekAgo[7];
+                    let dayString = oneWeekAgo[9] + oneWeekAgo[10];
+                    let yearString = oneWeekAgo[1] + oneWeekAgo[2] + oneWeekAgo[3] + oneWeekAgo[4];
+                    oneWeekAgo = `${monthString}/${dayString}/${yearString}`;
+
+                    dateOfPurchase = oneWeekAgo;
+                }
+                //Need to figure out the spoil date - take date of purchase and add the number of days fresh
+                let spoilDate = new Date(dateOfPurchase);
+                spoilDate.setDate(spoilDate.getDate() + foodValues[i].daysFresh);
+                spoilDate = JSON.stringify(spoilDate);
+                let monthString = spoilDate[6] + spoilDate[7];
+                let dayString = spoilDate[9] + spoilDate[10];
+                let yearString = spoilDate[1] + spoilDate[2] + spoilDate[3] + spoilDate[4];
+                spoilDate = `${monthString}/${dayString}/${yearString}`;
 
 
-                    //Now to categorize foods into amount of time remaining
-                    let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
-                    total = total + foodValues[i].daysFresh;
+                //Now to categorize foods into amount of time remaining
+                let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
+                total = total + foodValues[i].daysFresh;
 
 
-                    //Give classnames based on total time remaining
-                    let timeColor;
-                    if (total >= 0 && total < 7) {
-                        //ORANGE
-                        timeColor = "#FAC002";
-                    } else if (total < 0) {
-                        //RED
-                        timeColor = "#E31009";
-                    } else {
-                        //Green
-                        timeColor = "#59F56B"
-                    }
-                    let newObject = {
-                        _id: foodValues[i]._id,
-                        dateOfPurchase: dateOfPurchase,
-                        daysFresh: foodValues[i].daysFresh,
-                        location: foodValues[i].location,
-                        name: foodValues[i].name,
-                        timeColor: timeColor,
-                        timeRemaining: total
-                    }
-
-                    newFoodArray.push(newObject);
-
+                //Give classnames based on total time remaining
+                let timeColor;
+                if (total >= 0 && total < 7) {
+                    //ORANGE
+                    timeColor = "#FAC002";
+                } else if (total < 0) {
+                    //RED
+                    timeColor = "#E31009";
+                } else {
+                    //Green
+                    timeColor = "#59F56B"
+                }
+                let newObject = {
+                    _id: foodValues[i]._id,
+                    dateOfPurchase: dateOfPurchase,
+                    daysFresh: foodValues[i].daysFresh,
+                    location: foodValues[i].location,
+                    name: foodValues[i].name,
+                    timeColor: timeColor,
+                    timeRemaining: total
                 }
 
-                this.setState({ foodPantry: newFoodArray })
-                console.log(this.state.foodPantry)
+                newFoodArray.push(newObject);
 
             }
+
+            this.setState({ foodPantry: newFoodArray })
+            console.log(this.state.foodPantry)
+
+
         });
     }
 
@@ -177,7 +175,7 @@ class PantryCard extends Component {
 
         var renderFood = this.state.foodPantry;
 
-        if (renderFood === "No food found") {
+        if (renderFood.length === 0) {
             var noFood = "Please add food to list"
         }
 
@@ -200,7 +198,7 @@ class PantryCard extends Component {
 
                             <div className="card">
                                 <div className="card-body" style={{ border: `${item.timeColor} 5px solid` }}>
-                                    {item.name}, expiring in {item.timeRemaining} days
+                                    {item.name.charAt(0).toUpperCase() + item.name.slice(1)}, expiring in {item.timeRemaining} days
                                 </div>
                             </div>
 

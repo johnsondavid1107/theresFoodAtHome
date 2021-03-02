@@ -26,32 +26,51 @@ module.exports = {
     },
     allFoods: function (req, res) {
         db.allFoods.find({}).then(foodModel => {
-            // console.log(foodModel,"line29")
+            console.log(foodModel, "line29")
             res.send(foodModel)
         })
     },
+    addFood: function (req, res) {
+        console.log(req.body, "line 34")
+        db.User.update({ fireBaseId: req.body.user }, {
+            $push: {
+                foodItem: {
+                    name: req.body.name,
+                    dateOfPurchase: req.body.dateOfPurchase,
+                    daysFresh: req.body.daysFresh,
+                    spoiled: req.body.spoiled,
+                    location: req.body.location
+
+                }
+            }
+
+        }).then(function (response) {
+            console.log(response)
+            res.json(response)
+        })
+    },
     checkMe: function (req, res) {
-        console.log(req.params.item, "line 34")
-        let item = req.params.item
+        // console.log(req, "line 34")
+        let item = req.body
         //found on Stackoverflow, honeslty so excited that it works
-        db.allFoods.find({ "allFoods.name": item }, { _id: 0, allFoods: { $elemMatch: { name: item } } }).then(function (response) {
+        db.allFoods.find({ "allFoods.name": item.name }, { _id: 0, allFoods: { $elemMatch: { name: item.name } } }).then(function (response) {
             console.log(response, "line36")
             if (response.length === 0) {
                 console.log("not enough")
                 db.allFoods.update({
                     $push: {
                         allFoods: {
-                            name: item,
-                            daysFresh: 10
+                            name: item.name,
+                            daysFresh: item.daysFresh
                         }
                     }
-                }).then(function (response) {
-                    console.log(response)
+                }).then(function (responseNewFood) {
+                    console.log(responseNewFood, "line 49")
                     console.log("added new item")
                 })
 
             } else {
-                res.send("ok")
+                res.json(response)
             }
         })
 
@@ -80,25 +99,6 @@ module.exports = {
                 }
             }
         )
-    },
-    addFood: function (req, res) {
-        // console.log(req.body, "line 66")
-        db.User.update({ fireBaseId: req.body.user }, {
-            $push: {
-                foodItem: {
-                    name: req.body.name,
-                    dateOfPurchase: req.body.dateOfPurchase,
-                    daysFresh: req.body.daysFresh,
-                    spoiled: req.body.spoiled,
-                    location: req.body.location
-
-                }
-            }
-
-        }).then(function (response) {
-            console.log(response)
-            res.json(response)
-        })
     },
     trashFood: function (req, res) {
 
@@ -152,10 +152,10 @@ module.exports = {
 
         db.User.updateOne(
             { $and: [{ fireBaseId: req.params.id }, { "foodItem._id": req.params.foodId }] },
-            {$set: { "foodItem.dateOfPurchase": req.body.dateOfPurchase }},
-            {upsert: true}
+            { $set: { "foodItem.dateOfPurchase": req.body.dateOfPurchase } },
+            { upsert: true }
         ).then(dbFood => res.json(dbFood))
-        .catch(err => res.json(err))
+            .catch(err => res.json(err))
 
     }
 
