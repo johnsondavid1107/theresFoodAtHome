@@ -1,7 +1,7 @@
 import axios from "axios";
 //make Async to use 
 export default {
- 
+
     //Gets all food from the user's pantry
     getFoods: function (id) {
         return axios.get("/api/foods/userFoods/" + id);
@@ -10,7 +10,11 @@ export default {
         return axios.get("/api/foods/allFoods")
     },
     checkAllFoods: function (item) {
-        return axios.get("/api/foods/checkFoods/" + item)
+        return axios.post("/api/foods/checkFoods", {
+            name: item.name,
+            daysFresh: item.daysFresh
+
+        })
     },
     getUser: function (id) {
         return axios.get("/api/foods/getUser/" + id)
@@ -29,15 +33,15 @@ export default {
         return axios.put("/api/foods/deleteFood", {
             selection: food.deleteFood,
             user: food.user
- 
- 
+
+
         })
     },
     //Updates the database with a new date
-    updateFood: function(id, foodId, newDate){
+    updateFood: function (id, foodId, newDate) {
         console.log(newDate);
-        return axios.put("/api/foods/updateFood/" + id +"/" + foodId,
-        {dateOfPurchase: newDate.dateOfPurchase});
+        return axios.put("/api/foods/updateFood/" + id + "/" + foodId,
+            { dateOfPurchase: newDate.dateOfPurchase });
     },
     //searches for recipes - just from ingredients, no other 
     recipeFromIngredients: function (ingredients) {
@@ -48,12 +52,12 @@ export default {
         return axios.get("/api/foods/recipes/allergy/" + ingredients + "/" + allergy);
     }
 };
- 
- 
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
 

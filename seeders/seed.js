@@ -19,30 +19,30 @@ let foodSeed = [
                 daysFresh: 20
             },
             {
-                name: "Tea",
+                name: "tea",
                 daysFresh: 14
             }, {
-                name: "Cola",
+                name: "cola",
                 daysFresh: 10
             },
             {
-                name: "Bread",
+                name: "bread",
                 daysFresh: 7
             },
             {
-                name: "Milk",
+                name: "milk",
                 daysFresh: 14
             },
             {
-                name: "Eggs",
+                name: "eggs",
                 daysFresh: 14
             },
             {
-                name: "Yogurt",
+                name: "yogurt",
                 daysFresh: 14
             },
             {
-                name: "Tuna",
+                name: "tuna",
                 daysFresh: 14
             },
             {
@@ -50,11 +50,11 @@ let foodSeed = [
                 daysFresh: 14
             },
             {
-                name: "Nuts",
+                name: "nuts",
                 daysFresh: 14
             },
             {
-                name: "Salmon",
+                name: "salmon",
                 daysFresh: 14
             }
         ]
