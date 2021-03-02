@@ -34,8 +34,10 @@ export default {
         })
     },
     //Updates the database with a new date
-    updateFood: function(id, foodName){
-        return axios.put(`/updateFood/${id}/${foodName}`);
+    updateFood: function(id, foodId, newDate){
+        console.log(newDate);
+        return axios.put("/api/foods/updateFood/" + id +"/" + foodId,
+        {dateOfPurchase: newDate.dateOfPurchase});
     },
     //searches for recipes - just from ingredients, no other 
     recipeFromIngredients: function (ingredients) {

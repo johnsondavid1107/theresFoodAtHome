@@ -145,6 +145,18 @@ module.exports = {
         fetch(requestString).then(result => {
             return result.json();
         }).then(response => res.json(response));
+    },
+
+    //Updates a food item
+    update: function (req, res) {
+
+        db.User.updateOne(
+            { $and: [{ fireBaseId: req.params.id }, { "foodItem._id": req.params.foodId }] },
+            {$set: { "foodItem.dateOfPurchase": req.body.dateOfPurchase }},
+            {upsert: true}
+        ).then(dbFood => res.json(dbFood))
+        .catch(err => res.json(err))
+
     }
 
 };

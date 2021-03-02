@@ -3,6 +3,7 @@ import API from "../utils/API";
 import SuccessAlert from "../components/SuccessAlert";
 import "./PantryCard.css";
 import DeleteSuccess from "../components/DeleteSuccess";
+import todayDate from "../lib/todayDate";
 
 class PantryCard extends Component {
     state = {
@@ -25,8 +26,8 @@ class PantryCard extends Component {
     foodLoad() {
 
         let idNum = this.props.currentUser;
-        this.setState({show: false});
-        this.setState({showDelete: false});
+        this.setState({ show: false });
+        this.setState({ showDelete: false });
 
         API.getFoods(idNum).then(result => {
             if (result.data[0] === undefined) {
@@ -147,14 +148,24 @@ class PantryCard extends Component {
     handleUpdate(event, idNumber) {
         event.preventDefault();
 
-        let foodName = event.target.value;
+        let foodName = event.target.name;
+        let foodId = event.target.value;
         this.setState({ show: true });
         this.setState({ successName: foodName });
+        let today = todayDate();
+
+        let inputObject = {
+            dateOfPurchase: today
+        }
+
+        API.updateFood(this.state.idNumber, foodId, inputObject)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
         //Need the ID and the foodname
         //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
-        API.updateFood(idNumber, foodName)
-            .then(response => console.log(response))
-            .catch(err => console.log(err));
+        // API.updateFood(idNumber, foodName)
+        //     .then(response => console.log(response))
+        //     .catch(err => console.log(err));
 
         this.foodLoad()
     }
@@ -185,7 +196,7 @@ class PantryCard extends Component {
                     renderFood.map((item, index) =>
                         <div key={index}>
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber) || item._id} value={item._id} name={item.name}>Delete</button>
-                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber) || item.id} value={item.name}>Renew</button>
+                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber) || item.id} value={item._id} name={item.name}>Renew</button>
 
                             <div className="card">
                                 <div className="card-body" style={{ border: `${item.timeColor} 5px solid` }}>

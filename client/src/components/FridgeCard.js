@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import API from "../utils/API";
 import SuccessAlert from "../components/SuccessAlert";
 import DeleteSuccess from "../components/DeleteSuccess";
-
+import todayDate from "../lib/todayDate";
 
 class FridgeCard extends Component {
 
@@ -80,7 +80,6 @@ class FridgeCard extends Component {
                     //Now to categorize foods into amount of time remaining
                     let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
                     total = total + foodValues[i].daysFresh;
-                    console.log(total);
 
 
                     //Give classnames based on total time remaining
@@ -149,15 +148,20 @@ class FridgeCard extends Component {
     handleUpdate(event, idNumber) {
         event.preventDefault();
 
-        let foodName = event.target.value;
+        let foodName = event.target.name;
+        let foodId = event.target.value;
 
-        this.setState({ successName: foodName });
-        this.setState({ successType: "success" });
         this.setState({ show: true });
-        //Need the ID and the foodname
-        //THIS WILL NOT WORK UNTIL WE'VE FIXED THE CALENDAR SITUATION
-        API.updateFood(idNumber, foodName)
-            .then(response => console.log(response))
+        this.setState({ successName: foodName });
+        
+        let today = todayDate();
+
+        let inputObject = {
+            dateOfPurchase: today
+        }
+
+        API.updateFood(this.state.idNumber, foodId, inputObject)
+            .then(res => console.log(res))
             .catch(err => console.log(err));
 
         this.foodLoad()
@@ -182,7 +186,7 @@ class FridgeCard extends Component {
 
                         <div key={index}>
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber)} value={item._id} name={item.name}>Delete</button>
-                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item.name}>Renew</button>
+                            <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber)} value={item._id} name={item.name}>Renew</button>
 
                             <div className="card">
                                 <div className="card-body" style={{ border: `${item.timeColor} 5px solid`, }}>
