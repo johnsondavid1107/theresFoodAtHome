@@ -102,7 +102,7 @@ class PantryCard extends Component {
             }
 
             this.setState({ foodPantry: newFoodArray })
-            console.log(this.state.foodPantry)
+            // console.log(this.state.foodPantry);
 
 
         });

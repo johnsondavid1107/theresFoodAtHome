@@ -60,6 +60,7 @@ function Recipes() {
   const loadFoods = userId => {
     API.getFoods(userId)
       .then(res => {
+        console.log(res.data);
         //Makes an array of objects for each food item in pantry
         let dbObject = res.data[0].foodItem;
 
