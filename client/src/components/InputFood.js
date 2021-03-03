@@ -179,12 +179,15 @@ function InputFood(props) {
     const handleDayChange = date => {
         date = JSON.stringify(date);
 
+
         let monthString = date[6] + date[7];
         let dayString = date[9] + date[10];
         let yearString = date[1] + date[2] + date[3] + date[4];
         let dateString = `${monthString}/${dayString}/${yearString}`;
 
         let date1 = new Date(dateString)
+        console.log(date1)
+        console.log(dateString)
         // let today = new Date();
         // let dd = String(today.getDate()).padStart(2, '0');
         // let mm = String(today.getMonth() + 1).padStart(2, '0');

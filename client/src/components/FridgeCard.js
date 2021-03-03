@@ -79,7 +79,10 @@ class FridgeCard extends Component {
 
                 //Now to categorize foods into amount of time remaining
                 let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
-                total = total + foodValues[i].daysFresh;
+                console.log(total)
+                console.log(foodValues[i].daysFresh)
+                // total = total + foodValues[i].daysFresh;
+                console.log(total)
 
 
                 //Give classnames based on total time remaining
@@ -171,7 +174,7 @@ class FridgeCard extends Component {
     render() {
 
         var renderFood = this.state.foodFridge;
-        console.log(renderFood)
+
         if (renderFood.length === 0) {
             var noFood = "Please add food to list"
         }
