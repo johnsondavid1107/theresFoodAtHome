@@ -23,15 +23,15 @@ textarea {
   background-color: #fff;
 }
 /* this is the styling for the signin btn. */
- /* This class name ".btn:hover" effects all buttons on website pages - 
+/* This class name ".btn:hover" effects all buttons on website pages - 
   Instead create a class name and apply it to the button in order to make it not effect other buttons*/
-  .signIn_Btn:hover {
-    background-color: gray;
-    color: #fff;
-    border: 1px solid #fff;
-    transition: right 2s ease-in-out 0.5s;
-    text-align: center;
-  }
+.signIn_Btn:hover {
+  background-color: gray;
+  color: #fff;
+  border: 1px solid #fff;
+  transition: right 2s ease-in-out 0.5s;
+  text-align: center;
+}
 
 /* This is the styling for for the sign in with google button. */
 .google:hover {
@@ -42,6 +42,9 @@ textarea {
   text-align: center;
 }
 
+.Info {
+  text-align: center;
+}
 
 .forgot {
   color: #f39b6d;
@@ -51,12 +54,10 @@ textarea {
   color: #f39b6d;
 }
 
-
- .signUp  {
-
+.signUp {
   color: #f39b6d;
 }
 
-.reset  {
+.reset {
   color: #f39b6d;
 }
