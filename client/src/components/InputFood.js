@@ -47,7 +47,7 @@ function InputFood(props) {
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
         API.getAllFoods().then(function (response) {
             // console.log(response.data[0].allFoods)
-            console.log(response.data.length)
+
 
             if (response.data.length === 0) {
                 return
@@ -132,7 +132,7 @@ function InputFood(props) {
                 if (response2 === undefined) {
                     return
                 } else {
-                    console.log(response2.data[0].allFoods)
+                    console.log(response2)
                 }
             })
 
