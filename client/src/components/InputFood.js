@@ -13,7 +13,7 @@ import FridgeCard from "./FridgeCard"
 function InputFood(props) {
 
     //sets value of the input to send up to the users database.  TolowerCase placed in the object going to the database in handleAddFood function
-    const [foodChoice, setFood] = useState();
+    const [foodChoice, setFood] = useState("");
 
     //onload call all items from database and setting as state.
     const [allFoods, setAllFoods] = useState([]);
@@ -76,6 +76,8 @@ function InputFood(props) {
 
     function handleInputChange(event) {
         const { value } = event.target
+
+
         // console.log(value)
         setFood(value.toLowerCase())
 
@@ -85,44 +87,54 @@ function InputFood(props) {
         )
         setInputVal(value)
 
+
     }
 
     function handleAddFood(event) {
         console.log(allFoods)
-        let combo = {
-            user: user.uid,
-            name: foodChoice.toLowerCase(),
-            dateOfPurchase: todayDate,
-            daysFresh: daysFresh,
-            spoiled: false,
-            location: event.target.value,
 
-        }
-        console.log(combo)
-        API.makeFood(combo).then(function (response) {
-            console.log(response)
+        if (foodChoice === null ||foodChoice.trim() === "") {
+            console.log(typeof(foodChoice))
+            alert("Please enter in a value")
+
+            return
+        } else {
+            console.log(typeof(foodChoice))
+            let combo = {
+                user: user.uid,
+                name: foodChoice.toLowerCase(),
+                dateOfPurchase: todayDate,
+                daysFresh: daysFresh,
+                spoiled: false,
+                location: event.target.value,
+
+            }
+
+            console.log(combo)
+            API.makeFood(combo).then(function (response) {
+                console.log(response)
 
 
-            API.getFoods(combo.user).then(function (answer) {
-                console.log(answer)
-                setRenderState(answer)
+                API.getFoods(combo.user).then(function (answer) {
+                    console.log(answer)
+                    setRenderState(answer)
+                })
+
+            });
+
+            let newAllFood = {
+                name: foodChoice,
+                daysFresh: daysFresh
+            }
+            API.checkAllFoods(newAllFood).then(function (response2) {
+                if (response2 === undefined) {
+                    return
+                } else {
+                    console.log(response2.data[0].allFoods)
+                }
             })
 
-        });
-
-        let newAllFood = {
-            name: foodChoice,
-            daysFresh: daysFresh
         }
-        API.checkAllFoods(newAllFood).then(function (response2) {
-            if (response2 === undefined) {
-                return
-            } else {
-                console.log(response2.data[0].allFoods)
-            }
-        })
-
-
     }
 
     function handleDaysFresh(event) {
