@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import { Container, Row, Col, Button, Card, Accordion, Image, Form, Tab, Tabs } from "react-bootstrap";
 import UserContext from "../../utils/UserContext";
 import "./Recipe.css";
+import todayDate from "../../lib/todayDate";
  
  
 function Recipes() {
@@ -87,12 +88,7 @@ function Recipes() {
  
  
           //Gets number of days fresh for each item - difference between today's date and the spoil date
-          let today = new Date();
-          let dd = String(today.getDate()).padStart(2, '0');
-          let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-          let yyyy = today.getFullYear();
- 
-          today = mm + '/' + dd + '/' + yyyy;
+          let today = todayDate();
  
           let total = Math.floor((new Date(spoilDate) - new Date(today)) / (1000 * 3600 * 24));
           if (isNaN(total)) {
