@@ -7,6 +7,7 @@ import 'react-day-picker/lib/style.css';
 import UserContext from "../utils/UserContext"
 import PantryCard from "./PantryCard"
 import FridgeCard from "./FridgeCard"
+import { DateTime } from 'luxon'
 
 //David - I might need to turn this whole thing into a class component
 
@@ -29,6 +30,7 @@ function InputFood(props) {
     const [todayDate, setTodayDate] = useState("");
     //sending state (prop drill) down to pantry and fridge cards with a buttonclick
     const [renderState, setRenderState] = useState();
+    const [suggestDate, setSuggestDate] = useState()
 
     const user = useContext(UserContext)
 
@@ -93,13 +95,13 @@ function InputFood(props) {
     function handleAddFood(event) {
         console.log(allFoods)
 
-        if (foodChoice === null ||foodChoice.trim() === "") {
-            console.log(typeof(foodChoice))
+        if (foodChoice === null || foodChoice.trim() === "") {
+            console.log(typeof (foodChoice))
             alert("Please enter in a value")
 
             return
         } else {
-            console.log(typeof(foodChoice))
+            console.log(typeof (foodChoice))
             let combo = {
                 user: user.uid,
                 name: foodChoice.toLowerCase(),
@@ -141,6 +143,22 @@ function InputFood(props) {
         console.log(event.target.id)
         console.log(todayDate)
         console.log(event.target.value)
+
+        let date = (DateTime.now().plus({ days: event.target.value }))
+
+        console.log(date)
+
+        console.log(date.c.day)
+
+        console.log(date.c.month)
+
+        console.log(date.c.year)
+
+        setSuggestDate(`${date.c.year}-${date.c.month}-${date.c.day}`)
+
+
+
+
 
         //Talk to Julie about it to see if we can append the new day fresh in the value of the calendar on click.  Need help calculating the new expiration date from today and value of days fresh from button click.  
 
@@ -233,8 +251,7 @@ function InputFood(props) {
                             {/* Adding this so it works good in mobile */}
                             <br className="mobile-break" />
                             <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
-                            {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////// */}
-                            <DayPickerInput onDayChange={handleDayChange} value={"2021-3-10"} />
+                            <DayPickerInput onDayChange={handleDayChange} value={suggestDate} />
                         </div>
 
                     </Col>
