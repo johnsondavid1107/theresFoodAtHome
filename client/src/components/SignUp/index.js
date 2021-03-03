@@ -24,7 +24,7 @@ const SignUp = () => {
         email,
         password
       );
-      generateUserDocument(user, { displayName }).then(checkIfSignedIn())
+      generateUserDocument(user, { displayName }).then(checkIfSignedIn());
     } catch (error) {
       setError("Error Signing up with email and password");
     }
@@ -35,16 +35,16 @@ const SignUp = () => {
   };
 
   const checkIfSignedIn = () => {
-    auth.onAuthStateChanged(async userAuth => {
+    auth.onAuthStateChanged(async (userAuth) => {
       const user = await generateUserDocument(userAuth);
 
       if (user) {
-        return window.location.href = "/pantry"
+        return (window.location.href = "/pantry");
       } else {
-        return null
+        return null;
       }
     });
-  }
+  };
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
@@ -57,7 +57,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="signUp">
+    <div className="sign">
       <h1 className="header">Sign Up</h1>
       <div className="information">
         {error !== null && <div className="error">{error}</div>}
