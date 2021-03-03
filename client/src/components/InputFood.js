@@ -192,14 +192,15 @@ function InputFood(props) {
                     <Col size="md-12">
 
                         {/* David's code */}
-                        <h4>Search Suggestions:</h4>
+                        <h4 style={{textAlign:"center", textDecoration:"underline", fontWeight:"800"}}>Search Suggestions:</h4>
 
-                        {nada || renderSearch}
+                        {nada || renderSearch }
 
                     </Col>
                 </Row>
+                <br/>
                 <Row>
-                    <Col size="md-4">
+                    <Col size="md-6">
 
                         {/* Added Legend section - Zo */}
                         <h4>Food Status*</h4>
@@ -213,10 +214,10 @@ function InputFood(props) {
 
 
 
-                    <Col size="md-4">
+                    <Col size="md-6">
 
                         {/* Added Hever's food expiration date selection react code into Pantry page - Zo */}
-                        <div >
+                        <div style={{float:"right"}}>
                             {/* Adding this so it works good in mobile */}
                             <br className="mobile-break" />
                             <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
@@ -226,7 +227,7 @@ function InputFood(props) {
 
                     </Col>
                 </Row>
-
+            <br/>
                 <Row>
                     <Col size="md-12">
                         <div className="Box-1">
@@ -243,7 +244,7 @@ function InputFood(props) {
                 </Row>
 
                 {/* Do not touch - Zo ensures page is responsive during laptop view*/}
-                <br className="mobile" />
+                <br className="mobile" /> <br />
 
                 <Row>
                     <Col size="md-12">
