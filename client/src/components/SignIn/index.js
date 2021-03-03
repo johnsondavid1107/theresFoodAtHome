@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signInWithGoogle, auth, generateUserDocument } from "../../utils/firebase";
+import {
+  signInWithGoogle,
+  auth,
+  generateUserDocument,
+} from "../../utils/firebase";
 import "./style.css";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  
 
   const signInWithEmailAndPasswordHandler = (event, email, password) => {
     event.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).then(checkIfSignedIn()).catch((error) => {
-      setError("Error signing in with password and email!");
-      console.error("Error signing in with password and email", error);
-    });
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(checkIfSignedIn())
+      .catch((error) => {
+        setError("Error signing in with password and email!");
+        console.error("Error signing in with password and email", error);
+      });
   };
 
   const checkIfSignedIn = () => {
-    auth.onAuthStateChanged(async userAuth => {
+    auth.onAuthStateChanged(async (userAuth) => {
       const user = await generateUserDocument(userAuth);
 
       if (user) {
-        return window.location.href = "/pantry"
+        return (window.location.href = "/pantry");
       } else {
-        return null
+        return null;
       }
     });
-  }
+  };
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
@@ -87,8 +93,7 @@ const SignIn = () => {
             </button>
           </div>
         </form>
-        {/* it is my opinion that the code on line 83 can be deleted */}
-        {/* <p className="getIn">or</p> */}
+
         <div className="center">
           <button
             onClick={() => {

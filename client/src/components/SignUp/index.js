@@ -63,9 +63,6 @@ const SignUp = () => {
         {error !== null && <div className="error">{error}</div>}
 
         <form className="data">
-          {/* again both labels are green out because I don't feel we need them. */}
-          {/* <label htmlFor="displayName" className="disName">
-            Display Name:</label> */}
           <container>
             <div className="center">
               <input
