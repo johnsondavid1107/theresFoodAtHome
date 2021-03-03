@@ -54,7 +54,7 @@ module.exports = {
         let item = req.body
         //found on Stackoverflow, honeslty so excited that it works
         db.allFoods.find({ "allFoods.name": item.name }, { _id: 0, allFoods: { $elemMatch: { name: item.name } } }).then(function (response) {
-            console.log(response, "line36")
+            console.log(response, "line57")
             if (response.length === 0) {
                 console.log("not enough")
                 db.allFoods.update({
@@ -70,6 +70,19 @@ module.exports = {
                 })
 
             } else {
+
+                db.allFoods.update({
+
+                    "allFoods.name": item.name
+                }, {
+                    $set: {
+                        "allFoods.$.name": item.name,
+                        "allFoods.$.daysFresh": item.daysFresh
+                    }
+                }).then(function (result) {
+                    console.log(result, "updated item line 80")
+                })
+
                 res.json(response)
             }
         })

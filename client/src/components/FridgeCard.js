@@ -35,7 +35,7 @@ class FridgeCard extends Component {
         this.setState({ show: false });
         this.setState({ showDelete: false });
         API.getFoods(idNum).then(result => {
-            console.log(result.data[0].foodItem.length)
+
 
 
             let foodValues = result.data[0].foodItem.filter(item => item.location === "fridge");
@@ -79,10 +79,9 @@ class FridgeCard extends Component {
 
                 //Now to categorize foods into amount of time remaining
                 let total = Math.floor((new Date(spoilDate) - new Date(dateOfPurchase)) / (1000 * 3600 * 24));
-                console.log(total)
-                console.log(foodValues[i].daysFresh)
+
                 // total = total + foodValues[i].daysFresh;
-                console.log(total)
+
 
 
                 //Give classnames based on total time remaining

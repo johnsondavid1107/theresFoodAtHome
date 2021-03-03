@@ -23,7 +23,7 @@ function InputFood(props) {
     const [placeHolderFood, setPlaceHolderFood] = useState()
 
     //keeping track of what is placed in the input field to know when it is empty.  When it is empty "Nothing searched yet will display"
-    const [inputVal, setInputVal] = useState();
+    const [inputVal, setInputVal] = useState("");
 
 
     const [daysFresh, setDaysFresh] = useState(0);
@@ -31,6 +31,7 @@ function InputFood(props) {
     //sending state (prop drill) down to pantry and fridge cards with a buttonclick
     const [renderState, setRenderState] = useState();
     const [suggestDate, setSuggestDate] = useState()
+    const [dateEntered, setDateEntered] = useState("")
 
     const user = useContext(UserContext)
 
@@ -47,7 +48,7 @@ function InputFood(props) {
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
         API.getAllFoods().then(function (response) {
             // console.log(response.data[0].allFoods)
-            console.log(response.data.length)
+
 
             if (response.data.length === 0) {
                 return
@@ -95,10 +96,17 @@ function InputFood(props) {
     function handleAddFood(event) {
         console.log(allFoods)
 
+
+
         if (foodChoice === null || foodChoice.trim() === "") {
             console.log(typeof (foodChoice))
             alert("Please enter in a value")
 
+            return
+        } else if
+            (dateEntered === null || dateEntered.trim() === "") {
+            console.log(typeof (dateEntered))
+            alert("Please select a date")
             return
         } else {
             console.log(typeof (foodChoice))
@@ -132,7 +140,7 @@ function InputFood(props) {
                 if (response2 === undefined) {
                     return
                 } else {
-                    console.log(response2.data[0].allFoods)
+                    console.log(response2)
                 }
             })
 
@@ -142,7 +150,7 @@ function InputFood(props) {
     function handleDaysFresh(event) {
         console.log(event.target.id)
         console.log(todayDate)
-        console.log(event.target.value)
+        console.log(event.target.name)
 
         let date = (DateTime.now().plus({ days: event.target.value }))
 
@@ -155,6 +163,8 @@ function InputFood(props) {
         console.log(date.c.year)
 
         setSuggestDate(`${date.c.year}-${date.c.month}-${date.c.day}`)
+
+        setInputVal(event.target.name)
 
 
 
@@ -170,14 +180,16 @@ function InputFood(props) {
         console.log(placeHolderFood)
         var renderSearch = placeHolderFood.map((item, index) =>
 
-            <button className="btn btn-outline-success" type="button" key={index} id={item._id} value={item.daysFresh} onClick={handleDaysFresh}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</button>
+            <button className="btn btn-outline-success" type="button" key={index} id={item._id} value={item.daysFresh} onClick={handleDaysFresh} name={item.name.charAt(0).toUpperCase() + item.name.slice(1)}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</button>
 
         )
 
     }
 
     const handleDayChange = date => {
+
         date = JSON.stringify(date);
+        console.log(date)
 
 
         let monthString = date[6] + date[7];
@@ -198,11 +210,10 @@ function InputFood(props) {
         let daysFreshNum = Math.floor((new Date(date1) - new Date(todayDate)) / (1000 * 3600 * 24));
 
         setDaysFresh(daysFreshNum);
+        setDateEntered(date)
 
 
     }
-
-
 
 
     return (
@@ -211,7 +222,7 @@ function InputFood(props) {
                 <Row>
                     <Col size="md-12">
                         <div className="input-group input-group-sm mb-3">
-                            <input type="text" className="form-control" placeholder="Add food to 😋..." onChange={handleInputChange} />
+                            <input type="text" className="form-control" placeholder="Add food to 😋..." onChange={handleInputChange} value={inputVal} />
 
 
                             <button className="btn btn-warning" type="button" style={{ color: "black" }} type="button" onClick={handleAddFood} value="pantry">Pantry</button>
@@ -254,7 +265,10 @@ function InputFood(props) {
                             {/* Adding this so it works good in mobile */}
                             <br className="mobile-break" />
                             <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
-                            <DayPickerInput onDayChange={handleDayChange} value={suggestDate} />
+                            <DayPickerInput
+                                onDayChange={handleDayChange} placeholder={suggestDate}
+
+                            />
                         </div>
 
                     </Col>
