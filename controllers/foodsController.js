@@ -49,6 +49,21 @@ module.exports = {
             res.json(response)
         })
     },
+
+    emptyAll: function () {
+
+        db.allFoods.update({
+            $set: {
+                allFoods: {
+                    name: "",
+                    daysFresh: 0
+                }
+            }
+        }).then(function (deleteAll) {
+            console.log(deleteAll, "line 63")
+            console.log("cleared all")
+        })
+    },
     checkMe: function (req, res) {
         // console.log(req, "line 34")
         let item = req.body

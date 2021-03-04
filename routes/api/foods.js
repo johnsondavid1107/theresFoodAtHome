@@ -17,7 +17,7 @@ router.route("/recipes/:ingredient")
 
 //Finds the item within the foodItem array
 router.route("/updateFood/:id/:foodId")
-.put(FoodsController.update)
+    .put(FoodsController.update)
 
 
 
@@ -65,5 +65,6 @@ router.route("/getUser/:id").get(FoodsController.findOrCreate)
 router.route("/addFood").post(FoodsController.addFood)
 router.route("/deleteFood").put(FoodsController.trashFood)
 router.route("/checkFoods").post(FoodsController.checkMe)
+router.route("/clearAllFoods").put(FoodsController.emptyAll)
 
 module.exports = router;

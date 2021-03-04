@@ -19,6 +19,11 @@ export default {
     getUser: function (id) {
         return axios.get("/api/foods/getUser/" + id)
     },
+    clearAllFoods: function () {
+        return axios.put("/api/foods/clearAllFoods", {
+
+        })
+    },
     makeFood: function (food) {
         return axios.post("/api/foods/addFood", {
             user: food.user,
