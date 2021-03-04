@@ -80,6 +80,7 @@ button
     overflow: scroll;
     /* Change background color within container */
     background-color: gray;
+    width:100%;
 }
 
 .Box-2
@@ -91,6 +92,8 @@ button
     overflow: scroll;
     /* Change background color within container */
     background-color:gray;
+    width:100%;
+    
 }
 
 /* Change background color of card to white - Almonzo */
@@ -128,15 +131,20 @@ button
 
   .card-body
   {
-      width: 100%;
+      width:100%;
       font-weight: bold;
       border-radius:10px;
       padding: 10px 0px 10px 10px;
+     
   }
 
+  .center-sug
+  {
+      color:red;
+  }
 
   /* Media Query to change effects during screen size - Zo */
-    @media only screen and (min-width: 600px) 
+    @media only screen and (max-width: 600px) 
  {
     .align-Header
     {
@@ -145,15 +153,16 @@ button
 
     .Box-1
     {
-        width:700px;
-    
-       
+        margin: 0 auto; 
+ 
     }
+ 
     .Box-2
-    {
-        width:700px;
-       
+    {  
+        margin: 0 auto;
     }
+ 
+ 
 
   }
 
