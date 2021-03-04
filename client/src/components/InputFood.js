@@ -165,6 +165,7 @@ function InputFood(props) {
         setSuggestDate(`${date.c.year}-${date.c.month}-${date.c.day}`)
 
         setInputVal(event.target.name)
+        setFood(event.target.name)
 
 
 
@@ -260,16 +261,16 @@ function InputFood(props) {
                     <Col size="md-12">
 
                         {/* David's code */}
-                        <h4 style={{textAlign:"center", textDecoration:"underline", fontWeight:"800"}}>Search Suggestions:</h4>
+                        <h4 style={{ textAlign: "center", textDecoration: "underline", fontWeight: "800" }}>Search Suggestions:</h4>
 
-                        {nada || renderSearch }
+                        {nada || renderSearch}
 
                     </Col>
 
                 </Row>
-          {deleteButn || ""}
+                {deleteButn || ""}
 
-                <br/>
+                <br />
                 <Row>
                     <Col size="md-6">
 
@@ -288,7 +289,7 @@ function InputFood(props) {
                     <Col size="md-6">
 
                         {/* Added Hever's food expiration date selection react code into Pantry page - Zo */}
-                        <div style={{float:"right"}}>
+                        <div style={{ float: "right" }}>
                             {/* Adding this so it works good in mobile */}
                             <br className="mobile-break" />
                             <p style={{ fontWeight: "bold", borderRadius: "10px" }}>Enter expiration date:</p>
@@ -300,7 +301,7 @@ function InputFood(props) {
 
                     </Col>
                 </Row>
-            <br/>
+                <br />
                 <Row>
                     <Col size="md-12">
                         <div className="Box-1">
