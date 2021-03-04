@@ -174,15 +174,38 @@ function InputFood(props) {
 
     }
 
+    function handleClear(event) {
+
+        API.clearAllFoods().then(function (response) {
+            console.log("Cleared all database")
+            setPlaceHolderFood(response)
+            console.log(response)
+
+
+        })
+
+
+
+
+
+
+
+        alert("All Suggestions cleared!")
+
+    }
+
     if (placeHolderFood === undefined || inputVal === "") {
         var nada = "Nothing searched yet"
     } else {
         console.log(placeHolderFood)
         var renderSearch = placeHolderFood.map((item, index) =>
-
             <button className="btn btn-outline-success" type="button" key={index} id={item._id} value={item.daysFresh} onClick={handleDaysFresh} name={item.name.charAt(0).toUpperCase() + item.name.slice(1)}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</button>
 
+
+
         )
+
+        var deleteButn = <button className="btn btn-outline-danger" type="button" onClick={handleClear}> Clear All </button>
 
     }
 
@@ -229,6 +252,7 @@ function InputFood(props) {
                             <button className="btn btn-info" type="button" value="fridge" onClick={handleAddFood}>Fridge</button>
 
 
+
                         </div>
                     </Col>
                 </Row>
@@ -241,7 +265,10 @@ function InputFood(props) {
                         {nada || renderSearch}
 
                     </Col>
+
                 </Row>
+
+                {deleteButn || ""}
                 <Row>
                     <Col size="md-4">
 
