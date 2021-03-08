@@ -26,7 +26,7 @@ module.exports = {
             })
     },
     allFoods: function (req, res) {
-        db.allFoods.find({}).then(foodModel => {
+        db.User.find({}).then(foodModel => {
             // console.log(foodModel, "line29")
             res.send(foodModel)
         })
@@ -138,6 +138,11 @@ module.exports = {
                     db.User.collection.insert({
                         fireBaseId: user,
                         foodItem: [
+                            {
+
+                            }
+                        ],
+                        allFoods: [
                             {
 
                             }
