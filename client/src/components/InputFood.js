@@ -36,7 +36,7 @@ function InputFood(props) {
     //on 3/8 David created a new user using the uid string in the Robo3t database.  Once firebase error is fixed delete lines 38-40 and uncomment line 37
     // const user = useContext(UserContext)
     const user = {
-        uid: "NT3fCMjxFfPemnQqfs9u0OIoWHB3"
+        uid: "LqE8A5H13dQxbZKrGgjjfSWEkrD2"
     }
 
     useEffect(() => {
@@ -50,11 +50,15 @@ function InputFood(props) {
         today = mm + '/' + dd + '/' + yyyy;
         setTodayDate(today);
         //bring the entire databse allFOod collection down and set it as state.  Then search that state for event.target.value of user input.  If found render in placeholder.  If no match, take value and send up copy to the all foods database with the shelflife
-        API.getAllFoods().then(function (response) {
-            // console.log(response.data[0].allFoods)
+        API.getFoods(user.uid).then(function (response) {
+            console.log(response.data[0].allFoods)
 
 
-            if (response.data.length === 0) {
+            if (response.data[0].allFoods.length === 0) {
+                let nothing = {
+                    name: "nothing"
+                }
+                setAllFoods(nothing)
                 return
             } else {
                 setAllFoods(response.data[0].allFoods)
@@ -83,18 +87,22 @@ function InputFood(props) {
 
     function handleInputChange(event) {
         const { value } = event.target
-
-
-        // console.log(value)
-        setFood(value.toLowerCase())
-
-
-        setPlaceHolderFood(allFoods.filter(option =>
-            option.name.toLowerCase().includes(value.toLowerCase()))
-        )
         setInputVal(value)
 
 
+        console.log(allFoods)
+        setFood(value.toLowerCase())
+        if (allFoods.length === 1) {
+            return
+        } else {
+
+
+            setPlaceHolderFood(allFoods.filter(option =>
+                option.name.toLowerCase().includes(value.toLowerCase()))
+            )
+
+
+        }
     }
 
     function handleAddFood(event) {

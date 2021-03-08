@@ -31,7 +31,7 @@ class PantryPage extends Component {
     //on 3/8 David commented out line 32 to get around Firebase error.  When firebase is fixed, delete lines 33-35 and uncomment line 32
     // const user = this.context
     const user = {
-      uid: "NT3fCMjxFfPemnQqfs9u0OIoWHB3"
+      uid: "LqE8A5H13dQxbZKrGgjjfSWEkrD2"
     }
 
     if (user) {
