@@ -26,6 +26,16 @@ const userSchema = new Schema({
             }
         }
     ],
+    allFoods: [
+        {
+            name: {
+                type: String
+            },
+            daysFresh: {
+                type: Number
+            }
+        }
+    ]
 
 
 

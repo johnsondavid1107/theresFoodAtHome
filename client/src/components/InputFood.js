@@ -33,7 +33,11 @@ function InputFood(props) {
     const [suggestDate, setSuggestDate] = useState()
     const [dateEntered, setDateEntered] = useState("")
 
-    const user = useContext(UserContext)
+    //on 3/8 David created a new user using the uid string in the Robo3t database.  Once firebase error is fixed delete lines 38-40 and uncomment line 37
+    // const user = useContext(UserContext)
+    const user = {
+        uid: "NT3fCMjxFfPemnQqfs9u0OIoWHB3"
+    }
 
     useEffect(() => {
         console.log(user)
@@ -134,7 +138,8 @@ function InputFood(props) {
 
             let newAllFood = {
                 name: foodChoice,
-                daysFresh: daysFresh
+                daysFresh: daysFresh,
+                user: user.uid
             }
             API.checkAllFoods(newAllFood).then(function (response2) {
                 if (response2 === undefined) {
