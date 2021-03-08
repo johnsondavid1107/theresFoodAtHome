@@ -12,7 +12,8 @@ export default {
     checkAllFoods: function (item) {
         return axios.post("/api/foods/checkFoods", {
             name: item.name,
-            daysFresh: item.daysFresh
+            daysFresh: item.daysFresh,
+            user: item.user
 
         })
     },

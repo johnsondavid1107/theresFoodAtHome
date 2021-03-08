@@ -3,7 +3,8 @@ const { default: fetch } = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require("mongoose");
-const { allFoods } = require("../models");
+const { query } = require("express");
+
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -26,12 +27,12 @@ module.exports = {
     },
     allFoods: function (req, res) {
         db.allFoods.find({}).then(foodModel => {
-            console.log(foodModel, "line29")
+            // console.log(foodModel, "line29")
             res.send(foodModel)
         })
     },
     addFood: function (req, res) {
-        console.log(req.body, "line 34")
+        // console.log(req.body, "line 34")
         db.User.update({ fireBaseId: req.body.user }, {
             $push: {
                 foodItem: {
@@ -45,14 +46,25 @@ module.exports = {
             }
 
         }).then(function (response) {
-            console.log(response)
+
+            // db.User.update({ fireBaseId: req.body.user }, {
+            //     $push: {
+            //         allFoods: {
+            //             name: req.body.name,
+            //             daysFresh: req.body.daysFresh
+            //         }
+            //     }
+            // }).then(function (added) {
+            //     console.log(added, "added allItem")
+            // })
+            // console.log(response)
             res.json(response)
         })
     },
 
     emptyAll: function () {
 
-        db.allFoods.update({
+        db.User.update({ fireBaseId: req.body.user }, {
             $set: {
                 allFoods: {
                     name: "",
@@ -65,14 +77,20 @@ module.exports = {
         })
     },
     checkMe: function (req, res) {
-        // console.log(req, "line 34")
+        console.log(req.body, "line 79")
         let item = req.body
         //found on Stackoverflow, honeslty so excited that it works
-        db.allFoods.find({ "allFoods.name": item.name }, { _id: 0, allFoods: { $elemMatch: { name: item.name } } }).then(function (response) {
-            console.log(response, "line57")
-            if (response.length === 0) {
+        // db.allFoods.find({ "allFoods.name": item.name }, { _id: 0, allFoods: { $elemMatch: { name: item.name } } }).then(function (response) {
+        db.User.findOneAndUpdate({ fireBaseId: item.user, allFoods: { $elemMatch: { name: item.name } } }, {
+            $set: {
+                'allFoods.$.name': item.name,
+                "allFoods.$.daysFresh": item.daysFresh
+            }
+        }).then(function (response) {
+            console.log(response, "line84")
+            if (response === null) {
                 console.log("not enough")
-                db.allFoods.update({
+                db.User.update({ fireBaseId: item.user }, {
                     $push: {
                         allFoods: {
                             name: item.name,
@@ -80,23 +98,28 @@ module.exports = {
                         }
                     }
                 }).then(function (responseNewFood) {
-                    console.log(responseNewFood, "line 49")
+                    console.log(responseNewFood, "line 95")
                     console.log("added new item")
                 })
 
             } else {
+                console.log("found item")
 
-                db.allFoods.update({
+                // db.User.updateOne({
 
-                    "allFoods.name": item.name
-                }, {
-                    $set: {
-                        "allFoods.$.name": item.name,
-                        "allFoods.$.daysFresh": item.daysFresh
-                    }
-                }).then(function (result) {
-                    console.log(result, "updated item line 80")
-                })
+                //     fireBaseId: item.user
+                // }, {
+                //     $set: {
+                //         allFoods: {
+                //             name: item.name,
+                //             daysFresh: item.daysFresh
+                //         }
+                //         // "allFoods.name": item.name,
+                //         // "allFoods.daysFresh": item.daysFresh
+                //     }
+                // }).then(function (result) {
+                //     console.log(result, "updated item line 110")
+                // })
 
                 res.json(response)
             }
