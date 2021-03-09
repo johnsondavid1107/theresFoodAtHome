@@ -31,7 +31,7 @@ class PantryCard extends Component {
 
         API.getFoods(idNum).then(result => {
             console.log(result)
-            if (result.data.length === 0 || result.data[0].foodItem.length === 1) {
+            if (result.data.length === 0 || result.data[0].foodItem.length === 0) {
                 return console.log("noitems in array for pantry")
             }
 

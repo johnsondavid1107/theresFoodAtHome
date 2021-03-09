@@ -35,8 +35,8 @@ class FridgeCard extends Component {
         this.setState({ show: false });
         this.setState({ showDelete: false });
         API.getFoods(idNum).then(result => {
-
-            if (result.data.length === 0 || result.data[0].foodItem.length === 1) {
+            console.log(result)
+            if (result.data.length === 0 || result.data[0].foodItem.length === 0) {
                 return console.log("noitems in array")
             }
 
@@ -175,6 +175,7 @@ class FridgeCard extends Component {
     render() {
 
         var renderFood = this.state.foodFridge;
+        console.log(renderFood)
 
         if (renderFood.length === 0) {
             var noFood = "Please add food to list"
