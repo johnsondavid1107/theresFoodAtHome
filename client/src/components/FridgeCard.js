@@ -36,7 +36,9 @@ class FridgeCard extends Component {
         this.setState({ showDelete: false });
         API.getFoods(idNum).then(result => {
 
-
+            if (result.data.length === 0 || result.data[0].foodItem.length === 1) {
+                return console.log("noitems in array")
+            }
 
             let foodValues = result.data[0].foodItem.filter(item => item.location === "fridge");
             //Calculate time remaining - categorize it into "fresh", "expiring soon", and "expired"
