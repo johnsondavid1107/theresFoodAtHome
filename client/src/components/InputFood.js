@@ -174,7 +174,7 @@ function InputFood(props) {
         setSuggestDate(`${date.c.year}-${date.c.month}-${date.c.day}`)
 
         setInputVal(event.target.name)
-        setFood(event.target.name)
+        setFood(event.target.name.toLowerCase())
 
 
 
