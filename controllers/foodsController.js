@@ -62,14 +62,13 @@ module.exports = {
         })
     },
 
-    emptyAll: function () {
+    emptyAll: function (req, res) {
+
+        console.log(req.body)
 
         db.User.update({ fireBaseId: req.body.user }, {
             $set: {
-                allFoods: {
-                    name: "",
-                    daysFresh: 0
-                }
+                allFoods: []
             }
         }).then(function (deleteAll) {
             console.log(deleteAll, "line 63")
@@ -138,14 +137,14 @@ module.exports = {
                     db.User.collection.insert({
                         fireBaseId: user,
                         foodItem: [
-                            {
 
-                            }
+
+
                         ],
                         allFoods: [
-                            {
 
-                            }
+
+
                         ]
                     }).then(dbUser => res.json(dbUser))
 

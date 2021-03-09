@@ -30,6 +30,10 @@ class PantryCard extends Component {
         this.setState({ showDelete: false });
 
         API.getFoods(idNum).then(result => {
+            console.log(result)
+            if (result.data.length === 0 || result.data[0].foodItem.length === 1) {
+                return console.log("noitems in array")
+            }
 
             let foodValues = result.data[0].foodItem.filter(item => item.location === "pantry");
             //Calculate time remaining - categorize it into "fresh", "expiring soon", and "expired"
@@ -184,7 +188,7 @@ class PantryCard extends Component {
             <div style={{ backgroundColor: "gray" }}>
 
                 <h3 className="align-Header pantry-color">Pantry</h3>
-                
+
                 <DeleteSuccess show={this.state.showDelete} index={this.state.deleteIndex} name={this.state.deleteName} />
                 <SuccessAlert show={this.state.show} index={this.state.successIndex} name={this.state.successName} />
 
@@ -194,8 +198,8 @@ class PantryCard extends Component {
 
                     renderFood.map((item, index) =>
 
-                        <div key= {index } > 
-                            
+                        <div key={index} >
+
                             <button className="btn btn-danger" type="button" onClick={(e) => this.handleDelete(e, this.state.idNumber) || item._id} value={item._id} name={item.name}>Delete</button>
                             <button className="btn btn-success" type="button" onClick={(e) => this.handleUpdate(e, this.state.idNumber) || item.id} value={item._id} name={item.name}>Renew</button>
 
