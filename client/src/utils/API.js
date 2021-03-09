@@ -20,8 +20,10 @@ export default {
     getUser: function (id) {
         return axios.get("/api/foods/getUser/" + id)
     },
-    clearAllFoods: function () {
+    clearAllFoods: function (user) {
+        console.log(user)
         return axios.put("/api/foods/clearAllFoods", {
+            user: user
 
         })
     },

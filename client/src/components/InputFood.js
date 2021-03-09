@@ -53,11 +53,7 @@ function InputFood(props) {
 
 
             if (response.data[0].allFoods.length === 0) {
-                let nothing = {
-                    name: "nothing"
-                }
-                setAllFoods(nothing)
-                return
+                return console.log("no foods in allFoods array")
             } else {
                 setAllFoods(response.data[0].allFoods)
                 console.log(response.data[0].allFoods)
@@ -86,11 +82,13 @@ function InputFood(props) {
     function handleInputChange(event) {
         const { value } = event.target
         setInputVal(value)
-
-
         console.log(allFoods)
+
+
+
+
         setFood(value.toLowerCase())
-        if (allFoods.length === 1) {
+        if (allFoods.length === 0) {
             return
         } else {
 
@@ -188,7 +186,7 @@ function InputFood(props) {
 
     function handleClear(event) {
 
-        API.clearAllFoods().then(function (response) {
+        API.clearAllFoods(user.uid).then(function (response) {
             console.log("Cleared all database")
             setPlaceHolderFood(response)
             console.log(response)
