@@ -62,3 +62,10 @@ textarea {
 .reset {
   color: #f39b6d;
 }
+
+footer {
+  position: fixed;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+}
